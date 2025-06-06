@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Menu } from 'lucide-react';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'; // Added SheetTitle
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
@@ -85,6 +85,7 @@ export function Navigation() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] bg-black">
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle> {/* Visually hidden title */}
               <div className="flex flex-col gap-6 p-6">
                 <Logo />
                 <nav className="flex flex-col gap-4">
@@ -99,4 +100,3 @@ export function Navigation() {
     </header>
   );
 }
-
