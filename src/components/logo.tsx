@@ -5,11 +5,11 @@ export function Logo() {
   return (
     <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
       <Image
-        src="/add-hope-logo.png" 
+        src="/add-hope.png" 
         alt="Add Hope Logo"
-        width={150} // You might want to adjust this
-        height={40} // You might want to adjust this
-        priority // Preload logo as it's likely LCP
+        width={150} 
+        height={40} 
+        priority 
       />
     </Link>
   );
