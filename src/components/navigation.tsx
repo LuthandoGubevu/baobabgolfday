@@ -67,10 +67,10 @@ export function Navigation() {
 
   return (
     <header className={cn(
-      "sticky top-0 z-50 w-full bg-black transition-all duration-300", // Always bg-black
-      isScrolled ? "shadow-md" : ""                                    // Shadow on scroll
+      "sticky top-0 z-50 w-full bg-black transition-all duration-300", 
+      isScrolled ? "shadow-md" : ""
     )}>
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
         <nav className="hidden md:flex items-center gap-6">
           {renderLinks(mainNavLinks, true)}
