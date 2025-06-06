@@ -1,3 +1,4 @@
+
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
@@ -19,11 +20,11 @@ export function AboutSection() {
         </div>
         <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
            <Image 
-            src="https://placehold.co/600x400" 
-            alt="Children benefiting from Add Hope" 
+            src="/add-hope-kids.jpg" 
+            alt="Children smiling and receiving support from the Add Hope initiative" 
             layout="fill" 
             objectFit="cover"
-            data-ai-hint="happy children community"
+            data-ai-hint="children charity support"
             className="transform hover:scale-105 transition-transform duration-300"
           />
         </div>
