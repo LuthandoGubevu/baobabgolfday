@@ -7,8 +7,8 @@ export function Logo() {
       <Image
         src="/add-hope.png" 
         alt="Add Hope Logo"
-        width={150} 
-        height={40} 
+        width={135} 
+        height={36} 
         priority 
       />
     </Link>
