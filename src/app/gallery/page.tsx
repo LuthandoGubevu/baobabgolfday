@@ -1,6 +1,6 @@
 
 import { SectionWrapper } from "@/components/section-wrapper";
-import { Card, CardContent } from "@/components/ui/card"; // CardHeader, CardTitle removed as they are not used for image-only cards
+import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
 const galleryImages = [
@@ -28,12 +28,11 @@ export default function GalleryPage() {
           <Card key={index} className="overflow-hidden shadow-lg hover:shadow-primary/20 transition-shadow">
             <CardContent className="p-0">
               <div className="aspect-video relative">
-                <Image 
-                  src={image.src} 
+                <Image
+                  src={image.src}
                   alt={image.alt}
-                  layout="fill"
-                  objectFit="cover"
-                  className="hover:scale-105 transition-transform duration-300"
+                  fill
+                  className="hover:scale-105 transition-transform duration-300 object-cover"
                   data-ai-hint={image.dataAiHint}
                   priority={index < 3} // Prioritize loading for the first few images
                 />

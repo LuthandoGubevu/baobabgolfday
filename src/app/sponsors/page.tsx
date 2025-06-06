@@ -1,3 +1,4 @@
+
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
@@ -27,11 +28,11 @@ export default function SponsorsPage() {
         {pastSponsors.map((sponsor, index) => (
           <Card key={index} className="flex flex-col items-center justify-center p-6 bg-card shadow-lg hover:shadow-primary/20 transition-shadow aspect-square">
             <div className="relative w-full h-16 mb-4">
-              <Image 
+              <Image
                 src={sponsor.logoUrl}
                 alt={`${sponsor.name} logo`}
-                layout="fill"
-                objectFit="contain"
+                fill
+                className="object-contain"
                 data-ai-hint={sponsor.dataAiHint}
               />
             </div>

@@ -19,13 +19,12 @@ export function AboutSection() {
           </p>
         </div>
         <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
-           <Image 
-            src="/add-hope-kids.jpg" 
-            alt="Children smiling and receiving support from the Add Hope initiative" 
-            layout="fill" 
-            objectFit="cover"
+           <Image
+            src="/add-hope-kids.jpg"
+            alt="Children smiling and receiving support from the Add Hope initiative"
+            fill
             data-ai-hint="children charity support"
-            className="transform hover:scale-105 transition-transform duration-300"
+            className="transform hover:scale-105 transition-transform duration-300 object-cover"
           />
         </div>
       </div>

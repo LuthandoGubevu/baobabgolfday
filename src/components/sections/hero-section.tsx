@@ -16,13 +16,12 @@ export function HeroSection() {
   return (
     <SectionWrapper id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden !py-0">
       <div className="absolute inset-0 z-0">
-        <Image 
-          src="/golf-hero.jpg" 
-          alt="Golf event hero background" 
-          layout="fill" 
-          objectFit="cover" 
+        <Image
+          src="/golf-hero.jpg"
+          alt="Golf event hero background"
+          fill
           quality={80}
-          className="opacity-50"
+          className="opacity-50 object-cover"
           data-ai-hint="golf course hero"
           priority // Keep priority as it's LCP
         />
