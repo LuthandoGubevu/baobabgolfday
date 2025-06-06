@@ -17,7 +17,7 @@ export function HeroSection() {
     <SectionWrapper id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden !py-0">
       <div className="absolute inset-0 z-0">
         <Image 
-          src="/golf-hero.png" 
+          src="/golf-hero.jpg" 
           alt="Golf event hero background" 
           layout="fill" 
           objectFit="cover" 
