@@ -78,7 +78,7 @@ export function Navigation() {
            <Link href="/login" passHref>
             <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10 hover:text-primary-foreground ml-2">
               <LogIn className="mr-2 h-4 w-4" />
-              Sign In
+              Admin
             </Button>
           </Link>
         </nav>
@@ -100,7 +100,7 @@ export function Navigation() {
                   <Link href="/login" passHref>
                     <Button variant="outline" size="sm" className="w-full border-primary text-primary hover:bg-primary/10 hover:text-primary-foreground mt-4">
                       <LogIn className="mr-2 h-4 w-4" />
-                      Sign In
+                      Admin
                     </Button>
                   </Link>
                 </nav>
