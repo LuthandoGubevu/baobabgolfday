@@ -22,7 +22,7 @@ export function HeroSection() {
           layout="fill" 
           objectFit="cover" 
           quality={80}
-          className="opacity-30"
+          className="opacity-50"
           data-ai-hint="golf course hero"
           priority // Keep priority as it's LCP
         />
