@@ -4,12 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 
 const pastSponsors = [
-  { name: "Sponsor A", logoUrl: "https://placehold.co/200x100/2e2e2e/e0e0e0?text=Sponsor+A", dataAiHint: "company logo brand" },
-  { name: "Sponsor B", logoUrl: "https://placehold.co/200x100/2e2e2e/e0e0e0?text=Sponsor+B", dataAiHint: "corporate logo business" },
-  { name: "Sponsor C", logoUrl: "https://placehold.co/200x100/2e2e2e/e0e0e0?text=Sponsor+C", dataAiHint: "organization logo" },
-  { name: "Sponsor D", logoUrl: "https://placehold.co/200x100/2e2e2e/e0e0e0?text=Sponsor+D", dataAiHint: "brand identity" },
-  { name: "Sponsor E", logoUrl: "https://placehold.co/200x100/2e2e2e/e0e0e0?text=Sponsor+E", dataAiHint: "logo design" },
-  { name: "Sponsor F", logoUrl: "https://placehold.co/200x100/2e2e2e/e0e0e0?text=Sponsor+F", dataAiHint: "company branding" },
+  { name: "Sponsor A", logoUrl: "https://placehold.co/200x100.png", dataAiHint: "company logo brand" },
+  { name: "Sponsor B", logoUrl: "https://placehold.co/200x100.png", dataAiHint: "corporate logo business" },
+  { name: "Sponsor C", logoUrl: "https://placehold.co/200x100.png", dataAiHint: "organization logo" },
+  { name: "Sponsor D", logoUrl: "https://placehold.co/200x100.png", dataAiHint: "brand identity" },
+  { name: "Sponsor E", logoUrl: "https://placehold.co/200x100.png", dataAiHint: "logo design" },
+  { name: "Sponsor F", logoUrl: "https://placehold.co/200x100.png", dataAiHint: "company branding" },
 ];
 
 export default function SponsorsPage() {
@@ -46,3 +46,4 @@ export default function SponsorsPage() {
     </SectionWrapper>
   );
 }
+
