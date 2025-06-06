@@ -4,12 +4,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
 const galleryImages = [
-  { src: "/image-1.jpg", alt: "Gallery image 1 - Highlights from the golf event", dataAiHint: "golf event charity" },
-  { src: "/image-2.jpg", alt: "Gallery image 2 - Participants enjoying the golf day", dataAiHint: "charity golf players" },
-  { src: "/image-3.jpg", alt: "Gallery image 3 - Scenery from the golf course", dataAiHint: "golf course landscape" },
-  { src: "/image-4.jpg", alt: "Gallery image 4 - Action shot from the tournament", dataAiHint: "golf swing action" },
-  { src: "/image-5.jpg", alt: "Gallery image 5 - Group photo of attendees", dataAiHint: "event attendees group" },
-  { src: "/image-6.jpg", alt: "Gallery image 6 - Award ceremony or closing moments", dataAiHint: "charity event awards" },
+  { src: "/image-1.jpg", alt: "Highlights from the 2025 KFC Add Hope Golf Day event.", dataAiHint: "golf event charity" },
+  { src: "/image-2.jpg", alt: "Participants enjoying the atmosphere at the golf day.", dataAiHint: "charity golf players" },
+  { src: "/image-3.jpg", alt: "Scenic view of the East London Golf Club during the event.", dataAiHint: "golf course landscape" },
+  { src: "/image-4.jpg", alt: "An action shot of a golfer during the tournament.", dataAiHint: "golf swing action" },
+  { src: "/image-5.jpg", alt: "Group photo of attendees and supporters at the charity golf day.", dataAiHint: "event attendees group" },
+  { src: "/image-6.jpg", alt: "Moments from the award ceremony or closing of the golf event.", dataAiHint: "charity event awards" },
 ];
 
 export default function GalleryPage() {
@@ -25,7 +25,7 @@ export default function GalleryPage() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {galleryImages.map((image, index) => (
-          <Card key={index} className="overflow-hidden shadow-lg hover:shadow-primary/20 transition-shadow">
+          <Card key={image.src} className="overflow-hidden shadow-lg hover:shadow-primary/20 transition-shadow">
             <CardContent className="p-0">
               <div className="aspect-video relative">
                 <Image
@@ -34,7 +34,7 @@ export default function GalleryPage() {
                   fill
                   className="hover:scale-105 transition-transform duration-300 object-cover"
                   data-ai-hint={image.dataAiHint}
-                  priority={index < 3} // Prioritize loading for the first few images
+                  priority={index < 3} 
                 />
               </div>
             </CardContent>
