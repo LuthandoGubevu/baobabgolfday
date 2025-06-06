@@ -34,17 +34,17 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               await signOut(auth);
               toast({
                 title: "Authorization Failed",
-                description: "You do not have the necessary admin privileges.",
+                description: "You do not have the necessary admin privileges. Ensure your role is set in Firestore.",
                 variant: "destructive",
               });
               router.replace('/login');
             }
           } catch (error) {
-            console.error("Error checking admin role:", error);
+            console.error("Error checking admin role in Firestore:", error); // Log the specific error
             await signOut(auth);
             toast({
-              title: "Error",
-              description: "Could not verify admin privileges. Please try again.",
+              title: "Error Verifying Privileges",
+              description: "Could not verify admin privileges. Please check console for details or try again.",
               variant: "destructive",
             });
             router.replace('/login');
@@ -85,7 +85,12 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   if (!isAuthorized) {
     // This state should ideally be brief as the redirect happens in useEffect.
-    return null;
+    // It can also be a fallback if redirection fails for some reason or while it's in progress.
+    return (
+        <SectionWrapper id="admin-unauthorized" className="min-h-screen flex justify-center items-center">
+             <p className="text-xl text-muted-foreground">Redirecting to login...</p>
+        </SectionWrapper>
+    );
   }
 
   return <>{children}</>;
