@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,7 +18,7 @@ import { Loader2 } from "lucide-react";
 export function BookingForm() {
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
-  const [fileError, setFileError] = useState<string | null>(null);
+  // fileError state is removed as file uploads are removed.
 
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingFormSchema),
@@ -37,12 +38,12 @@ export function BookingForm() {
       sponsorAuctionPrize: false,
       donateWithoutAttending: false,
       golfCartInterest: false,
-      proofOfPayment: undefined,
+      // proofOfPayment: undefined, // Removed
     },
   });
 
   const onSubmit = (values: BookingFormValues) => {
-    setFileError(null);
+    // setFileError(null); // Removed
     startTransition(async () => {
       const result = await submitBooking(values);
       if (result.success) {
@@ -57,7 +58,6 @@ export function BookingForm() {
           description: result.message || "An error occurred.",
           variant: "destructive",
         });
-        // Handle field specific errors if any from server
         if (result.errors) {
           Object.entries(result.errors).forEach(([field, messages]) => {
             const fieldName = field as keyof BookingFormValues;
@@ -65,9 +65,7 @@ export function BookingForm() {
                 form.setError(fieldName, { type: "server", message: messages.join(', ') });
             }
           });
-          if (result.errors.proofOfPayment) {
-            setFileError(result.errors.proofOfPayment.join(', '));
-          }
+          // Removed proofOfPayment error handling
         }
       }
     });
@@ -151,7 +149,7 @@ export function BookingForm() {
               ].map(item => (
                 <div key={item.id} className="flex items-center space-x-2">
                   <Controller
-                    name={item.id as keyof BookingFormValues}
+                    name={item.id as keyof BookingFormValues} // Cast is safe as these keys exist in BookingFormValues
                     control={form.control}
                     render={({ field }) => (
                        <Checkbox id={item.id} checked={field.value as boolean | undefined} onCheckedChange={field.onChange} />
@@ -163,9 +161,9 @@ export function BookingForm() {
             </div>
           </div>
 
-          <Separator className="bg-border" />
+          {/* Proof of Payment section removed */}
+          {/* <Separator className="bg-border" />
 
-          {/* Proof of Payment */}
           <div className="space-y-2">
             <Label htmlFor="proofOfPayment" className="text-xl font-semibold text-foreground">Upload Proof of Payment (Optional)</Label>
             <p className="text-sm text-muted-foreground">If you've already made a payment, please upload the proof (PDF, JPG, PNG - Max 5MB).</p>
@@ -185,7 +183,8 @@ export function BookingForm() {
             />
             {form.formState.errors.proofOfPayment && <p className="text-sm text-destructive mt-1">{form.formState.errors.proofOfPayment.message}</p>}
             {fileError && <p className="text-sm text-destructive mt-1">{fileError}</p>}
-          </div>
+          </div> */}
+
         </CardContent>
         <CardFooter>
           <Button type="submit" size="lg" className="w-full" disabled={isPending}>

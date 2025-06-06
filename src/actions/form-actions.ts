@@ -1,3 +1,4 @@
+
 "use server";
 
 import { bookingFormSchema, BookingFormValues, donationFormSchema, DonationFormValues } from '@/lib/schemas';
@@ -13,17 +14,11 @@ export async function submitBooking(values: BookingFormValues) {
     };
   }
 
-  const { proofOfPayment, ...formData } = validatedFields.data;
+  // proofOfPayment is removed from schema, so it won't be in validatedFields.data
+  const formData = validatedFields.data;
 
   console.log("Booking Form Data:", formData);
-  if (proofOfPayment) {
-    console.log("Proof of Payment File Name:", proofOfPayment.name);
-    console.log("Proof of Payment File Size:", proofOfPayment.size);
-    console.log("Proof of Payment File Type:", proofOfPayment.type);
-    // In a real app, you would upload this file to storage (e.g., Firebase Storage, S3)
-    // const fileBuffer = Buffer.from(await proofOfPayment.arrayBuffer());
-    // await uploadFileToStorage(proofOfPayment.name, fileBuffer);
-  }
+  // File upload logic for proofOfPayment is removed.
   
   // Simulate database save or API call
   await new Promise(resolve => setTimeout(resolve, 1000));
@@ -35,7 +30,7 @@ export async function submitBooking(values: BookingFormValues) {
 }
 
 
-export async function submitDonationProof(values: DonationFormValues) {
+export async function submitDonationReference(values: DonationFormValues) { // Renamed function
   const validatedFields = donationFormSchema.safeParse(values);
 
   if (!validatedFields.success) {
@@ -46,20 +41,16 @@ export async function submitDonationProof(values: DonationFormValues) {
     };
   }
   
-  const { proofOfPayment, donorName } = validatedFields.data;
+  // proofOfPayment is removed from schema
+  const { donorName } = validatedFields.data;
 
-  console.log("Donation Proof Form Data - Donor:", donorName);
-  if (proofOfPayment) {
-    console.log("Proof of Payment File Name:", proofOfPayment.name);
-    console.log("Proof of Payment File Size:", proofOfPayment.size);
-    console.log("Proof of Payment File Type:", proofOfPayment.type);
-    // similar file upload logic as above
-  }
+  console.log("Donation Reference - Donor:", donorName);
+  // File upload logic for proofOfPayment is removed.
   
   await new Promise(resolve => setTimeout(resolve, 1000));
 
   return {
     success: true,
-    message: "Donation proof submitted successfully! Thank you for your generosity."
+    message: "Donation reference submitted successfully! Thank you for your generosity." // Updated message
   };
 }

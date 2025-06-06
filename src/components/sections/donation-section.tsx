@@ -1,8 +1,9 @@
+
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Download, UploadCloud } from "lucide-react";
-import { DonationProofForm } from "@/components/donation-form";
+import { Download, Gift } from "lucide-react"; // UploadCloud removed, Gift added as an example
+import { DonationReferenceForm } from "@/components/donation-form"; // Updated component name
 
 const bankingDetails = [
   { label: "Account Name", value: "KFC Add Hope" },
@@ -49,14 +50,14 @@ export function DonationSection() {
           <Card className="bg-card shadow-xl">
             <CardHeader>
               <CardTitle className="text-2xl font-headline text-primary flex items-center gap-2">
-                <UploadCloud className="h-7 w-7"/> Submit Your Proof of Payment
+                <Gift className="h-7 w-7"/> Let Us Know About Your Donation
               </CardTitle>
               <CardDescription className="text-muted-foreground">
-                After making your donation, please upload your proof of payment here.
+                After making your donation, please let us know by providing your name/company for our reference.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <DonationProofForm />
+              <DonationReferenceForm />
             </CardContent>
           </Card>
           

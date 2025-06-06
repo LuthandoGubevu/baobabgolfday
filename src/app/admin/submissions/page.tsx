@@ -1,3 +1,4 @@
+
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ShieldAlert } from "lucide-react";
@@ -17,7 +18,7 @@ export default function AdminSubmissionsPage() {
         <CardHeader>
           <CardTitle className="text-2xl text-foreground">Submission Data</CardTitle>
           <CardDescription className="text-muted-foreground">
-            In a full application, submitted forms and uploaded files would be displayed here after proper authentication and backend integration.
+            In a full application, submitted forms (registrations and donation references) would be displayed here after proper authentication and backend integration.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -28,8 +29,9 @@ export default function AdminSubmissionsPage() {
           <ul className="list-disc list-inside space-y-2 mt-4 text-muted-foreground">
             <li>User authentication and authorization for admin access.</li>
             <li>A database to store submission data.</li>
-            <li>Secure file storage for uploaded proofs of payment.</li>
+            {/* Secure file storage for uploaded proofs of payment. - Removed */}
             <li>An interface to list, view, and manage submissions.</li>
+            <li>Tracking of donation references (if applicable from the donation form).</li>
           </ul>
         </CardContent>
       </Card>
