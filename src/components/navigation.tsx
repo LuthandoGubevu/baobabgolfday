@@ -2,13 +2,18 @@
 "use client";
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Menu, LogIn } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation'; // useRouter added
+import { Menu, LogIn, LogOut } from 'lucide-react'; // LogOut added
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
+import { onAuthStateChanged, signOut, User } from 'firebase/auth'; // signOut, User added
+import { auth } from '@/lib/firebase'; // auth imported
+import { useToast } from '@/hooks/use-toast'; // useToast imported
+
+const ADMIN_EMAIL = "shayna@baobabbrands.com"; // Defined for checking admin
 
 const mainNavLinks = [
   { href: '#home', label: 'Home' },
@@ -26,15 +31,30 @@ const supportingNavLinks = [
 
 export function Navigation() {
   const pathname = usePathname();
+  const router = useRouter(); // useRouter hook
+  const { toast } = useToast(); // toast hook
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false); // State for admin login
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    const unsubscribeAuth = onAuthStateChanged(auth, (user: User | null) => {
+      if (user && user.email === ADMIN_EMAIL) {
+        setIsAdminLoggedIn(true);
+      } else {
+        setIsAdminLoggedIn(false);
+      }
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      unsubscribeAuth(); // Unsubscribe from auth listener
+    };
   }, []);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -46,7 +66,27 @@ export function Navigation() {
         targetElement.scrollIntoView({ behavior: 'smooth' });
       }
     }
-    setIsSheetOpen(false); // Close sheet on link click
+    setIsSheetOpen(false); 
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setIsAdminLoggedIn(false);
+      toast({
+        title: "Logged Out",
+        description: "You have been successfully logged out.",
+      });
+      router.push('/'); // Redirect to home page after logout
+    } catch (error) {
+      console.error("Logout Error:", error);
+      toast({
+        title: "Logout Failed",
+        description: "Could not log you out. Please try again.",
+        variant: "destructive",
+      });
+    }
+    setIsSheetOpen(false); // Close sheet if open
   };
   
   const renderLinks = (links: { href: string; label: string }[], isMainPageLink: boolean) => (
@@ -65,6 +105,32 @@ export function Navigation() {
     ))
   );
 
+  const AdminButton = ({ isMobile = false }: { isMobile?: boolean }) => (
+    isAdminLoggedIn ? (
+      <Button 
+        variant="outline" 
+        size={isMobile ? "sm" : "sm"} 
+        className={cn("border-primary text-primary hover:bg-primary/10 hover:text-primary-foreground", isMobile ? "w-full mt-4" : "ml-2")}
+        onClick={handleLogout}
+      >
+        <LogOut className="mr-2 h-4 w-4" />
+        Log Out
+      </Button>
+    ) : (
+      <Link href="/login" passHref>
+        <Button 
+          variant="outline" 
+          size={isMobile ? "sm" : "sm"} 
+          className={cn("border-primary text-primary hover:bg-primary/10 hover:text-primary-foreground", isMobile ? "w-full mt-4" : "ml-2")}
+          onClick={() => setIsSheetOpen(false)}
+        >
+          <LogIn className="mr-2 h-4 w-4" />
+          Admin
+        </Button>
+      </Link>
+    )
+  );
+
   return (
     <header className={cn(
       "sticky top-0 z-50 w-full bg-black transition-all duration-300", 
@@ -75,12 +141,7 @@ export function Navigation() {
         <nav className="hidden md:flex items-center gap-4">
           {renderLinks(mainNavLinks, true)}
           {renderLinks(supportingNavLinks, false)}
-           <Link href="/login" passHref>
-            <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10 hover:text-primary-foreground ml-2">
-              <LogIn className="mr-2 h-4 w-4" />
-              Admin
-            </Button>
-          </Link>
+          <AdminButton />
         </nav>
         <div className="md:hidden">
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -97,12 +158,7 @@ export function Navigation() {
                 <nav className="flex flex-col gap-4">
                   {renderLinks(mainNavLinks, true)}
                   {renderLinks(supportingNavLinks, false)}
-                  <Link href="/login" passHref>
-                    <Button variant="outline" size="sm" className="w-full border-primary text-primary hover:bg-primary/10 hover:text-primary-foreground mt-4">
-                      <LogIn className="mr-2 h-4 w-4" />
-                      Admin
-                    </Button>
-                  </Link>
+                  <AdminButton isMobile={true} />
                 </nav>
               </div>
             </SheetContent>

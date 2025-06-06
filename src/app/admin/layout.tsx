@@ -4,7 +4,8 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '@/lib/firebase';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { SectionWrapper } from '@/components/section-wrapper';
@@ -18,23 +19,45 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
       if (user) {
         if (user.email === ADMIN_EMAIL) {
-          setIsAuthorized(true);
-        } else {
-          // User is logged in, but not the authorized admin
-          signOut(auth).then(() => {
+          // Check Firestore for admin role
+          try {
+            const roleDocRef = doc(db, "roles", user.email);
+            const roleDocSnap = await getDoc(roleDocRef);
+
+            if (roleDocSnap.exists() && roleDocSnap.data().role === "admin") {
+              setIsAuthorized(true);
+            } else {
+              // User is ADMIN_EMAIL but doesn't have admin role in Firestore
+              await signOut(auth);
+              toast({
+                title: "Authorization Failed",
+                description: "You do not have the necessary admin privileges.",
+                variant: "destructive",
+              });
+              router.replace('/login');
+            }
+          } catch (error) {
+            console.error("Error checking admin role:", error);
+            await signOut(auth);
             toast({
-              title: "Access Denied",
-              description: "This account is not authorized for admin access. Please sign in with the correct admin credentials.",
+              title: "Error",
+              description: "Could not verify admin privileges. Please try again.",
               variant: "destructive",
             });
             router.replace('/login');
-          }).catch(() => {
-            // Handle sign out error if necessary
-            router.replace('/login');
+          }
+        } else {
+          // User is logged in, but not the authorized admin email
+          await signOut(auth);
+          toast({
+            title: "Access Denied",
+            description: "This account is not authorized for admin access. Please sign in with the correct admin credentials.",
+            variant: "destructive",
           });
+          router.replace('/login');
         }
       } else {
         // User is not logged in
@@ -62,9 +85,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   if (!isAuthorized) {
     // This state should ideally be brief as the redirect happens in useEffect.
-    // However, as a fallback or during the very short period before redirect,
-    // we can show a message or nothing.
-    // Returning null is fine as the user will be redirected.
     return null;
   }
 
