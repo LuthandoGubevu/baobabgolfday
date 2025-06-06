@@ -2,8 +2,8 @@
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Download, Gift } from "lucide-react"; // UploadCloud removed, Gift added as an example
-import { DonationReferenceForm } from "@/components/donation-form"; // Updated component name
+// import { Download, Gift } from "lucide-react"; // Gift and Download are no longer needed
+// import { DonationReferenceForm } from "@/components/donation-form"; // DonationReferenceForm is no longer needed
 
 const bankingDetails = [
   { label: "Account Name", value: "KFC Add Hope" },
@@ -25,7 +25,7 @@ export function DonationSection() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
+      <div className="grid md:grid-cols-1 gap-8 lg:gap-12 items-start max-w-xl mx-auto">
         <Card className="bg-card shadow-xl">
           <CardHeader>
             <CardTitle className="text-2xl font-headline text-primary">Banking Details</CardTitle>
@@ -46,6 +46,8 @@ export function DonationSection() {
           </CardContent>
         </Card>
 
+        {/* "Let Us Know About Your Donation" section and "Download Donation Info PDF" button removed */}
+        {/* 
         <div className="space-y-6">
           <Card className="bg-card shadow-xl">
             <CardHeader>
@@ -67,7 +69,8 @@ export function DonationSection() {
               Download Donation Info PDF
             </Button>
           </a>
-        </div>
+        </div> 
+        */}
       </div>
     </SectionWrapper>
   );

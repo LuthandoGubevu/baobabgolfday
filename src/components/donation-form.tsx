@@ -1,4 +1,10 @@
 
+// This file is no longer needed as the DonationReferenceForm has been removed
+// from the DonationSection. You can safely delete this file.
+// Content is removed to prevent build errors if it's still imported elsewhere,
+// though it shouldn't be.
+
+/*
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -59,27 +65,7 @@ export function DonationReferenceForm() { // Renamed component
         {form.formState.errors.donorName && <p className="text-sm text-destructive mt-1">{form.formState.errors.donorName.message}</p>}
       </div>
       
-      {/* Proof of Payment upload section removed */}
-      {/* <div>
-        <Label htmlFor="donationProofOfPayment">Upload Proof of Payment (PDF, JPG, PNG - Max 5MB)</Label>
-         <Controller
-            name="proofOfPayment"
-            control={form.control}
-            render={({ field: { onChange, value, ...restField } }) => (
-                <Input
-                    id="donationProofOfPayment"
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) => onChange(e.target.files ? e.target.files[0] : null)}
-                    className="mt-1 file:text-primary-foreground file:bg-primary hover:file:bg-primary/90"
-                    {...restField}
-                />
-            )}
-        />
-        {form.formState.errors.proofOfPayment && <p className="text-sm text-destructive mt-1">{form.formState.errors.proofOfPayment.message}</p>}
-        {fileError && <p className="text-sm text-destructive mt-1">{fileError}</p>}
-      </div> */}
-
+      
       <Button type="submit" size="lg" className="w-full" disabled={isPending}>
         {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
         Submit Reference 
@@ -87,3 +73,6 @@ export function DonationReferenceForm() { // Renamed component
     </form>
   );
 }
+*/
+
+export {}; // Add an empty export to make it a module if all content is removed.

@@ -24,9 +24,12 @@ export const bookingFormSchema = z.object({
 
 export type BookingFormValues = z.infer<typeof bookingFormSchema>;
 
+// donationFormSchema and DonationFormValues removed as the form is no longer used.
+/*
 export const donationFormSchema = z.object({
   donorName: z.string().min(1, "Your name or company name is required for reference."),
   // proofOfPayment: fileSchema.refine(file => file !== undefined && file !== null, "Proof of payment is required."), // Removed
 });
 
 export type DonationFormValues = z.infer<typeof donationFormSchema>;
+*/

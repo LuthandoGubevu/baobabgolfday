@@ -1,7 +1,7 @@
 
 "use server";
 
-import { bookingFormSchema, BookingFormValues, donationFormSchema, DonationFormValues } from '@/lib/schemas';
+import { bookingFormSchema, BookingFormValues } from '@/lib/schemas'; // donationFormSchema and DonationFormValues removed
 import { db } from '@/lib/firebase'; // Import db
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
@@ -43,7 +43,8 @@ export async function submitBooking(values: BookingFormValues) {
   }
 }
 
-
+// submitDonationReference function removed as the corresponding form is removed.
+/*
 export async function submitDonationReference(values: DonationFormValues) { 
   const validatedFields = donationFormSchema.safeParse(values);
 
@@ -82,3 +83,4 @@ export async function submitDonationReference(values: DonationFormValues) {
     message: "Donation reference submitted successfully! Thank you for your generosity."
   };
 }
+*/
