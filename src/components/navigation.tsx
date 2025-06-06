@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -66,8 +67,8 @@ export function Navigation() {
 
   return (
     <header className={cn(
-      "sticky top-0 z-50 w-full transition-all duration-300",
-      isScrolled ? "bg-secondary shadow-md" : "bg-transparent"
+      "sticky top-0 z-50 w-full bg-black transition-all duration-300", // Always bg-black
+      isScrolled ? "shadow-md" : ""                                    // Shadow on scroll
     )}>
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <Logo />
@@ -83,7 +84,7 @@ export function Navigation() {
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] bg-secondary">
+            <SheetContent side="right" className="w-[280px] bg-secondary"> {/* Mobile sheet still uses secondary, consider if this should also be black */}
               <div className="flex flex-col gap-6 p-6">
                 <Logo />
                 <nav className="flex flex-col gap-4">
