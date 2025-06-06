@@ -84,7 +84,7 @@ export function Navigation() {
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] bg-secondary"> {/* Mobile sheet still uses secondary, consider if this should also be black */}
+            <SheetContent side="right" className="w-[280px] bg-background">
               <div className="flex flex-col gap-6 p-6">
                 <Logo />
                 <nav className="flex flex-col gap-4">
