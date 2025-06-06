@@ -1,7 +1,9 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { Navigation } from '@/components/navigation';
 import { Toaster } from "@/components/ui/toaster";
+import { Footer } from '@/components/footer'; // Import the new Footer component
 
 export const metadata: Metadata = {
   title: 'Hope Fore Hunger - KFC Add Hope Golf Day 2025',
@@ -20,9 +22,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-body antialiased bg-background text-foreground">
+      <body className="font-body antialiased bg-background text-foreground flex flex-col min-h-screen">
         <Navigation />
-        <main>{children}</main>
+        <main className="flex-grow">{children}</main>
+        <Footer /> {/* Add the Footer component here */}
         <Toaster />
       </body>
     </html>
