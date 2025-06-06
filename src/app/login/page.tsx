@@ -87,7 +87,7 @@ export default function LoginPage() {
 
   return (
     <SectionWrapper id="login-page" className="min-h-screen flex items-center justify-center">
-      <Card className="w-full max-w-md bg-card shadow-xl">
+      <Card className="w-full max-w-md bg-card shadow-xl mx-auto">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-headline text-primary flex items-center justify-center gap-2">
             <LogIn className="h-8 w-8" /> Admin Sign In
