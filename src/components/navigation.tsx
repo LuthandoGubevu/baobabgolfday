@@ -3,10 +3,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu } from 'lucide-react';
+import { Menu, LogIn } from 'lucide-react';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'; // Added SheetTitle
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
@@ -72,9 +72,15 @@ export function Navigation() {
     )}>
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-4">
           {renderLinks(mainNavLinks, true)}
           {renderLinks(supportingNavLinks, false)}
+           <Link href="/login" passHref>
+            <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10 hover:text-primary-foreground ml-2">
+              <LogIn className="mr-2 h-4 w-4" />
+              Sign In
+            </Button>
+          </Link>
         </nav>
         <div className="md:hidden">
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -85,12 +91,18 @@ export function Navigation() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] bg-black">
-              <SheetTitle className="sr-only">Navigation Menu</SheetTitle> {/* Visually hidden title */}
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col gap-6 p-6">
                 <Logo />
                 <nav className="flex flex-col gap-4">
                   {renderLinks(mainNavLinks, true)}
                   {renderLinks(supportingNavLinks, false)}
+                  <Link href="/login" passHref>
+                    <Button variant="outline" size="sm" className="w-full border-primary text-primary hover:bg-primary/10 hover:text-primary-foreground mt-4">
+                      <LogIn className="mr-2 h-4 w-4" />
+                      Sign In
+                    </Button>
+                  </Link>
                 </nav>
               </div>
             </SheetContent>

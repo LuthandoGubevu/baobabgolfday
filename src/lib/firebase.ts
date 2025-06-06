@@ -1,5 +1,7 @@
+
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApp, getApps } from "firebase/app";
+import { getAuth } from "firebase/auth"; // Import getAuth
 import { getAnalytics, isSupported } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -19,6 +21,7 @@ const firebaseConfig = {
 // Initialize Firebase
 // To avoid re-initializing on hot reloads in development, check if an app already exists.
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+const auth = getAuth(app); // Initialize and export auth
 
 // Initialize Analytics and export it (check for support first)
 let analytics;
@@ -35,4 +38,4 @@ if (typeof window !== 'undefined') { // Check if window is defined (runs on clie
   });
 }
 
-export { app, analytics };
+export { app, auth, analytics };
