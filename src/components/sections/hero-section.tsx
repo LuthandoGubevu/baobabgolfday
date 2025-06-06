@@ -1,3 +1,4 @@
+
 "use client";
 import { Button } from "@/components/ui/button";
 import { SectionWrapper } from "@/components/section-wrapper";
@@ -16,13 +17,14 @@ export function HeroSection() {
     <SectionWrapper id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden !py-0">
       <div className="absolute inset-0 z-0">
         <Image 
-          src="https://placehold.co/1920x1080/121212/2e2e2e" // Dark placeholder representing golf course at dusk/dawn
-          alt="Golf course background" 
+          src="/golf-hero.png" 
+          alt="Golf event hero background" 
           layout="fill" 
           objectFit="cover" 
           quality={80}
           className="opacity-30"
-          data-ai-hint="golf course landscape"
+          data-ai-hint="golf course hero"
+          priority // Keep priority as it's LCP
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background"></div>
       </div>
