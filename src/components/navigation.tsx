@@ -84,7 +84,7 @@ export function Navigation() {
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] bg-background">
+            <SheetContent side="right" className="w-[280px] bg-black">
               <div className="flex flex-col gap-6 p-6">
                 <Logo />
                 <nav className="flex flex-col gap-4">
@@ -99,3 +99,4 @@ export function Navigation() {
     </header>
   );
 }
+
