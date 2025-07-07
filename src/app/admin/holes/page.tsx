@@ -2,14 +2,13 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { collection, onSnapshot, query } from 'firebase/firestore';
+import { collection, onSnapshot, query, doc, runTransaction, updateDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
 import { Loader2, Golf, CircleCheck, CircleHelp, CircleX, RefreshCw, AlertTriangle } from "lucide-react";
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
-import { confirmHole, releaseHole } from '@/actions/admin-actions';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -73,21 +72,31 @@ export default function AdminHolesPage() {
   const handleAction = async (action: 'confirm' | 'release', holeId: string, bookingId?: string) => {
     setIsSubmitting(holeId);
     try {
-        let result;
         if (action === 'confirm' && bookingId) {
-            result = await confirmHole(holeId, bookingId);
+            const holeRef = doc(db, "holes", holeId);
+            await runTransaction(db, async (transaction) => {
+                const holeDoc = await transaction.get(holeRef);
+                if (!holeDoc.exists() || holeDoc.data().bookingId !== bookingId) {
+                    throw new Error("Hole status has changed or booking ID does not match.");
+                }
+                transaction.update(holeRef, { status: "confirmed" });
+            });
+            toast({ title: "Success", description: `Hole ${holeId} has been confirmed.` });
         } else if (action === 'release') {
-            result = await releaseHole(holeId);
+            const holeRef = doc(db, "holes", holeId);
+            await updateDoc(holeRef, {
+                status: "available",
+                bookingId: null,
+                companyName: null,
+                contactName: null,
+                email: null,
+            });
+            toast({ title: "Success", description: `Hole ${holeId} is now available.` });
         } else {
             throw new Error("Invalid action or missing booking ID.");
         }
-
-        if (result.success) {
-            toast({ title: "Success", description: result.message });
-        } else {
-            toast({ title: "Error", description: result.message, variant: "destructive" });
-        }
     } catch (err: any) {
+        console.error("Admin action failed:", err);
         toast({ title: "Action Failed", description: err.message || "An unexpected error occurred.", variant: "destructive" });
     } finally {
         setIsSubmitting(null);
