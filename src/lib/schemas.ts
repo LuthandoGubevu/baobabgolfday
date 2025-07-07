@@ -19,6 +19,9 @@ export const bookingFormSchema = z.object({
   sponsorAuctionPrize: z.boolean().optional(),
   donateWithoutAttending: z.boolean().optional(),
   golfCartInterest: z.boolean().optional(),
+  termsAccepted: z.boolean().refine(val => val === true, {
+    message: "You must accept the terms and conditions to proceed.",
+  }),
   // proofOfPayment: fileSchema, // Removed
 });
 

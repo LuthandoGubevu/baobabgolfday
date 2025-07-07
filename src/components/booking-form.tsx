@@ -1,6 +1,7 @@
 
 "use client";
 
+import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
 import { bookingFormSchema, BookingFormValues } from "@/lib/schemas";
@@ -38,6 +39,7 @@ export function BookingForm() {
       sponsorAuctionPrize: false,
       donateWithoutAttending: false,
       golfCartInterest: false,
+      termsAccepted: false,
       // proofOfPayment: undefined, // Removed
     },
   });
@@ -160,30 +162,35 @@ export function BookingForm() {
               ))}
             </div>
           </div>
+          
+          <Separator className="bg-border" />
 
-          {/* Proof of Payment section removed */}
-          {/* <Separator className="bg-border" />
-
-          <div className="space-y-2">
-            <Label htmlFor="proofOfPayment" className="text-xl font-semibold text-foreground">Upload Proof of Payment (Optional)</Label>
-            <p className="text-sm text-muted-foreground">If you've already made a payment, please upload the proof (PDF, JPG, PNG - Max 5MB).</p>
-            <Controller
-                name="proofOfPayment"
+          {/* Terms and Conditions */}
+          <div>
+            <div className="flex items-center space-x-2">
+              <Controller
+                name="termsAccepted"
                 control={form.control}
-                render={({ field: { onChange, value, ...restField } }) => (
-                    <Input
-                        id="proofOfPayment"
-                        type="file"
-                        accept=".pdf,.jpg,.jpeg,.png"
-                        onChange={(e) => onChange(e.target.files ? e.target.files[0] : null)}
-                        className="file:text-primary-foreground file:bg-primary hover:file:bg-primary/90"
-                        {...restField}
-                    />
+                render={({ field }) => (
+                  <Checkbox 
+                    id="termsAccepted" 
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
                 )}
-            />
-            {form.formState.errors.proofOfPayment && <p className="text-sm text-destructive mt-1">{form.formState.errors.proofOfPayment.message}</p>}
-            {fileError && <p className="text-sm text-destructive mt-1">{fileError}</p>}
-          </div> */}
+              />
+              <Label htmlFor="termsAccepted" className="font-normal text-muted-foreground">
+                I have read and agree to the{" "}
+                <Link href="/terms" className="text-primary hover:underline" target="_blank">
+                  Terms and Conditions
+                </Link>
+                .
+              </Label>
+            </div>
+            {form.formState.errors.termsAccepted && (
+              <p className="text-sm text-destructive mt-1 ml-6">{form.formState.errors.termsAccepted.message}</p>
+            )}
+          </div>
 
         </CardContent>
         <CardFooter>
