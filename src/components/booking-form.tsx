@@ -29,6 +29,7 @@ export function BookingForm() {
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
   const [holes, setHoles] = useState<Hole[]>([]);
+  const [holeError, setHoleError] = useState<string | null>(null);
 
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingFormSchema),
@@ -60,15 +61,23 @@ export function BookingForm() {
 
   useEffect(() => {
     const q = query(collection(db, "holes"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const fetchedHoles: Hole[] = [];
-        querySnapshot.forEach((doc) => {
-            fetchedHoles.push({ id: doc.id, ...doc.data() } as Hole);
-        });
-        // Sort holes numerically by ID
-        fetchedHoles.sort((a, b) => parseInt(a.id) - parseInt(b.id));
-        setHoles(fetchedHoles);
-    });
+    const unsubscribe = onSnapshot(q, 
+        (querySnapshot) => {
+            setHoleError(null); // Clear error on success
+            const fetchedHoles: Hole[] = [];
+            querySnapshot.forEach((doc) => {
+                fetchedHoles.push({ id: doc.id, ...doc.data() } as Hole);
+            });
+            // Sort holes numerically by ID
+            fetchedHoles.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+            setHoles(fetchedHoles);
+        },
+        (error) => {
+            console.error("Firestore holes listener error:", error);
+            setHoleError("Could not load hole availability. Please check permissions or contact the event organizer.");
+            setHoles([]);
+        }
+    );
 
     return () => unsubscribe();
   }, []);
@@ -199,39 +208,47 @@ export function BookingForm() {
              {showHoleSelector && (
               <div className="pt-4 space-y-4">
                 <h4 className="font-semibold text-foreground">Select Your Sponsored Hole</h4>
-                <Controller
-                  name="sponsoredHoleNumber"
-                  control={form.control}
-                  render={({ field }) => (
-                    <RadioGroup
-                      onValueChange={(value) => field.onChange(parseInt(value))}
-                      className="grid grid-cols-6 sm:grid-cols-9 gap-2"
-                    >
-                      {holes.map((hole) => {
-                        const isDisabled = hole.status !== 'available';
-                        return (
-                          <div key={hole.id} className="flex items-center justify-center">
-                            <RadioGroupItem value={hole.id} id={`hole-${hole.id}`} className="sr-only" disabled={isDisabled} />
-                            <Label
-                              htmlFor={`hole-${hole.id}`}
-                              className={cn(
-                                "flex items-center justify-center w-10 h-10 rounded-full border-2 cursor-pointer transition-all",
-                                field.value === parseInt(hole.id)
-                                  ? "bg-primary text-primary-foreground border-primary ring-2 ring-offset-2 ring-offset-background ring-primary"
-                                  : "bg-background text-foreground border-border",
-                                isDisabled
-                                  ? "bg-muted text-muted-foreground border-dashed cursor-not-allowed line-through"
-                                  : "hover:bg-accent hover:text-accent-foreground"
-                              )}
-                            >
-                              {hole.id}
-                            </Label>
-                          </div>
-                        );
-                      })}
-                    </RadioGroup>
-                  )}
-                />
+                 {holeError && (
+                    <div className="p-3 my-2 text-sm rounded-md bg-destructive/10 text-destructive border border-destructive/20 flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4" />
+                        <p>{holeError}</p>
+                    </div>
+                )}
+                {holes.length > 0 && 
+                  <Controller
+                    name="sponsoredHoleNumber"
+                    control={form.control}
+                    render={({ field }) => (
+                      <RadioGroup
+                        onValueChange={(value) => field.onChange(parseInt(value))}
+                        className="grid grid-cols-6 sm:grid-cols-9 gap-2"
+                      >
+                        {holes.map((hole) => {
+                          const isDisabled = hole.status !== 'available';
+                          return (
+                            <div key={hole.id} className="flex items-center justify-center">
+                              <RadioGroupItem value={hole.id} id={`hole-${hole.id}`} className="sr-only" disabled={isDisabled} />
+                              <Label
+                                htmlFor={`hole-${hole.id}`}
+                                className={cn(
+                                  "flex items-center justify-center w-10 h-10 rounded-full border-2 cursor-pointer transition-all",
+                                  field.value === parseInt(hole.id)
+                                    ? "bg-primary text-primary-foreground border-primary ring-2 ring-offset-2 ring-offset-background ring-primary"
+                                    : "bg-background text-foreground border-border",
+                                  isDisabled
+                                    ? "bg-muted text-muted-foreground border-dashed cursor-not-allowed line-through"
+                                    : "hover:bg-accent hover:text-accent-foreground"
+                                )}
+                              >
+                                {hole.id}
+                              </Label>
+                            </div>
+                          );
+                        })}
+                      </RadioGroup>
+                    )}
+                  />
+                }
                 {form.formState.errors.sponsoredHoleNumber && (
                     <p className="text-sm text-destructive mt-2 flex items-center gap-1">
                         <AlertCircle className="h-4 w-4" />
