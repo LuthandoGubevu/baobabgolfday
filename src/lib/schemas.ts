@@ -22,8 +22,19 @@ export const bookingFormSchema = z.object({
   termsAccepted: z.boolean().refine(val => val === true, {
     message: "You must accept the terms and conditions to proceed.",
   }),
-  // proofOfPayment: fileSchema, // Removed
+  sponsoredHoleNumber: z.number().optional(),
+  paymentReference: z.string().optional(),
+}).refine(data => {
+  // If a hole sponsorship is selected, a hole number must also be selected.
+  if ((data.sponsorHole1000 || data.sponsorHole1800) && !data.sponsoredHoleNumber) {
+    return false;
+  }
+  return true;
+}, {
+  message: "Please select an available hole for your sponsorship.",
+  path: ["sponsoredHoleNumber"], // Correctly associate error with the hole number field
 });
+
 
 export type BookingFormValues = z.infer<typeof bookingFormSchema>;
 

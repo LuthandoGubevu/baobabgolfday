@@ -7,7 +7,7 @@ import { db } from '@/lib/firebase';
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Loader2, ShieldAlert, PackageOpen } from "lucide-react";
+import { Loader2, ShieldAlert, PackageOpen, BookUser } from "lucide-react";
 import type { BookingFormValues } from '@/lib/schemas'; // For type safety
 
 interface BookingSubmission extends BookingFormValues {
@@ -46,7 +46,7 @@ export default function AdminSubmissionsPage() {
         querySnapshot.forEach((doc) => {
           fetchedSubmissions.push({ 
             id: doc.id, 
-            ...(doc.data() as BookingFormValues), // Spread data, id and submittedAt are separate
+            ...(doc.data() as BookingFormValues),
             submittedAt: doc.data().submittedAt as FirestoreTimestamp | null 
           });
         });
@@ -63,10 +63,10 @@ export default function AdminSubmissionsPage() {
   }, []);
 
   return (
-    <SectionWrapper id="admin-submissions-page" className="min-h-screen">
+    <div id="admin-submissions-page">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary flex items-center justify-center gap-3">
-          <ShieldAlert className="h-12 w-12"/> Admin Area: Booking Submissions
+          <BookUser className="h-12 w-12"/> Booking Submissions
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
           View all golf day registrations and sponsorship bookings.
@@ -118,9 +118,10 @@ export default function AdminSubmissionsPage() {
                   <TableHead>Submitted At</TableHead>
                   <TableHead>Company</TableHead>
                   <TableHead>Contact Name</TableHead>
-                  <TableHead>Team Name</TableHead>
                   <TableHead>Players</TableHead>
                   <TableHead>Sponsorship</TableHead>
+                  <TableHead>Hole Req.</TableHead>
+                  <TableHead>Payment Ref.</TableHead>
                   <TableHead>Contact Email</TableHead>
                   <TableHead>Phone</TableHead>
                 </TableRow>
@@ -131,7 +132,6 @@ export default function AdminSubmissionsPage() {
                     <TableCell className="whitespace-nowrap">{formatTimestamp(sub.submittedAt)}</TableCell>
                     <TableCell>{sub.companyName}</TableCell>
                     <TableCell>{sub.contactName}</TableCell>
-                    <TableCell>{sub.callingCardName}</TableCell>
                     <TableCell className="min-w-[200px]">
                       {sub.player1 && <div>1. {sub.player1}</div>}
                       {sub.player2 && <div>2. {sub.player2}</div>}
@@ -139,6 +139,8 @@ export default function AdminSubmissionsPage() {
                       {sub.player4 && <div>4. {sub.player4}</div>}
                     </TableCell>
                     <TableCell>{formatSponsorship(sub)}</TableCell>
+                    <TableCell className="text-center font-bold">{sub.sponsoredHoleNumber || 'N/A'}</TableCell>
+                    <TableCell>{sub.paymentReference || 'N/A'}</TableCell>
                     <TableCell>{sub.email}</TableCell>
                     <TableCell>{sub.phoneNumber}</TableCell>
                   </TableRow>
@@ -148,6 +150,6 @@ export default function AdminSubmissionsPage() {
           </CardContent>
         </Card>
       )}
-    </SectionWrapper>
+    </div>
   );
 }

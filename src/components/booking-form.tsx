@@ -10,16 +10,25 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
 import { submitBooking } from "@/actions/form-actions";
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
-import { Loader2 } from "lucide-react";
+import { Loader2, AlertCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { db } from "@/lib/firebase";
+import { collection, onSnapshot, doc, query, orderBy } from "firebase/firestore";
+
+interface Hole {
+    id: string;
+    status: 'available' | 'pending' | 'confirmed';
+}
 
 export function BookingForm() {
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
-  // fileError state is removed as file uploads are removed.
+  const [holes, setHoles] = useState<Hole[]>([]);
 
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingFormSchema),
@@ -40,12 +49,39 @@ export function BookingForm() {
       donateWithoutAttending: false,
       golfCartInterest: false,
       termsAccepted: false,
-      // proofOfPayment: undefined, // Removed
+      sponsoredHoleNumber: undefined,
+      paymentReference: "",
     },
   });
 
+  const watchSponsorHole1000 = form.watch("sponsorHole1000");
+  const watchSponsorHole1800 = form.watch("sponsorHole1800");
+  const showHoleSelector = watchSponsorHole1000 || watchSponsorHole1800;
+
+  useEffect(() => {
+    const q = query(collection(db, "holes"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const fetchedHoles: Hole[] = [];
+        querySnapshot.forEach((doc) => {
+            fetchedHoles.push({ id: doc.id, ...doc.data() } as Hole);
+        });
+        // Sort holes numerically by ID
+        fetchedHoles.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+        setHoles(fetchedHoles);
+    });
+
+    return () => unsubscribe();
+  }, []);
+  
+  // When sponsorship is unchecked, reset hole selection
+  useEffect(() => {
+      if (!showHoleSelector) {
+          form.setValue("sponsoredHoleNumber", undefined);
+          form.clearErrors("sponsoredHoleNumber");
+      }
+  }, [showHoleSelector, form]);
+
   const onSubmit = (values: BookingFormValues) => {
-    // setFileError(null); // Removed
     startTransition(async () => {
       const result = await submitBooking(values);
       if (result.success) {
@@ -67,7 +103,6 @@ export function BookingForm() {
                 form.setError(fieldName, { type: "server", message: messages.join(', ') });
             }
           });
-          // Removed proofOfPayment error handling
         }
       }
     });
@@ -160,6 +195,66 @@ export function BookingForm() {
                   <Label htmlFor={item.id} className="font-normal text-muted-foreground">{item.label}</Label>
                 </div>
               ))}
+            </div>
+             {showHoleSelector && (
+              <div className="pt-4 space-y-4">
+                <h4 className="font-semibold text-foreground">Select Your Sponsored Hole</h4>
+                <Controller
+                  name="sponsoredHoleNumber"
+                  control={form.control}
+                  render={({ field }) => (
+                    <RadioGroup
+                      onValueChange={(value) => field.onChange(parseInt(value))}
+                      className="grid grid-cols-6 sm:grid-cols-9 gap-2"
+                    >
+                      {holes.map((hole) => {
+                        const isDisabled = hole.status !== 'available';
+                        return (
+                          <div key={hole.id} className="flex items-center justify-center">
+                            <RadioGroupItem value={hole.id} id={`hole-${hole.id}`} className="sr-only" disabled={isDisabled} />
+                            <Label
+                              htmlFor={`hole-${hole.id}`}
+                              className={cn(
+                                "flex items-center justify-center w-10 h-10 rounded-full border-2 cursor-pointer transition-all",
+                                field.value === parseInt(hole.id)
+                                  ? "bg-primary text-primary-foreground border-primary ring-2 ring-offset-2 ring-offset-background ring-primary"
+                                  : "bg-background text-foreground border-border",
+                                isDisabled
+                                  ? "bg-muted text-muted-foreground border-dashed cursor-not-allowed line-through"
+                                  : "hover:bg-accent hover:text-accent-foreground"
+                              )}
+                            >
+                              {hole.id}
+                            </Label>
+                          </div>
+                        );
+                      })}
+                    </RadioGroup>
+                  )}
+                />
+                {form.formState.errors.sponsoredHoleNumber && (
+                    <p className="text-sm text-destructive mt-2 flex items-center gap-1">
+                        <AlertCircle className="h-4 w-4" />
+                        {form.formState.errors.sponsoredHoleNumber.message}
+                    </p>
+                )}
+                <p className="text-xs text-muted-foreground pt-2">
+                  Please note: Holes are first come, first served. Your selection will be confirmed once payment has been received and verified.
+                </p>
+              </div>
+            )}
+          </div>
+
+          <Separator className="bg-border" />
+
+          {/* Payment Reference */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold text-foreground">Payment Information</h3>
+            <div>
+                <Label htmlFor="paymentReference">Payment Reference Number (Optional)</Label>
+                <Input id="paymentReference" {...form.register("paymentReference")} placeholder="e.g., EFT-12345" />
+                <p className="text-xs text-muted-foreground mt-1">If you have already made a payment, please provide the reference number.</p>
+                {form.formState.errors.paymentReference && <p className="text-sm text-destructive mt-1">{form.formState.errors.paymentReference.message}</p>}
             </div>
           </div>
           

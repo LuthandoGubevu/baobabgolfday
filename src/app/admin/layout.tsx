@@ -2,15 +2,56 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '@/lib/firebase';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ShieldAlert, BookUser, Golf, LayoutDashboard } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { SectionWrapper } from '@/components/section-wrapper';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 const ADMIN_EMAIL = "shayna@baobabbrands.com";
+
+function AdminNav() {
+    const pathname = usePathname();
+    const router = useRouter();
+
+    const handleLogout = async () => {
+        await signOut(auth);
+        router.push('/login');
+    };
+
+    const navItems = [
+        { href: '/admin/submissions', label: 'Submissions', icon: BookUser },
+        { href: '/admin/holes', label: 'Hole Status', icon: Golf },
+    ];
+
+    return (
+        <div className="bg-card p-4 rounded-lg shadow-md mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className='flex items-center gap-2 text-lg font-semibold text-primary'>
+                <LayoutDashboard />
+                <span>Admin Dashboard</span>
+            </div>
+            <nav className="flex items-center gap-2">
+                {navItems.map(item => (
+                    <Link key={item.href} href={item.href} passHref>
+                        <Button variant={pathname === item.href ? "default" : "outline"} size="sm">
+                            <item.icon className='mr-2 h-4 w-4' />
+                            {item.label}
+                        </Button>
+                    </Link>
+                ))}
+                 <Button variant="destructive" size="sm" onClick={handleLogout}>
+                    Log Out
+                </Button>
+            </nav>
+        </div>
+    );
+}
+
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
@@ -93,5 +134,10 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     );
   }
 
-  return <>{children}</>;
+  return (
+    <SectionWrapper id="admin-area" className="min-h-screen bg-secondary">
+        <AdminNav />
+        {children}
+    </SectionWrapper>
+  );
 }
