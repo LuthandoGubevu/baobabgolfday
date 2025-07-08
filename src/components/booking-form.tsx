@@ -18,7 +18,7 @@ import { Separator } from "@/components/ui/separator";
 import { Loader2, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { db } from "@/lib/firebase";
-import { collection, onSnapshot, doc, query, orderBy } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 
 interface Hole {
     id: string;
@@ -61,28 +61,30 @@ export function BookingForm() {
   const showHoleSelector = watchSponsorHole1000 || watchSponsorHole1800;
 
   useEffect(() => {
-    setHolesLoading(true);
-    const q = query(collection(db, "holes"));
-    const unsubscribe = onSnapshot(q, 
-        (querySnapshot) => {
-            setHoleError(null);
+    const fetchHoles = async () => {
+        setHolesLoading(true);
+        setHoleError(null);
+        try {
+            const q = query(collection(db, "holes"));
+            const querySnapshot = await getDocs(q);
+            
             const fetchedHoles: Hole[] = [];
             querySnapshot.forEach((doc) => {
                 fetchedHoles.push({ id: doc.id, ...doc.data() } as Hole);
             });
             fetchedHoles.sort((a, b) => parseInt(a.id) - parseInt(b.id));
             setHoles(fetchedHoles);
-            setHolesLoading(false);
-        },
-        (error) => {
-            console.error("Firestore holes listener error:", error);
+
+        } catch (error) {
+            console.error("Firestore getDocs error:", error);
             setHoleError("Could not load hole availability. Please check permissions or contact the event organizer.");
             setHoles([]);
+        } finally {
             setHolesLoading(false);
         }
-    );
+    };
 
-    return () => unsubscribe();
+    fetchHoles();
   }, []);
   
   // When sponsorship is unchecked, reset hole selection
