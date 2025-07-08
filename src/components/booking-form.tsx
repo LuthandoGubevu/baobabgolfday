@@ -68,10 +68,16 @@ export function BookingForm() {
             const q = query(collection(db, "holes"));
             const querySnapshot = await getDocs(q);
             
+            // New logging to help diagnose the issue
+            console.log("Hole query snapshot size:", querySnapshot.size);
+
             const fetchedHoles: Hole[] = [];
             querySnapshot.forEach((doc) => {
+                // New logging
+                console.log("Fetched hole doc:", doc.id, doc.data());
                 fetchedHoles.push({ id: doc.id, ...doc.data() } as Hole);
             });
+
             fetchedHoles.sort((a, b) => parseInt(a.id) - parseInt(b.id));
             setHoles(fetchedHoles);
 
