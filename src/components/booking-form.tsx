@@ -30,6 +30,7 @@ export function BookingForm() {
   const [isPending, startTransition] = useTransition();
   const [holes, setHoles] = useState<Hole[]>([]);
   const [holeError, setHoleError] = useState<string | null>(null);
+  const [holesLoading, setHolesLoading] = useState(true);
 
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingFormSchema),
@@ -60,22 +61,24 @@ export function BookingForm() {
   const showHoleSelector = watchSponsorHole1000 || watchSponsorHole1800;
 
   useEffect(() => {
+    setHolesLoading(true);
     const q = query(collection(db, "holes"));
     const unsubscribe = onSnapshot(q, 
         (querySnapshot) => {
-            setHoleError(null); // Clear error on success
+            setHoleError(null);
             const fetchedHoles: Hole[] = [];
             querySnapshot.forEach((doc) => {
                 fetchedHoles.push({ id: doc.id, ...doc.data() } as Hole);
             });
-            // Sort holes numerically by ID
             fetchedHoles.sort((a, b) => parseInt(a.id) - parseInt(b.id));
             setHoles(fetchedHoles);
+            setHolesLoading(false);
         },
         (error) => {
             console.error("Firestore holes listener error:", error);
             setHoleError("Could not load hole availability. Please check permissions or contact the event organizer.");
             setHoles([]);
+            setHolesLoading(false);
         }
     );
 
@@ -212,6 +215,18 @@ export function BookingForm() {
                     <div className="p-3 my-2 text-sm rounded-md bg-destructive/10 text-destructive border border-destructive/20 flex items-center gap-2">
                         <AlertCircle className="h-4 w-4" />
                         <p>{holeError}</p>
+                    </div>
+                )}
+                {holesLoading && (
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <p>Loading available holes...</p>
+                    </div>
+                )}
+                {!holesLoading && !holeError && holes.length === 0 && (
+                     <div className="p-3 my-2 text-sm rounded-md bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4" />
+                        <p>No holes are currently available for sponsorship. Please check back later.</p>
                     </div>
                 )}
                 {holes.length > 0 && 
