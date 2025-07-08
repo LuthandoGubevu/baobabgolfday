@@ -82,16 +82,30 @@ export default function AdminHolesPage() {
                 transaction.update(holeRef, { status: "confirmed" });
             });
             toast({ title: "Success", description: `Hole ${holeId} has been confirmed.` });
-        } else if (action === 'release') {
+        } else if (action === 'release' && bookingId) {
             const holeRef = doc(db, "holes", holeId);
-            await updateDoc(holeRef, {
-                status: "available",
-                bookingId: null,
-                companyName: null,
-                contactName: null,
-                email: null,
+            const bookingRef = doc(db, "bookings", bookingId);
+
+            await runTransaction(db, async (transaction) => {
+                const bookingDoc = await transaction.get(bookingRef);
+                if (bookingDoc.exists()) {
+                    // Remove the sponsored hole from the original booking
+                    transaction.update(bookingRef, { sponsoredHoleNumber: null });
+                } else {
+                    console.warn(`Booking document ${bookingId} not found, but releasing hole ${holeId}.`);
+                }
+
+                // Reset the hole document to be available
+                transaction.update(holeRef, {
+                    status: "available",
+                    bookingId: null,
+                    companyName: null,
+                    contactName: null,
+                    email: null,
+                });
             });
-            toast({ title: "Success", description: `Hole ${holeId} is now available.` });
+
+            toast({ title: "Success", description: `Hole ${holeId} released and booking updated.` });
         } else {
             throw new Error("Invalid action or missing booking ID.");
         }
@@ -184,7 +198,7 @@ export default function AdminHolesPage() {
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
                                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                    <AlertDialogAction onClick={() => handleAction('release', hole.id)}>
+                                    <AlertDialogAction onClick={() => handleAction('release', hole.id, hole.bookingId)}>
                                         Yes, release hole
                                     </AlertDialogAction>
                                     </AlertDialogFooter>
