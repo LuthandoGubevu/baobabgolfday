@@ -5,7 +5,7 @@ export function Logo() {
   return (
     <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
       <Image
-        src="/add-hope.png" 
+        src="/add-hope-2.png" 
         alt="Add Hope Logo"
         width={56} 
         height={15} 
