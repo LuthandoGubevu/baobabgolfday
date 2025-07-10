@@ -9,7 +9,8 @@ export function Logo() {
         alt="Add Hope Logo"
         width={112} 
         height={30} 
-        priority 
+        priority
+        style={{ height: 'auto' }}
       />
     </Link>
   );
