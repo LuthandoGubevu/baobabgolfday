@@ -72,6 +72,15 @@ export default function LoginPage() {
                 case "auth/invalid-email":
                     errorMessage = "Invalid email format.";
                     break;
+                case "auth/too-many-requests":
+                     errorMessage = "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.";
+                     break;
+                case "auth/network-request-failed":
+                    errorMessage = "Network error. Please check your internet connection and try again.";
+                    break;
+                 case "auth/operation-not-allowed":
+                    errorMessage = "Email/password sign-in is not enabled for this project. Please contact the administrator.";
+                    break;
                 default:
                     errorMessage = "Login failed. Please try again.";
             }
