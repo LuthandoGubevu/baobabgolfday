@@ -22,8 +22,8 @@ export async function submitBooking(values: BookingFormValues) {
     // If a hole was selected, run a transaction to reserve it
     if (sponsoredHoleNumber) {
         const holeRef = doc(db, "holes", sponsoredHoleNumber.toString());
-        // Firestore requires collection path to be non-empty string.
-        const bookingRef = doc(collection(db, "bookings"));
+        // Firestore requires collection path to be non-empty string, so we create a reference for a new document.
+        const newBookingRef = doc(collection(db, "bookings"));
 
         try {
             await runTransaction(db, async (transaction) => {
@@ -32,23 +32,25 @@ export async function submitBooking(values: BookingFormValues) {
                     throw new Error("This hole is no longer available. Please select another one.");
                 }
 
-                // Hole is available, so proceed
-                transaction.set(bookingRef, {
+                // Hole is available, so proceed.
+                // First, create the new booking document with all the form data.
+                transaction.set(newBookingRef, {
                     ...formData,
                     sponsoredHoleNumber,
                     submittedAt: serverTimestamp()
                 });
 
+                // Then, update the hole document to mark it as pending and link it to the new booking ID.
                 transaction.update(holeRef, {
                     status: 'pending',
-                    bookingId: bookingRef.id,
+                    bookingId: newBookingRef.id,
                     companyName: formData.companyName,
                     contactName: formData.contactName,
                     email: formData.email,
                 });
             });
 
-            console.log("Booking submitted with ID: ", bookingRef.id, formData);
+            console.log("Booking submitted with ID: ", newBookingRef.id, formData);
             return { 
                 success: true, 
                 message: "Booking submitted successfully! Your hole selection is pending confirmation." 
