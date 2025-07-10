@@ -6,7 +6,7 @@ import { collection, onSnapshot, query, doc, runTransaction, updateDoc } from 'f
 import { db } from '@/lib/firebase';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
-import { Loader2, Golf, CircleCheck, CircleHelp, CircleX, RefreshCw, AlertTriangle } from "lucide-react";
+import { Loader2, ShieldCheck, CircleCheck, CircleHelp, CircleX, RefreshCw, AlertTriangle } from "lucide-react";
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -39,7 +39,7 @@ const statusConfig: Record<HoleStatus, {
 }> = {
     available: { label: 'Available', icon: CircleCheck, color: 'text-green-500', bgColor: 'bg-green-500/10' },
     pending: { label: 'Pending Confirmation', icon: CircleHelp, color: 'text-yellow-500', bgColor: 'bg-yellow-500/10' },
-    confirmed: { label: 'Confirmed', icon: Golf, color: 'text-red-500', bgColor: 'bg-red-500/10' },
+    confirmed: { label: 'Confirmed', icon: ShieldCheck, color: 'text-red-500', bgColor: 'bg-red-500/10' },
 };
 
 export default function AdminHolesPage() {
@@ -122,7 +122,7 @@ export default function AdminHolesPage() {
     <div id="admin-holes-page">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary flex items-center justify-center gap-3">
-          <Golf className="h-12 w-12"/> Hole Sponsorship Status
+          <ShieldCheck className="h-12 w-12"/> Hole Sponsorship Status
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
           Manually confirm and manage the status of each sponsored hole.
