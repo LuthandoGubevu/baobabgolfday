@@ -28,7 +28,12 @@ export async function submitBooking(values: BookingFormValues) {
             await runTransaction(db, async (transaction) => {
                 const holeDoc = await transaction.get(holeRef);
 
-                if (!holeDoc.exists() || holeDoc.data().status !== 'available') {
+                if (!holeDoc.exists()) {
+                    // This is a critical check. If the hole document doesn't exist in Firestore, we must stop.
+                    throw new Error(`Hole ${sponsoredHoleNumber} does not exist in the database.`);
+                }
+                
+                if (holeDoc.data().status !== 'available') {
                     throw new Error("This hole is no longer available. Please select another one.");
                 }
 
@@ -56,16 +61,11 @@ export async function submitBooking(values: BookingFormValues) {
             };
 
         } catch (error: any) {
-            console.error("Hole booking transaction failed: ", error);
-            if (error.message.includes("no longer available")) {
-                 return {
-                    success: false,
-                    message: "The hole you selected was just taken. Please refresh and choose another hole."
-                 }
-            }
+            console.error("Hole booking transaction failed:", error);
+            // Return the specific error message from the transaction
             return {
                 success: false,
-                message: "There was an error reserving your hole. Please try again."
+                message: error.message || "There was an error reserving your hole. Please try again."
             };
         }
 
