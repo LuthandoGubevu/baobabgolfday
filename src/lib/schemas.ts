@@ -23,8 +23,8 @@ export const bookingFormSchema = z.object({
     message: "You must accept the terms and conditions to proceed.",
   }),
   sponsoredHoleNumber: z.number().optional()
-    .refine(num => num === undefined || (num >= 1 && num <= 18), {
-        message: "Please select a valid hole number between 1 and 18."
+    .refine(num => num === undefined || (num >= 1 && num <= 19), {
+        message: "Please select a valid hole number between 1 and 19."
     }),
   paymentReference: z.string().optional(),
 }).refine(data => {
