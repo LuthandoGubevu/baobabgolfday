@@ -1,14 +1,28 @@
 
 "use client";
 
-import { useEffect, useState } from 'react';
-import { collection, getDocs, orderBy, query, Timestamp as FirestoreTimestamp } from 'firebase/firestore';
+import { useEffect, useState, useTransition } from 'react';
+import { collection, getDocs, orderBy, query, Timestamp as FirestoreTimestamp, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Loader2, ShieldAlert, PackageOpen, BookUser } from "lucide-react";
+import { Loader2, PackageOpen, BookUser, Trash2 } from "lucide-react";
 import type { BookingFormValues } from '@/lib/schemas'; // For type safety
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import { deleteSubmission } from '@/actions/admin-actions';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface BookingSubmission extends BookingFormValues {
   id: string;
@@ -33,6 +47,8 @@ export default function AdminSubmissionsPage() {
   const [submissions, setSubmissions] = useState<BookingSubmission[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { toast } = useToast();
+  const [isDeleting, startDeleteTransition] = useTransition();
 
   useEffect(() => {
     const fetchSubmissions = async () => {
@@ -61,6 +77,26 @@ export default function AdminSubmissionsPage() {
 
     fetchSubmissions();
   }, []);
+
+  const handleDelete = (submissionId: string) => {
+    startDeleteTransition(async () => {
+        const result = await deleteSubmission(submissionId);
+        if (result.success) {
+            toast({
+                title: "Success",
+                description: result.message,
+            });
+            // Optimistically remove the submission from the local state
+            setSubmissions(prev => prev.filter(sub => sub.id !== submissionId));
+        } else {
+            toast({
+                title: "Error",
+                description: result.message,
+                variant: "destructive",
+            });
+        }
+    });
+  };
 
   return (
     <div id="admin-submissions-page">
@@ -124,6 +160,7 @@ export default function AdminSubmissionsPage() {
                   <TableHead>Payment Ref.</TableHead>
                   <TableHead>Contact Email</TableHead>
                   <TableHead>Phone</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -143,6 +180,30 @@ export default function AdminSubmissionsPage() {
                     <TableCell>{sub.paymentReference || 'N/A'}</TableCell>
                     <TableCell>{sub.email}</TableCell>
                     <TableCell>{sub.phoneNumber}</TableCell>
+                    <TableCell className="text-right">
+                       <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button variant="destructive" size="icon" disabled={isDeleting}>
+                                <Trash2 className="h-4 w-4" />
+                                <span className="sr-only">Delete Submission</span>
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action cannot be undone. This will permanently delete the submission from <span className="font-bold">{sub.companyName}</span>.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction onClick={() => handleDelete(sub.id)}>
+                                {isDeleting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Yes, delete"}
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
