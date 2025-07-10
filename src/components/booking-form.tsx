@@ -295,14 +295,15 @@ export function BookingForm() {
           {/* Terms and Conditions */}
           <div>
             <div className="flex items-center space-x-2">
-              <Controller
+               <Controller
                 name="termsAccepted"
                 control={form.control}
                 render={({ field }) => (
-                  <Checkbox 
-                    id="termsAccepted" 
+                  <Checkbox
+                    id="termsAccepted"
                     checked={field.value}
                     onCheckedChange={field.onChange}
+                    aria-invalid={form.formState.errors.termsAccepted ? "true" : "false"}
                   />
                 )}
               />
