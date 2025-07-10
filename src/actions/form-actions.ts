@@ -22,25 +22,24 @@ export async function submitBooking(values: BookingFormValues) {
     // If a hole was selected, run a transaction to reserve it
     if (sponsoredHoleNumber) {
         const holeRef = doc(db, "holes", sponsoredHoleNumber.toString());
-        // Firestore requires collection path to be non-empty string, so we create a reference for a new document.
-        const newBookingRef = doc(collection(db, "bookings"));
+        const newBookingRef = doc(collection(db, "bookings")); // Create a reference for the new booking
 
         try {
             await runTransaction(db, async (transaction) => {
                 const holeDoc = await transaction.get(holeRef);
+
                 if (!holeDoc.exists() || holeDoc.data().status !== 'available') {
                     throw new Error("This hole is no longer available. Please select another one.");
                 }
 
-                // Hole is available, so proceed.
-                // First, create the new booking document with all the form data.
+                // Hole is available. Create the booking document FIRST.
                 transaction.set(newBookingRef, {
                     ...formData,
                     sponsoredHoleNumber,
                     submittedAt: serverTimestamp()
                 });
 
-                // Then, update the hole document to mark it as pending and link it to the new booking ID.
+                // THEN, update the hole document to mark it as pending.
                 transaction.update(holeRef, {
                     status: 'pending',
                     bookingId: newBookingRef.id,
@@ -58,7 +57,6 @@ export async function submitBooking(values: BookingFormValues) {
 
         } catch (error: any) {
             console.error("Hole booking transaction failed: ", error);
-            // Provide a more specific error message if a hole was taken
             if (error.message.includes("no longer available")) {
                  return {
                     success: false,
