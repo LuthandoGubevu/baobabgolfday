@@ -114,10 +114,10 @@ export default function ContactPage() {
               <div>
                 <p className="font-semibold text-foreground">Event Address:</p>
                 <p>
-                  22 Gleneagles Road <br/>
-                  Bunkers Hill <br/>
-                  East London, Eastern Cape <br/>
-                  5241
+                  Olivewood Golf Club <br />
+                  Schafli Road, Chintsa East <br />
+                  East London, Eastern Cape <br />
+                  South Africa
                 </p>
               </div>
             </div>

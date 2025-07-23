@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { MapPin, CalendarDays, Clock, Users, Gift, Shirt, Coffee } from "lucide-react";
 
 const eventDetails = [
-  { icon: MapPin, label: "Location", value: "East London Golf Club" },
+  { icon: MapPin, label: "Location", value: "Olivewood Golf Club" },
   { icon: CalendarDays, label: "Date", value: "TBA" },
   { icon: Clock, label: "Time", value: "TBA" },
   { icon: Users, label: "Format", value: "4 Ball Alliance" },

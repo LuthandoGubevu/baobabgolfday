@@ -37,7 +37,7 @@ export function HeroSection() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-md md:text-lg text-foreground/90">
           <div className="flex items-center justify-center gap-2">
             <MapPin className="h-5 w-5 text-primary" />
-            <span>East London Golf Club</span>
+            <span>Olivewood Golf Club</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <CalendarDays className="h-5 w-5 text-primary" />
