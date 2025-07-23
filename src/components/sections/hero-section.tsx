@@ -41,7 +41,7 @@ export function HeroSection() {
           </div>
           <div className="flex items-center justify-center gap-2">
             <CalendarDays className="h-5 w-5 text-primary" />
-            <span>TBA</span>
+            <span>Friday, 5 December 2025</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <Clock className="h-5 w-5 text-primary" />

@@ -4,7 +4,7 @@ import { MapPin, CalendarDays, Clock, Users, Gift, Shirt, Coffee } from "lucide-
 
 const eventDetails = [
   { icon: MapPin, label: "Location", value: "Olivewood Golf Club" },
-  { icon: CalendarDays, label: "Date", value: "TBA" },
+  { icon: CalendarDays, label: "Date", value: "Friday, 5 December 2025" },
   { icon: Clock, label: "Time", value: "TBA" },
   { icon: Users, label: "Format", value: "4 Ball Alliance" },
   { icon: Gift, label: "Prizes", value: "Longest Drive, Closest to Pin, Best Team" },
