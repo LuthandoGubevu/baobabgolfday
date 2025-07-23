@@ -13,7 +13,7 @@ export function BookingSection() {
           Registrations Open <span className="text-primary">Soon!</span>
         </h2>
         <p className="mt-4 text-lg text-muted-foreground">
-          Secure your spot for a fantastic day of golf for a great cause. Bookings open on August 15th, 2025.
+          Secure your spot for a fantastic day of golf for a great cause. Registrations open soon.
         </p>
       </div>
       <div className="max-w-3xl mx-auto mt-8">

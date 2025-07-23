@@ -4,8 +4,8 @@ import { MapPin, CalendarDays, Clock, Users, Gift, Shirt, Coffee } from "lucide-
 
 const eventDetails = [
   { icon: MapPin, label: "Location", value: "East London Golf Club" },
-  { icon: CalendarDays, label: "Date", value: "25 October 2025" },
-  { icon: Clock, label: "Time", value: "12:00 PM Shotgun Start" },
+  { icon: CalendarDays, label: "Date", value: "TBA" },
+  { icon: Clock, label: "Time", value: "TBA" },
   { icon: Users, label: "Format", value: "4 Ball Alliance" },
   { icon: Gift, label: "Prizes", value: "Longest Drive, Closest to Pin, Best Team" },
   { icon: Shirt, label: "Includes", value: "Gift Bags, Golf Shirts" },
