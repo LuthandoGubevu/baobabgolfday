@@ -56,30 +56,24 @@ export default function ContactPage() {
 
         <Card className="bg-card shadow-xl">
           <CardHeader>
-            <CardTitle className="text-2xl text-foreground">Event Organizer Details</CardTitle>
+            <CardTitle className="text-2xl text-foreground">Get In Touch</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 text-muted-foreground">
             <div className="flex items-center gap-3">
               <Mail className="h-6 w-6 text-primary" />
-              <p>Email: <a href="mailto:events@addhope.co.za" className="hover:text-primary transition-colors">events@addhope.co.za</a> (Example)</p>
+              <p>Email: <a href="mailto:info@baobabbrands.com" className="hover:text-primary transition-colors">info@baobabbrands.com</a></p>
             </div>
             <div className="flex items-center gap-3">
               <Phone className="h-6 w-6 text-primary" />
-              <p>Phone: <a href="tel:+27001234567" className="hover:text-primary transition-colors">+27 (00) 123 4567</a> (Example)</p>
+              <p>Phone: <a href="tel:0430040071" className="hover:text-primary transition-colors">043 004 0071</a></p>
             </div>
             <div className="flex items-start gap-3">
               <MapPinIcon className="h-6 w-6 text-primary mt-1" />
               <p>
-                KFC Add Hope Foundation <br/>
-                1 Example Street, Suburb <br/>
-                City, Postal Code, South Africa (Example)
+                Baobab House, Triple Point <br/>
+                St Helena Road, Beacon Bay <br/>
+                East London, SOUTH AFRICA
               </p>
-            </div>
-            <div className="pt-4">
-              <h3 className="font-semibold text-foreground mb-2">Event Venue:</h3>
-              <p>East London Golf Club</p>
-              <p>[Club Address Line 1]</p>
-              <p>East London, [Postal Code]</p>
             </div>
           </CardContent>
         </Card>
