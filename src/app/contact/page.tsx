@@ -1,22 +1,58 @@
 
+"use client";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTransition } from "react";
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPinIcon } from "lucide-react";
+import { Mail, Phone, MapPinIcon, Loader2 } from "lucide-react";
+import { contactFormSchema, type ContactFormValues } from "@/lib/schemas";
+import { submitMessage } from "@/actions/contact-actions";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ContactPage() {
-  // Dummy action for form
-  const handleSubmit = async (formData: FormData) => {
-    "use server";
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
-    console.log("Contact Form Submission:", { name, email, message });
-    // Here you would typically send an email or save to a database
-    // For now, we'll just log it.
+  const { toast } = useToast();
+  const [isPending, startTransition] = useTransition();
+
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+
+  const handleSubmit = (values: ContactFormValues) => {
+    startTransition(async () => {
+      const result = await submitMessage(values);
+      if (result.success) {
+        toast({
+          title: "Message Sent!",
+          description: result.message,
+        });
+        form.reset();
+      } else {
+        toast({
+          title: "Error",
+          description: result.message || "An error occurred.",
+          variant: "destructive",
+        });
+        if (result.errors) {
+          Object.entries(result.errors).forEach(([field, messages]) => {
+            const fieldName = field as keyof ContactFormValues;
+            if (Array.isArray(messages)) {
+              form.setError(fieldName, { type: 'server', message: messages.join(', ') });
+            }
+          });
+        }
+      }
+    });
   };
 
   return (
@@ -36,20 +72,26 @@ export default function ContactPage() {
             <CardTitle className="text-2xl text-foreground">Send us a Message</CardTitle>
           </CardHeader>
           <CardContent>
-            <form action={handleSubmit} className="space-y-6">
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
               <div>
                 <Label htmlFor="name">Full Name</Label>
-                <Input type="text" id="name" name="name" required />
+                <Input id="name" {...form.register("name")} />
+                {form.formState.errors.name && <p className="text-sm text-destructive mt-1">{form.formState.errors.name.message}</p>}
               </div>
               <div>
                 <Label htmlFor="email">Email Address</Label>
-                <Input type="email" id="email" name="email" required />
+                <Input id="email" type="email" {...form.register("email")} />
+                {form.formState.errors.email && <p className="text-sm text-destructive mt-1">{form.formState.errors.email.message}</p>}
               </div>
               <div>
                 <Label htmlFor="message">Message</Label>
-                <Textarea id="message" name="message" rows={5} required />
+                <Textarea id="message" rows={5} {...form.register("message")} />
+                {form.formState.errors.message && <p className="text-sm text-destructive mt-1">{form.formState.errors.message.message}</p>}
               </div>
-              <Button type="submit" className="w-full" size="lg">Send Message</Button>
+              <Button type="submit" className="w-full" size="lg" disabled={isPending}>
+                {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                Send Message
+              </Button>
             </form>
           </CardContent>
         </Card>

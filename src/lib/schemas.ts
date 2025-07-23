@@ -41,12 +41,10 @@ export const bookingFormSchema = z.object({
 
 export type BookingFormValues = z.infer<typeof bookingFormSchema>;
 
-// donationFormSchema and DonationFormValues removed as the form is no longer used.
-/*
-export const donationFormSchema = z.object({
-  donorName: z.string().min(1, "Your name or company name is required for reference."),
-  // proofOfPayment: fileSchema.refine(file => file !== undefined && file !== null, "Proof of payment is required."), // Removed
+export const contactFormSchema = z.object({
+  name: z.string().min(1, "Your name is required."),
+  email: z.string().email("Please enter a valid email address."),
+  message: z.string().min(10, "Message must be at least 10 characters long."),
 });
 
-export type DonationFormValues = z.infer<typeof donationFormSchema>;
-*/
+export type ContactFormValues = z.infer<typeof contactFormSchema>;

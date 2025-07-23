@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '@/lib/firebase';
-import { Loader2, BookUser, ShieldCheck, LayoutDashboard } from 'lucide-react';
+import { Loader2, BookUser, ShieldCheck, LayoutDashboard, MessageSquare } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { SectionWrapper } from '@/components/section-wrapper';
 import { cn } from '@/lib/utils';
@@ -27,6 +27,7 @@ function AdminNav() {
     const navItems = [
         { href: '/admin/submissions', label: 'Submissions', icon: BookUser },
         { href: '/admin/holes', label: 'Hole Status', icon: ShieldCheck },
+        { href: '/admin/messages', label: 'Messages', icon: MessageSquare },
     ];
 
     return (

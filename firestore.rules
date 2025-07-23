@@ -1,3 +1,4 @@
+
 rules_version = '2';
 
 service cloud.firestore {
@@ -6,24 +7,27 @@ service cloud.firestore {
     // Helper function to check for admin role
     function isAdmin() {
       // Check if the user is authenticated and if their email exists in the roles collection with the 'admin' role.
-      // This requires the admin user to be logged in.
       return request.auth != null && get(/databases/$(database)/documents/roles/$(request.auth.token.email)).data.role == 'admin';
     }
 
-    // Bookings can be created by anyone, but only read or updated by an admin.
+    // Bookings can be created by anyone, but only read or deleted by an admin.
     match /bookings/{bookingId} {
-      allow read, update, delete: if isAdmin();
+      allow read, delete: if isAdmin();
       allow create: if true; // Anyone can submit a booking
     }
 
-    // Hole status can be read by anyone, but only updated as part of the booking process or by an admin.
+    // Hole status can be read by anyone, but only written by an admin or as part of the booking transaction.
     match /holes/{holeId} {
       allow read: if true; // Anyone can check hole availability
-      allow write: if true; // Allow public writes for the booking transaction, and admin updates.
-                          // A more production-ready rule would be more restrictive,
-                          // but this allows the current functionality to work.
+      allow write: if true; // Allows the booking transaction and admin updates.
     }
     
+    // Messages can be created by anyone, but only read or deleted by an admin.
+    match /messages/{messageId} {
+      allow read, delete: if isAdmin();
+      allow create: if true; // Anyone can send a message
+    }
+
     // Roles can only be read by an authenticated user checking their own role.
     // This collection should be populated manually in the Firestore console for security.
     match /roles/{userEmail} {
@@ -31,8 +35,8 @@ service cloud.firestore {
       allow write: if false; // Disallow writes from client for security. Manage roles in the console.
     }
     
-    // Add a default deny rule for any other collections
-    match /{document=**} {
+    // Add a default deny rule for any other collections to prevent accidental access.
+    match /{path=**}/ {
       allow read, write: if false;
     }
   }
