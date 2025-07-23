@@ -59,7 +59,7 @@ export default function ContactPage() {
             <CardTitle className="text-2xl text-foreground">Get In Touch</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 text-muted-foreground">
-            <div className="flex items-center gap-3">
+             <div className="flex items-center gap-3">
               <Mail className="h-6 w-6 text-primary" />
               <p>Email: <a href="mailto:info@baobabbrands.com" className="hover:text-primary transition-colors">info@baobabbrands.com</a></p>
             </div>
@@ -69,11 +69,15 @@ export default function ContactPage() {
             </div>
             <div className="flex items-start gap-3">
               <MapPinIcon className="h-6 w-6 text-primary mt-1" />
-              <p>
-                Baobab House, Triple Point <br/>
-                St Helena Road, Beacon Bay <br/>
-                East London, SOUTH AFRICA
-              </p>
+              <div>
+                <p className="font-semibold text-foreground">Event Address:</p>
+                <p>
+                  22 Gleneagles Road <br/>
+                  Bunkers Hill <br/>
+                  East London, Eastern Cape <br/>
+                  5241
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
