@@ -3,7 +3,8 @@ import { BookingForm } from "@/components/booking-form";
 import { CountdownTimer } from "@/components/countdown-timer";
 
 export function BookingSection() {
-  const twoWeeksFromNow = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
+  // Set the target date to August 15, 2025. Note: Month is 0-indexed (7 = August).
+  const registrationOpenDate = new Date(2025, 7, 15);
 
   return (
     <SectionWrapper id="booking" alternateBackground={true}>
@@ -12,12 +13,12 @@ export function BookingSection() {
           Registrations Open <span className="text-primary">Soon!</span>
         </h2>
         <p className="mt-4 text-lg text-muted-foreground">
-          Secure your spot for a fantastic day of golf for a great cause. Bookings open in:
+          Secure your spot for a fantastic day of golf for a great cause. Bookings open on August 15th, 2025.
         </p>
       </div>
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto mt-8">
         {/* The BookingForm is hidden and replaced by the CountdownTimer */}
-        <CountdownTimer targetDate={twoWeeksFromNow} />
+        <CountdownTimer targetDate={registrationOpenDate} />
 
         {/* 
           To re-enable the form, comment out the CountdownTimer above 
