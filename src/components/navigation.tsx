@@ -25,7 +25,6 @@ const mainNavLinks = [
 
 const supportingNavLinks = [
   { href: '/gallery', label: 'Gallery' },
-  { href: '/sponsors', label: 'Sponsors' },
   { href: '/contact', label: 'Contact Us' },
 ];
 
