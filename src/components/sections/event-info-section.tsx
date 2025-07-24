@@ -8,7 +8,7 @@ const eventDetails = [
   { icon: Clock, label: "Time", value: "TBA" },
   { icon: Users, label: "Format", value: "4 Ball Alliance" },
   { icon: Gift, label: "Prizes", value: "Longest Drive, Closest to Pin, Best Team" },
-  { icon: Shirt, label: "Includes", value: "Gift Bags, Golf Shirts" },
+  { icon: Shirt, label: "Includes", value: "Gift Bags" },
   { icon: Coffee, label: "Refreshments", value: "Light Refreshments Included" },
 ];
 
