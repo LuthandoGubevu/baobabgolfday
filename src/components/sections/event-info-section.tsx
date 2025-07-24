@@ -1,7 +1,7 @@
 
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, CalendarDays, Clock, Users, Gift, Coffee } from "lucide-react";
+import { MapPin, CalendarDays, Clock, Users, Gift, Coffee, ShoppingBag } from "lucide-react";
 
 const eventDetails = [
   { icon: MapPin, label: "Location", value: "Olivewood Golf Club" },
@@ -9,7 +9,7 @@ const eventDetails = [
   { icon: Clock, label: "Time", value: "TBA" },
   { icon: Users, label: "Format", value: "4 Ball Alliance" },
   { icon: Gift, label: "Prizes", value: "Longest Drive, Closest to Pin, Best Team" },
-  { icon: Gift, label: "Includes", value: "Gift Bags" },
+  { icon: ShoppingBag, label: "Includes", value: "Gift Bags" },
   { icon: Coffee, label: "Refreshments", value: "Light Refreshments Included" },
 ];
 
