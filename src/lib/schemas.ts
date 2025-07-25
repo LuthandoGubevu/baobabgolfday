@@ -48,3 +48,9 @@ export const contactFormSchema = z.object({
 });
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;
+
+export const reminderFormSchema = z.object({
+  email: z.string().email("Please enter a valid email address."),
+});
+
+export type ReminderFormValues = z.infer<typeof reminderFormSchema>;

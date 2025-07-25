@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '@/lib/firebase';
-import { Loader2, BookUser, ShieldCheck, LayoutDashboard, MessageSquare } from 'lucide-react';
+import { Loader2, BookUser, ShieldCheck, LayoutDashboard, MessageSquare, BellRing } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { SectionWrapper } from '@/components/section-wrapper';
 import { cn } from '@/lib/utils';
@@ -28,6 +28,7 @@ function AdminNav() {
         { href: '/admin/submissions', label: 'Submissions', icon: BookUser },
         { href: '/admin/holes', label: 'Hole Status', icon: ShieldCheck },
         { href: '/admin/messages', label: 'Messages', icon: MessageSquare },
+        { href: '/admin/reminders', label: 'Reminders', icon: BellRing },
     ];
 
     return (
@@ -36,7 +37,7 @@ function AdminNav() {
                 <LayoutDashboard />
                 <span>Admin Dashboard</span>
             </div>
-            <nav className="flex items-center gap-2">
+            <nav className="flex items-center gap-2 flex-wrap justify-center">
                 {navItems.map(item => (
                     <Link key={item.href} href={item.href} passHref>
                         <Button variant={pathname === item.href ? "default" : "outline"} size="sm">
