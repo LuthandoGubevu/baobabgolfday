@@ -1,43 +1,54 @@
-
 rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-  
+
     // Helper function to check for admin role
     function isAdmin() {
-      // Check if the user is authenticated and if their email exists in the roles collection with the 'admin' role.
-      return request.auth != null && get(/databases/$(database)/documents/roles/$(request.auth.token.email)).data.role == 'admin';
+      // Check if the user is authenticated and has an admin role document
+      // The admin role doc should exist at /roles/{user.email} with {role: "admin"}
+      return request.auth != null && exists(/databases/$(database)/documents/roles/$(request.auth.token.email)) &&
+             get(/databases/$(database)/documents/roles/$(request.auth.token.email)).data.role == 'admin';
     }
 
-    // Bookings can be created by anyone, but only read or deleted by an admin.
+    // Bookings:
+    // - Allow anyone to create a booking (submit the form).
+    // - Allow only admins to read, update, or delete bookings.
     match /bookings/{bookingId} {
-      allow read, delete: if isAdmin();
-      allow create: if true; // Anyone can submit a booking
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
     }
 
-    // Hole status can be read by anyone, but only written by an admin or as part of the booking transaction.
+    // Holes:
+    // - Allow anyone to read the status of holes (for the booking form).
+    // - Allow only admins to update hole statuses.
     match /holes/{holeId} {
-      allow read: if true; // Anyone can check hole availability
-      allow write: if true; // Allows the booking transaction and admin updates.
-    }
-    
-    // Messages can be created by anyone, but only read or deleted by an admin.
-    match /messages/{messageId} {
-      allow read, delete: if isAdmin();
-      allow create: if true; // Anyone can send a message
+      allow read: if true;
+      allow update: if isAdmin();
     }
 
-    // Roles can only be read by an authenticated user checking their own role.
-    // This collection should be populated manually in the Firestore console for security.
-    match /roles/{userEmail} {
-      allow read: if request.auth != null && request.auth.token.email == userEmail;
-      allow write: if false; // Disallow writes from client for security. Manage roles in the console.
+    // Messages:
+    // - Allow anyone to create a message (submit contact form).
+    // - Allow only admins to read or delete messages.
+    match /messages/{messageId} {
+      allow create: if true;
+      allow read, delete: if isAdmin();
     }
     
-    // Add a default deny rule for any other collections to prevent accidental access.
-    match /{path=**}/ {
-      allow read, write: if false;
+    // Reminders:
+    // - Allow anyone to create a reminder (submit email).
+    // - Allow only admins to read or delete reminders.
+    match /reminders/{reminderId} {
+      allow create: if true;
+      allow read, delete: if isAdmin();
+    }
+
+    // Roles:
+    // - Only admins can manage roles. This prevents non-admins from giving themselves
+    //   admin privileges. This collection should be managed carefully, likely
+    //   directly from the Firebase Console for initial setup.
+    match /roles/{userEmail} {
+      allow read, write: if isAdmin();
     }
   }
 }
