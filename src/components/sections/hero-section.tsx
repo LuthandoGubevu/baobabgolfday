@@ -1,4 +1,3 @@
-
 "use client";
 import { Button } from "@/components/ui/button";
 import { SectionWrapper } from "@/components/section-wrapper";
@@ -51,9 +50,6 @@ export function HeroSection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
           <Button size="lg" onClick={() => scrollTo('booking')} className="min-w-[160px] shadow-lg hover:shadow-primary/50 transition-shadow">
             Book Now
-          </Button>
-          <Button variant="outline" size="lg" onClick={() => scrollTo('donate')} className="min-w-[160px] border-primary text-primary hover:bg-primary/10 shadow-lg hover:shadow-primary/30 transition-shadow">
-            Donate
           </Button>
         </div>
       </div>
