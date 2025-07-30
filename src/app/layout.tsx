@@ -8,6 +8,9 @@ import { Footer } from '@/components/footer'; // Import the new Footer component
 export const metadata: Metadata = {
   title: 'Hope Fore Hunger - KFC Add Hope Golf Day 2025',
   description: 'Join the KFC Add Hope Annual Golf Day 2025 for a day of golf and giving.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
