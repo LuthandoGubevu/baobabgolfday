@@ -20,7 +20,6 @@ const mainNavLinks = [
   { href: '#about', label: 'About Add Hope' },
   { href: '#event-info', label: 'Event Info' },
   { href: '#booking', label: 'Bookings' },
-  { href: '#donate', label: 'Donate' },
 ];
 
 const supportingNavLinks = [
