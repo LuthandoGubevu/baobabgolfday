@@ -19,6 +19,7 @@ import { Loader2, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { db } from "@/lib/firebase";
 import { collection, onSnapshot, query } from "firebase/firestore";
+import Image from "next/image";
 
 interface Hole {
     id: string;
@@ -270,6 +271,15 @@ export function BookingForm() {
                         {form.formState.errors.sponsoredHoleNumber.message}
                     </p>
                 )}
+                <div className="mt-6 aspect-[4/3] relative rounded-lg overflow-hidden border border-border shadow-md">
+                    <Image 
+                        src="/Course.jpg" 
+                        alt="Golf course layout" 
+                        fill
+                        className="object-contain"
+                        data-ai-hint="golf course map"
+                    />
+                </div>
                 <p className="text-xs text-muted-foreground pt-2">
                   Please note: Holes are first come, first served. Your selection will be confirmed once payment has been received and verified.
                 </p>
