@@ -71,9 +71,12 @@ export function BookingForm() {
         querySnapshot.forEach((doc) => {
             fetchedHoles.push({ id: doc.id, ...doc.data() } as Hole);
         });
-
-        fetchedHoles.sort((a, b) => parseInt(a.id) - parseInt(b.id));
-        setHoles(fetchedHoles);
+        
+        const filteredAndSortedHoles = fetchedHoles
+            .filter(hole => parseInt(hole.id) <= 18) // Filter out holes greater than 18
+            .sort((a, b) => parseInt(a.id) - parseInt(b.id));
+            
+        setHoles(filteredAndSortedHoles);
         setHolesLoading(false);
 
     }, (error) => {
