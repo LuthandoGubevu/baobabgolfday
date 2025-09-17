@@ -5,12 +5,10 @@ import { useEffect, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '@/lib/firebase';
+import { auth } from '@/lib/firebase';
 import { Loader2, BookUser, ShieldCheck, LayoutDashboard, MessageSquare, BellRing } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { SectionWrapper } from '@/components/section-wrapper';
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
 function AdminNav() {
@@ -57,39 +55,13 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = useState(true);
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
-      if (user && user.email) {
-        // User is logged in, check their role in Firestore.
-        try {
-          const roleDocRef = doc(db, "roles", user.email);
-          const roleDocSnap = await getDoc(roleDocRef);
-
-          if (roleDocSnap.exists() && roleDocSnap.data().role === "admin") {
-            // User has admin role, grant access.
-            setIsAuthorized(true);
-          } else {
-            // User does not have admin role.
-            await signOut(auth);
-            toast({
-              title: "Access Denied",
-              description: "You do not have the necessary admin privileges.",
-              variant: "destructive",
-            });
-            router.replace('/login');
-          }
-        } catch (error) {
-          console.error("Error verifying admin role:", error);
-          await signOut(auth);
-          toast({
-            title: "Error Verifying Privileges",
-            description: "Could not verify your admin role. Please try again.",
-            variant: "destructive",
-          });
-          router.replace('/login');
-        }
+      if (user) {
+        // User is logged in. The security rules on the server will handle authorization.
+        setIsAuthenticated(true);
       } else {
         // User is not logged in.
         toast({
@@ -114,9 +86,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     );
   }
 
-  if (!isAuthorized) {
-    // This state should ideally be brief as the redirect happens in useEffect.
-    // It can also be a fallback if redirection fails for some reason or while it's in progress.
+  if (!isAuthenticated) {
+    // This state is a fallback while the redirect to login is in progress.
     return (
         <SectionWrapper id="admin-unauthorized" className="min-h-screen flex justify-center items-center">
              <p className="text-xl text-muted-foreground">Redirecting to login...</p>

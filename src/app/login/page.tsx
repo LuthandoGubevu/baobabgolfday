@@ -6,9 +6,8 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '@/lib/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -19,7 +18,7 @@ import { SectionWrapper } from '@/components/section-wrapper';
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
-  password: z.string().min(6, { message: "Password must be at least 6 characters." }),
+  password: z.string().min(1, { message: "Password is required." }),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -41,29 +40,16 @@ export default function LoginPage() {
   const onSubmit = (values: LoginFormValues) => {
     startTransition(async () => {
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
-        const user = userCredential.user;
+        await signInWithEmailAndPassword(auth, values.email, values.password);
+        
+        toast({
+          title: "Login Successful",
+          description: "Redirecting to admin dashboard...",
+        });
+        // On successful login, always redirect to the admin submissions page.
+        // Firestore security rules will handle subsequent data access.
+        router.push('/admin/submissions');
 
-        // After successful login, check the user's role in Firestore.
-        const roleDocRef = doc(db, "roles", user.email!);
-        const roleDocSnap = await getDoc(roleDocRef);
-
-        if (roleDocSnap.exists() && roleDocSnap.data().role === 'admin') {
-          toast({
-            title: "Login Successful",
-            description: "Redirecting to admin dashboard...",
-          });
-          router.push('/admin/submissions');
-        } else {
-          // If not an admin, sign them out.
-          await signOut(auth);
-          toast({
-            title: "Access Denied",
-            description: "This account is not authorized for admin access.",
-            variant: "destructive",
-          });
-          form.reset();
-        }
       } catch (error: any) {
         console.error("Firebase Auth Error:", error);
         let errorMessage = "An unknown error occurred. Please try again.";
@@ -78,7 +64,7 @@ export default function LoginPage() {
                     errorMessage = "Invalid email format.";
                     break;
                 case "auth/too-many-requests":
-                     errorMessage = "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.";
+                     errorMessage = "Access to this account has been temporarily disabled due to many failed login attempts. You can try again later.";
                      break;
                 case "auth/network-request-failed":
                     errorMessage = "Network error. Please check your internet connection and try again.";
