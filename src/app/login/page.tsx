@@ -7,7 +7,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '@/lib/firebase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -15,8 +16,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, LogIn } from 'lucide-react';
 import { SectionWrapper } from '@/components/section-wrapper';
-
-const ADMIN_EMAIL = "shayna@baobabbrands.com";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -44,20 +43,25 @@ export default function LoginPage() {
         const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
         const user = userCredential.user;
 
-        if (user.email === ADMIN_EMAIL) {
+        // After successful login, check the user's role in Firestore.
+        const roleDocRef = doc(db, "roles", user.email!);
+        const roleDocSnap = await getDoc(roleDocRef);
+
+        if (roleDocSnap.exists() && roleDocSnap.data().role === 'admin') {
           toast({
             title: "Login Successful",
             description: "Redirecting to admin dashboard...",
           });
           router.push('/admin/submissions');
         } else {
-          await signOut(auth); // Sign out the unauthorized user
+          // If not an admin, sign them out.
+          await signOut(auth);
           toast({
             title: "Access Denied",
             description: "This account is not authorized for admin access.",
             variant: "destructive",
           });
-          form.reset(); // Reset form for security
+          form.reset();
         }
       } catch (error: any) {
         console.error("Firebase Auth Error:", error);

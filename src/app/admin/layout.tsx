@@ -13,8 +13,6 @@ import { SectionWrapper } from '@/components/section-wrapper';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
-const ADMIN_EMAIL = "shayna@baobabbrands.com";
-
 function AdminNav() {
     const pathname = usePathname();
     const router = useRouter();
@@ -63,47 +61,37 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
-      if (user) {
-        if (user.email === ADMIN_EMAIL) {
-          // Check Firestore for admin role
-          try {
-            const roleDocRef = doc(db, "roles", user.email);
-            const roleDocSnap = await getDoc(roleDocRef);
+      if (user && user.email) {
+        // User is logged in, check their role in Firestore.
+        try {
+          const roleDocRef = doc(db, "roles", user.email);
+          const roleDocSnap = await getDoc(roleDocRef);
 
-            if (roleDocSnap.exists() && roleDocSnap.data().role === "admin") {
-              setIsAuthorized(true);
-            } else {
-              // User is ADMIN_EMAIL but doesn't have admin role in Firestore
-              await signOut(auth);
-              toast({
-                title: "Authorization Failed",
-                description: "You do not have the necessary admin privileges. Ensure your role is set in Firestore.",
-                variant: "destructive",
-              });
-              router.replace('/login');
-            }
-          } catch (error) {
-            console.error("Error checking admin role in Firestore:", error); // Log the specific error
+          if (roleDocSnap.exists() && roleDocSnap.data().role === "admin") {
+            // User has admin role, grant access.
+            setIsAuthorized(true);
+          } else {
+            // User does not have admin role.
             await signOut(auth);
             toast({
-              title: "Error Verifying Privileges",
-              description: "Could not verify admin privileges. Please check console for details or try again.",
+              title: "Access Denied",
+              description: "You do not have the necessary admin privileges.",
               variant: "destructive",
             });
             router.replace('/login');
           }
-        } else {
-          // User is logged in, but not the authorized admin email
+        } catch (error) {
+          console.error("Error verifying admin role:", error);
           await signOut(auth);
           toast({
-            title: "Access Denied",
-            description: "This account is not authorized for admin access. Please sign in with the correct admin credentials.",
+            title: "Error Verifying Privileges",
+            description: "Could not verify your admin role. Please try again.",
             variant: "destructive",
           });
           router.replace('/login');
         }
       } else {
-        // User is not logged in
+        // User is not logged in.
         toast({
           title: "Authentication Required",
           description: "Please sign in to access the admin area.",
