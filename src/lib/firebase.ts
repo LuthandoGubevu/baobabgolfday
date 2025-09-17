@@ -19,6 +19,10 @@ const firebaseConfig = {
   measurementId: "G-SQ2CMM306T"
 };
 
+// ** Diagnostic Log **
+console.log("Connected to Firebase Project ID:", firebaseConfig.projectId);
+
+
 // Initialize Firebase
 // To avoid re-initializing on hot reloads in development, check if an app already exists.
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
