@@ -11,6 +11,8 @@ import { useToast } from '@/hooks/use-toast';
 import { SectionWrapper } from '@/components/section-wrapper';
 import { Button } from '@/components/ui/button';
 
+const ADMIN_EMAIL = "roslyn@baobabbrands.com";
+
 function AdminNav() {
     const pathname = usePathname();
     const router = useRouter();
@@ -59,14 +61,14 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
-      if (user) {
-        // User is logged in. The security rules on the server will handle authorization.
+      if (user && user.email === ADMIN_EMAIL) {
+        // User is logged in and is the admin.
         setIsAuthenticated(true);
       } else {
-        // User is not logged in.
+        // User is not logged in or is not the admin.
         toast({
           title: "Authentication Required",
-          description: "Please sign in to access the admin area.",
+          description: "You do not have permission to access the admin area.",
           variant: "destructive",
         });
         router.replace('/login');
@@ -79,19 +81,19 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   if (loading) {
     return (
-      <SectionWrapper id="admin-loading" className="min-h-screen flex justify-center items-center">
+      <div className="min-h-screen flex justify-center items-center bg-background">
         <Loader2 className="h-16 w-16 animate-spin text-primary" />
         <p className="ml-4 text-xl text-muted-foreground">Verifying access...</p>
-      </SectionWrapper>
+      </div>
     );
   }
 
   if (!isAuthenticated) {
     // This state is a fallback while the redirect to login is in progress.
     return (
-        <SectionWrapper id="admin-unauthorized" className="min-h-screen flex justify-center items-center">
-             <p className="text-xl text-muted-foreground">Redirecting to login...</p>
-        </SectionWrapper>
+      <div className="min-h-screen flex justify-center items-center bg-background">
+        <p className="text-xl text-muted-foreground">Redirecting to login...</p>
+      </div>
     );
   }
 
@@ -102,3 +104,4 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     </SectionWrapper>
   );
 }
+

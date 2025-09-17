@@ -14,7 +14,6 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, LogIn, Eye, EyeOff } from 'lucide-react';
-import { SectionWrapper } from '@/components/section-wrapper';
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -47,7 +46,7 @@ export default function LoginPage() {
           description: "Redirecting to admin dashboard...",
         });
         // On successful login, always redirect to the admin submissions page.
-        // Firestore security rules will handle subsequent data access.
+        // The AdminLayout will handle authorization.
         router.push('/admin/submissions');
 
       } catch (error: any) {
@@ -86,7 +85,7 @@ export default function LoginPage() {
   };
 
   return (
-    <SectionWrapper id="login-page" className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <Card className="w-full max-w-md bg-card shadow-xl mx-auto">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-headline text-primary flex items-center justify-center gap-2">
@@ -105,6 +104,7 @@ export default function LoginPage() {
                 type="email"
                 {...form.register("email")}
                 placeholder="admin@example.com"
+                autoComplete="email"
               />
               {form.formState.errors.email && (
                 <p className="text-sm text-destructive mt-1">{form.formState.errors.email.message}</p>
@@ -119,6 +119,7 @@ export default function LoginPage() {
                   {...form.register("password")}
                   placeholder="••••••••"
                   className="pr-10"
+                  autoComplete="current-password"
                 />
                 <button
                   type="button"
@@ -142,6 +143,6 @@ export default function LoginPage() {
           </CardFooter>
         </form>
       </Card>
-    </SectionWrapper>
+    </div>
   );
 }
