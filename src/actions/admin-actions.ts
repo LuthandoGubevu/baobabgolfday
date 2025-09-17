@@ -6,7 +6,7 @@ import { db } from "@/lib/firebase";
 import { doc, runTransaction, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { headers } from "next/headers";
 
-const ADMIN_EMAIL = "shayna@baobabbrands.com";
+const ADMIN_EMAIL = "roslyn@baobabbrands.com";
 
 // Helper function to verify admin user
 async function verifyAdmin() {

@@ -13,7 +13,7 @@ import { onAuthStateChanged, signOut, User } from 'firebase/auth'; // signOut, U
 import { auth } from '@/lib/firebase'; // auth imported
 import { useToast } from '@/hooks/use-toast'; // useToast imported
 
-const ADMIN_EMAIL = "shayna@baobabbrands.com"; // Defined for checking admin
+const ADMIN_EMAIL = "roslyn@baobabbrands.com"; // Defined for checking admin
 
 const mainNavLinks = [
   { href: '#home', label: 'Home' },
