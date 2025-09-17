@@ -3,17 +3,16 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation'; // useRouter added
-import { Menu, LogIn, LogOut } from 'lucide-react'; // LogOut added
+import { Menu, LogIn, LogOut, LayoutDashboard } from 'lucide-react'; // LogOut added
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth'; // signOut, User added
-import { auth } from '@/lib/firebase'; // auth imported
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '@/lib/firebase'; // auth imported
 import { useToast } from '@/hooks/use-toast'; // useToast imported
-
-const ADMIN_EMAIL = "roslyn@baobabbrands.com"; // Defined for checking admin
 
 const mainNavLinks = [
   { href: '#home', label: 'Home' },
@@ -41,9 +40,19 @@ export function Navigation() {
     };
     window.addEventListener('scroll', handleScroll);
     
-    const unsubscribeAuth = onAuthStateChanged(auth, (user: User | null) => {
-      if (user && user.email === ADMIN_EMAIL) {
-        setIsAdminLoggedIn(true);
+    const unsubscribeAuth = onAuthStateChanged(auth, async (user: User | null) => {
+      if (user && user.email) {
+        try {
+          const roleDocRef = doc(db, "roles", user.email);
+          const roleDocSnap = await getDoc(roleDocRef);
+          if (roleDocSnap.exists() && roleDocSnap.data().role === "admin") {
+            setIsAdminLoggedIn(true);
+          } else {
+            setIsAdminLoggedIn(false);
+          }
+        } catch {
+          setIsAdminLoggedIn(false);
+        }
       } else {
         setIsAdminLoggedIn(false);
       }
@@ -70,7 +79,6 @@ export function Navigation() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      setIsAdminLoggedIn(false);
       toast({
         title: "Logged Out",
         description: "You have been successfully logged out.",
@@ -103,22 +111,39 @@ export function Navigation() {
     ))
   );
 
-  const AdminButton = ({ isMobile = false }: { isMobile?: boolean }) => (
-    isAdminLoggedIn ? (
-      <Button 
-        variant="outline" 
-        size={isMobile ? "sm" : "sm"} 
-        className={cn("border-primary text-primary hover:bg-primary/10 hover:text-primary-foreground", isMobile ? "w-full mt-4" : "ml-2")}
-        onClick={handleLogout}
-      >
-        <LogOut className="mr-2 h-4 w-4" />
-        Log Out
-      </Button>
-    ) : (
+  const AdminButton = ({ isMobile = false }: { isMobile?: boolean }) => {
+    if (isAdminLoggedIn) {
+      return (
+        <div className={cn("flex gap-2", isMobile && "flex-col w-full mt-4")}>
+          <Link href="/admin/submissions" passHref>
+            <Button 
+              variant="outline" 
+              size="sm"
+              className={cn("border-primary text-primary hover:bg-primary/10 hover:text-primary-foreground", isMobile && "w-full")}
+              onClick={() => setIsSheetOpen(false)}
+            >
+              <LayoutDashboard className="mr-2 h-4 w-4" />
+              Dashboard
+            </Button>
+          </Link>
+          <Button 
+            variant="destructive" 
+            size="sm"
+            className={cn(isMobile && "w-full")}
+            onClick={handleLogout}
+          >
+            <LogOut className="mr-2 h-4 w-4" />
+            Log Out
+          </Button>
+        </div>
+      )
+    }
+    
+    return (
       <Link href="/login" passHref>
         <Button 
           variant="outline" 
-          size={isMobile ? "sm" : "sm"} 
+          size={isMobile ? "default" : "sm"} 
           className={cn("border-primary text-primary hover:bg-primary/10 hover:text-primary-foreground", isMobile ? "w-full mt-4" : "ml-2")}
           onClick={() => setIsSheetOpen(false)}
         >
@@ -127,7 +152,8 @@ export function Navigation() {
         </Button>
       </Link>
     )
-  );
+  };
+
 
   return (
     <header className={cn(
