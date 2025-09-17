@@ -22,32 +22,48 @@ export async function deleteSubmission(submissionId: string) {
         return { success: false, message: "Submission ID is required." };
     }
 
-    // In a real app, you would verify admin privileges here using a passed ID token.
-    // For now, we trust the client-side route guard.
+    // Admin access is controlled by client-side route guard.
 
     try {
         const submissionRef = doc(db, "bookings", submissionId);
-        
-        // Before deleting, check if this booking had a sponsored hole
         const submissionDoc = await getDoc(submissionRef);
-        if (submissionDoc.exists()) {
-            const data = submissionDoc.data();
-            // If the submission had a sponsored hole, release it
-            if (data.sponsoredHoleNumber && (data.status === 'pending' || data.status === 'confirmed')) {
-                const holeRef = doc(db, "holes", data.sponsoredHoleNumber.toString());
-                await updateDoc(holeRef, {
-                    status: "available",
-                    bookingId: null,
-                    companyName: null,
-                    contactName: null,
-                    email: null,
-                });
-            }
+
+        if (!submissionDoc.exists()) {
+            return { success: false, message: "Submission not found." };
+        }
+
+        const submissionData = submissionDoc.data();
+        const sponsoredHoleNumber = submissionData.sponsoredHoleNumber;
+
+        // If a hole was sponsored, we need to release it.
+        if (sponsoredHoleNumber) {
+            const holeRef = doc(db, "holes", sponsoredHoleNumber.toString());
+
+            await runTransaction(db, async (transaction) => {
+                const holeDoc = await transaction.get(holeRef);
+                
+                // Only release the hole if it was linked to THIS specific booking.
+                // This prevents accidentally releasing a hole that another booking now holds.
+                if (holeDoc.exists() && holeDoc.data().bookingId === submissionId) {
+                    transaction.update(holeRef, {
+                        status: "available",
+                        bookingId: null,
+                        companyName: null,
+                        contactName: null,
+                        email: null,
+                    });
+                }
+                
+                // Now, delete the booking document itself within the same transaction.
+                transaction.delete(submissionRef);
+            });
+
+        } else {
+            // No sponsored hole, just delete the submission.
+            await deleteDoc(submissionRef);
         }
         
-        await deleteDoc(submissionRef);
-        
-        revalidatePath("/admin/submissions"); // Re-renders the page to show updated list
+        revalidatePath("/admin/submissions");
         return { success: true, message: "Submission deleted successfully." };
 
     } catch (error: any) {
