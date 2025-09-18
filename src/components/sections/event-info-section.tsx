@@ -7,7 +7,7 @@ const eventDetails = [
   { icon: MapPin, label: "Location", value: "Olivewood Golf Club" },
   { icon: CalendarDays, label: "Date", value: "Friday, 5 December 2025" },
   { icon: Clock, label: "Time", value: "9:30 Shotgun Start" },
-  { icon: Users, label: "Format", value: "4 Ball Alliance" },
+  { icon: Users, label: "Format", value: "4 Ball Alliance. Including Golf Cart" },
   { icon: Gift, label: "Prizes", value: "Longest Drive, Closest to Pin, Best Team" },
   { icon: ShoppingBag, label: "Includes", value: "Gift Bags" },
   { icon: Coffee, label: "Refreshments", value: "Light Refreshments Included" },
