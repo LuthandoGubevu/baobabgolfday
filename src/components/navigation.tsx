@@ -3,21 +3,21 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation'; // useRouter added
-import { Menu, LogIn, LogOut, LayoutDashboard } from 'lucide-react'; // LogOut added
+import { Menu, LogIn, LogOut, LayoutDashboard, Trophy } from 'lucide-react'; // Trophy added, LogOut added
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth'; // signOut, User added
-import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '@/lib/firebase'; // auth imported
+import { auth } from '@/lib/firebase'; // auth imported
 import { useToast } from '@/hooks/use-toast'; // useToast imported
 
 const mainNavLinks = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About Add Hope' },
   { href: '#event-info', label: 'Event Info' },
+  { href: '#competition', label: 'Competition' },
   { href: '#booking', label: 'Bookings' },
 ];
 
@@ -41,21 +41,11 @@ export function Navigation() {
     window.addEventListener('scroll', handleScroll);
     
     const unsubscribeAuth = onAuthStateChanged(auth, async (user: User | null) => {
-      if (user && user.email) {
-        try {
-          const roleDocRef = doc(db, "roles", user.email);
-          const roleDocSnap = await getDoc(roleDocRef);
-          if (roleDocSnap.exists() && roleDocSnap.data().role === "admin") {
+        if (user && user.email === "roslyn@baobabbrands.com") {
             setIsAdminLoggedIn(true);
-          } else {
+        } else {
             setIsAdminLoggedIn(false);
-          }
-        } catch {
-          setIsAdminLoggedIn(false);
         }
-      } else {
-        setIsAdminLoggedIn(false);
-      }
     });
 
     return () => {
