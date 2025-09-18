@@ -40,7 +40,7 @@ export function HeroSection() {
           <div className="flex justify-center items-center gap-8 md:gap-12 flex-wrap">
             <div className="relative h-12 w-32" data-ai-hint="sponsor logo">
                 <Image
-                    src="https://picsum.photos/seed/sponsor1/200/100"
+                    src="https://placehold.co/200x100/121212/e0e0e0?text=Sponsor+1"
                     alt="Sponsor 1 Logo"
                     fill
                     className="object-contain"
@@ -48,7 +48,7 @@ export function HeroSection() {
             </div>
              <div className="relative h-12 w-32" data-ai-hint="sponsor logo">
                 <Image
-                    src="https://picsum.photos/seed/sponsor2/200/100"
+                    src="https://placehold.co/200x100/121212/e0e0e0?text=Sponsor+2"
                     alt="Sponsor 2 Logo"
                     fill
                     className="object-contain"
@@ -56,7 +56,7 @@ export function HeroSection() {
             </div>
              <div className="relative h-12 w-32" data-ai-hint="sponsor logo">
                 <Image
-                    src="https://picsum.photos/seed/sponsor3/200/100"
+                    src="https://placehold.co/200x100/121212/e0e0e0?text=Sponsor+3"
                     alt="Sponsor 3 Logo"
                     fill
                     className="object-contain"
@@ -64,7 +64,7 @@ export function HeroSection() {
             </div>
              <div className="relative h-12 w-32" data-ai-hint="sponsor logo">
                 <Image
-                    src="https://picsum.photos/seed/sponsor4/200/100"
+                    src="https://placehold.co/200x100/121212/e0e0e0?text=Sponsor+4"
                     alt="Sponsor 4 Logo"
                     fill
                     className="object-contain"
