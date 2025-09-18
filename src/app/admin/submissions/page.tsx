@@ -154,6 +154,7 @@ export default function AdminSubmissionsPage() {
                   <TableHead>Submitted At</TableHead>
                   <TableHead>Company</TableHead>
                   <TableHead>Contact Name</TableHead>
+                  <TableHead>VAT Number</TableHead>
                   <TableHead>Players</TableHead>
                   <TableHead>Sponsorship</TableHead>
                   <TableHead>Prize Details</TableHead>
@@ -169,6 +170,7 @@ export default function AdminSubmissionsPage() {
                     <TableCell className="whitespace-nowrap">{formatTimestamp(sub.submittedAt)}</TableCell>
                     <TableCell>{sub.companyName}</TableCell>
                     <TableCell>{sub.contactName}</TableCell>
+                    <TableCell>{sub.businessVatNumber}</TableCell>
                     <TableCell className="min-w-[200px]">
                       {sub.player1 && <div>1. {sub.player1}</div>}
                       {sub.player2 && <div>2. {sub.player2}</div>}
@@ -214,3 +216,5 @@ export default function AdminSubmissionsPage() {
     </div>
   );
 }
+
+    
