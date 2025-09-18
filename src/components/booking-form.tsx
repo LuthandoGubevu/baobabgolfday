@@ -139,28 +139,28 @@ export function BookingForm() {
             <h3 className="text-xl font-semibold text-foreground">Contact Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="companyName">Company Name</Label>
+                <Label htmlFor="companyName">Company Name <span className="text-primary">*</span></Label>
                 <Input id="companyName" {...form.register("companyName")} />
                 {form.formState.errors.companyName && <p className="text-sm text-destructive mt-1">{form.formState.errors.companyName.message}</p>}
               </div>
               <div>
-                <Label htmlFor="contactName">Contact Name</Label>
+                <Label htmlFor="contactName">Contact Name <span className="text-primary">*</span></Label>
                 <Input id="contactName" {...form.register("contactName")} />
                 {form.formState.errors.contactName && <p className="text-sm text-destructive mt-1">{form.formState.errors.contactName.message}</p>}
               </div>
               <div>
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">Email <span className="text-primary">*</span></Label>
                 <Input id="email" type="email" {...form.register("email")} />
                 {form.formState.errors.email && <p className="text-sm text-destructive mt-1">{form.formState.errors.email.message}</p>}
               </div>
               <div>
-                <Label htmlFor="phoneNumber">Phone Number</Label>
+                <Label htmlFor="phoneNumber">Phone Number <span className="text-primary">*</span></Label>
                 <Input id="phoneNumber" type="tel" {...form.register("phoneNumber")} />
                 {form.formState.errors.phoneNumber && <p className="text-sm text-destructive mt-1">{form.formState.errors.phoneNumber.message}</p>}
               </div>
             </div>
             <div>
-              <Label htmlFor="businessVatNumber">Business VAT number</Label>
+              <Label htmlFor="businessVatNumber">Business VAT number <span className="text-primary">*</span></Label>
               <Input id="businessVatNumber" {...form.register("businessVatNumber")} />
               {form.formState.errors.businessVatNumber && <p className="text-sm text-destructive mt-1">{form.formState.errors.businessVatNumber.message}</p>}
             </div>
@@ -172,14 +172,14 @@ export function BookingForm() {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-foreground">Team Registration</h3>
             <div>
-              <Label htmlFor="callingCardName">Calling Card Name (Team Name)</Label>
+              <Label htmlFor="callingCardName">Calling Card Name (Team Name) <span className="text-primary">*</span></Label>
               <Input id="callingCardName" {...form.register("callingCardName")} />
               {form.formState.errors.callingCardName && <p className="text-sm text-destructive mt-1">{form.formState.errors.callingCardName.message}</p>}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[1, 2, 3, 4].map((num) => (
                 <div key={num}>
-                  <Label htmlFor={`player${num}`}>Player {num} Full Name</Label>
+                  <Label htmlFor={`player${num}`}>Player {num} Full Name <span className="text-primary">*</span></Label>
                   <Input id={`player${num}`} {...form.register(`player${num}` as `player${1 | 2 | 3 | 4}`)} />
                   {form.formState.errors[`player${num}` as `player${1 | 2 | 3 | 4}`] && <p className="text-sm text-destructive mt-1">{form.formState.errors[`player${num}` as `player${1 | 2 | 3 | 4}`]?.message}</p>}
                 </div>
@@ -214,7 +214,7 @@ export function BookingForm() {
             </div>
              {showHoleSelector && (
               <div className="pt-4 space-y-4">
-                <h4 className="font-semibold text-foreground">Select Your Sponsored Hole</h4>
+                <h4 className="font-semibold text-foreground">Select Your Sponsored Hole <span className="text-primary">*</span></h4>
                  {holeError && (
                     <div className="p-3 my-2 text-sm rounded-md bg-destructive/10 text-destructive border border-destructive/20 flex items-center gap-2">
                         <AlertCircle className="h-4 w-4" />
@@ -325,7 +325,7 @@ export function BookingForm() {
                 <Link href="/terms" className="text-primary hover:underline" target="_blank">
                   Terms and Conditions
                 </Link>
-                .
+                . <span className="text-primary">*</span>
               </Label>
             </div>
             {form.formState.errors.termsAccepted && (
@@ -344,3 +344,5 @@ export function BookingForm() {
     </Card>
   );
 }
+
+    
