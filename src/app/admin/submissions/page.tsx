@@ -39,7 +39,7 @@ function formatSponsorship(submission: BookingFormValues): string {
   if (submission.sponsorHole1000) sponsorships.push("Hole (R1000)");
   if (submission.sponsorHole1800) sponsorships.push("Hole (R1800)");
   if (submission.sponsorAuctionPrize) sponsorships.push("Auction/Prize");
-  if (submission.donateWithoutAttending) sponsorships.push("Donation Only");
+  if (submission.donateWithoutAttending) sponsorships.push(`Donation (${submission.donationAmount || 'unspecified'})`);
   return sponsorships.length > 0 ? sponsorships.join(', ') : 'None';
 }
 

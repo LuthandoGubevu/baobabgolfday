@@ -52,6 +52,7 @@ export function BookingForm() {
       sponsorAuctionPrize: false,
       auctionPrizeDescription: "",
       donateWithoutAttending: false,
+      donationAmount: "",
       golfCartInterest: false,
       termsAccepted: false,
       sponsoredHoleNumber: undefined,
@@ -62,6 +63,7 @@ export function BookingForm() {
   const watchSponsorHole1000 = form.watch("sponsorHole1000");
   const watchSponsorHole1800 = form.watch("sponsorHole1800");
   const watchSponsorAuctionPrize = form.watch("sponsorAuctionPrize");
+  const watchDonateWithoutAttending = form.watch("donateWithoutAttending");
   const showHoleSelector = watchSponsorHole1000 || watchSponsorHole1800;
 
   useEffect(() => {
@@ -107,6 +109,14 @@ export function BookingForm() {
           form.clearErrors("auctionPrizeDescription");
       }
   }, [watchSponsorAuctionPrize, form]);
+
+  // When donation is unchecked, reset amount
+  useEffect(() => {
+      if (!watchDonateWithoutAttending) {
+          form.setValue("donationAmount", "");
+          form.clearErrors("donationAmount");
+      }
+  }, [watchDonateWithoutAttending, form]);
 
   const onSubmit = (values: BookingFormValues) => {
     startTransition(async () => {
@@ -214,6 +224,7 @@ export function BookingForm() {
             <div className="space-y-3">
               {sponsorshipOptions.map(item => {
                 const isAuctionPrize = item.id === "sponsorAuctionPrize";
+                const isDonation = item.id === "donateWithoutAttending";
                 return (
                   <div key={item.id}>
                     <div className="flex items-center space-x-2">
@@ -237,6 +248,19 @@ export function BookingForm() {
                                 {...form.register("auctionPrizeDescription")} 
                             />
                             {form.formState.errors.auctionPrizeDescription && <p className="text-sm text-destructive mt-1">{form.formState.errors.auctionPrizeDescription.message}</p>}
+                        </div>
+                    )}
+                    {isDonation && watchDonateWithoutAttending && (
+                        <div className="pl-6 pt-2">
+                            <Label htmlFor="donationAmount">
+                                Please specify donation amount (e.g., R500) <span className="text-primary">*</span>
+                            </Label>
+                            <Input
+                                id="donationAmount" 
+                                className="mt-1"
+                                {...form.register("donationAmount")}
+                            />
+                            {form.formState.errors.donationAmount && <p className="text-sm text-destructive mt-1">{form.formState.errors.donationAmount.message}</p>}
                         </div>
                     )}
                   </div>
@@ -327,7 +351,7 @@ export function BookingForm() {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-foreground">Payment Information</h3>
             <div>
-                <Label htmlFor="paymentReference">Payment Reference Number (Optional)</Label>
+                <Label htmlFor="paymentReference">Payment Reference Number</Label>
                 <Input id="paymentReference" {...form.register("paymentReference")} placeholder="e.g., EFT-12345" />
                 <p className="text-xs text-muted-foreground mt-1">If you have already made a payment, please provide the reference number.</p>
                 {form.formState.errors.paymentReference && <p className="text-sm text-destructive mt-1">{form.formState.errors.paymentReference.message}</p>}

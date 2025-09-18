@@ -17,8 +17,9 @@ export const bookingFormSchema = z.object({
   sponsorHole1000: z.boolean().optional(),
   sponsorHole1800: z.boolean().optional(),
   sponsorAuctionPrize: z.boolean().optional(),
-  auctionPrizeDescription: z.string().optional(), // New field for prize details
+  auctionPrizeDescription: z.string().optional(),
   donateWithoutAttending: z.boolean().optional(),
+  donationAmount: z.string().optional(), // New field for donation amount
   golfCartInterest: z.boolean().optional(),
   termsAccepted: z.boolean().refine(val => val === true, {
     message: "You must accept the terms and conditions to proceed.",
@@ -46,6 +47,15 @@ export const bookingFormSchema = z.object({
 }, {
     message: "Please describe the prize you will be sponsoring.",
     path: ["auctionPrizeDescription"],
+}).refine(data => {
+    // If donating without attending, an amount must be specified.
+    if (data.donateWithoutAttending && (!data.donationAmount || data.donationAmount.trim().length === 0)) {
+        return false;
+    }
+    return true;
+}, {
+    message: "Please specify the amount you wish to donate.",
+    path: ["donationAmount"],
 });
 
 
