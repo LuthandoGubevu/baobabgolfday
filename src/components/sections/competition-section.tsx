@@ -10,10 +10,10 @@ export function CompetitionSection() {
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl order-last md:order-first">
            <Image
-            src="https://picsum.photos/seed/car-prize/800/600"
-            alt="A luxury car, the prize for the hole-in-one competition"
+            src="/golfer.png"
+            alt="A golfer celebrating a successful shot after winning the hole-in-one competition"
             fill
-            data-ai-hint="luxury car prize"
+            data-ai-hint="golfer celebrating"
             className="transform hover:scale-105 transition-transform duration-300 object-cover"
           />
         </div>
