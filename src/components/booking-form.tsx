@@ -160,7 +160,7 @@ export function BookingForm() {
               </div>
             </div>
             <div>
-              <Label htmlFor="businessVatNumber">Business VAT number (Optional)</Label>
+              <Label htmlFor="businessVatNumber">Business VAT number</Label>
               <Input id="businessVatNumber" {...form.register("businessVatNumber")} />
               {form.formState.errors.businessVatNumber && <p className="text-sm text-destructive mt-1">{form.formState.errors.businessVatNumber.message}</p>}
             </div>
