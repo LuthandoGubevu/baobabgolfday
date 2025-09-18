@@ -172,14 +172,14 @@ export function BookingForm() {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-foreground">Team Registration</h3>
             <div>
-              <Label htmlFor="callingCardName">Calling Card Name (Team Name) <span className="text-primary">*</span></Label>
+              <Label htmlFor="callingCardName">Calling Card Name (Team Name)</Label>
               <Input id="callingCardName" {...form.register("callingCardName")} />
               {form.formState.errors.callingCardName && <p className="text-sm text-destructive mt-1">{form.formState.errors.callingCardName.message}</p>}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[1, 2, 3, 4].map((num) => (
                 <div key={num}>
-                  <Label htmlFor={`player${num}`}>Player {num} Full Name <span className="text-primary">*</span></Label>
+                  <Label htmlFor={`player${num}`}>Player {num} Full Name</Label>
                   <Input id={`player${num}`} {...form.register(`player${num}` as `player${1 | 2 | 3 | 4}`)} />
                   {form.formState.errors[`player${num}` as `player${1 | 2 | 3 | 4}`] && <p className="text-sm text-destructive mt-1">{form.formState.errors[`player${num}` as `player${1 | 2 | 3 | 4}`]?.message}</p>}
                 </div>
@@ -344,5 +344,3 @@ export function BookingForm() {
     </Card>
   );
 }
-
-    
