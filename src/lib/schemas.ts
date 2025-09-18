@@ -17,6 +17,7 @@ export const bookingFormSchema = z.object({
   sponsorHole1000: z.boolean().optional(),
   sponsorHole1800: z.boolean().optional(),
   sponsorAuctionPrize: z.boolean().optional(),
+  auctionPrizeDescription: z.string().optional(), // New field for prize details
   donateWithoutAttending: z.boolean().optional(),
   golfCartInterest: z.boolean().optional(),
   termsAccepted: z.boolean().refine(val => val === true, {
@@ -35,7 +36,16 @@ export const bookingFormSchema = z.object({
   return true;
 }, {
   message: "Please select an available hole for your sponsorship.",
-  path: ["sponsoredHoleNumber"], // Correctly associate error with the hole number field
+  path: ["sponsoredHoleNumber"], 
+}).refine(data => {
+    // If auction prize is sponsored, a description must be provided.
+    if (data.sponsorAuctionPrize && (!data.auctionPrizeDescription || data.auctionPrizeDescription.trim().length === 0)) {
+        return false;
+    }
+    return true;
+}, {
+    message: "Please describe the prize you will be sponsoring.",
+    path: ["auctionPrizeDescription"],
 });
 
 

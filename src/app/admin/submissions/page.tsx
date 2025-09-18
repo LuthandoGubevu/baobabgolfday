@@ -156,6 +156,7 @@ export default function AdminSubmissionsPage() {
                   <TableHead>Contact Name</TableHead>
                   <TableHead>Players</TableHead>
                   <TableHead>Sponsorship</TableHead>
+                  <TableHead>Prize Details</TableHead>
                   <TableHead>Hole Req.</TableHead>
                   <TableHead>Payment Ref.</TableHead>
                   <TableHead>Contact Email</TableHead>
@@ -176,6 +177,7 @@ export default function AdminSubmissionsPage() {
                       {sub.player4 && <div>4. {sub.player4}</div>}
                     </TableCell>
                     <TableCell>{formatSponsorship(sub)}</TableCell>
+                    <TableCell className="min-w-[200px] whitespace-pre-wrap">{sub.auctionPrizeDescription || 'N/A'}</TableCell>
                     <TableCell className="text-center font-bold">{sub.sponsoredHoleNumber || 'N/A'}</TableCell>
                     <TableCell>{sub.paymentReference || 'N/A'}</TableCell>
                     <TableCell>{sub.email}</TableCell>

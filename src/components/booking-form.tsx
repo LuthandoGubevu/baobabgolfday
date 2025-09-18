@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { db } from "@/lib/firebase";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import Image from "next/image";
+import { Textarea } from "./ui/textarea";
 
 interface Hole {
     id: string;
@@ -49,6 +50,7 @@ export function BookingForm() {
       sponsorHole1000: false,
       sponsorHole1800: false,
       sponsorAuctionPrize: false,
+      auctionPrizeDescription: "",
       donateWithoutAttending: false,
       golfCartInterest: false,
       termsAccepted: false,
@@ -59,6 +61,7 @@ export function BookingForm() {
 
   const watchSponsorHole1000 = form.watch("sponsorHole1000");
   const watchSponsorHole1800 = form.watch("sponsorHole1800");
+  const watchSponsorAuctionPrize = form.watch("sponsorAuctionPrize");
   const showHoleSelector = watchSponsorHole1000 || watchSponsorHole1800;
 
   useEffect(() => {
@@ -97,6 +100,14 @@ export function BookingForm() {
       }
   }, [showHoleSelector, form]);
 
+  // When auction sponsorship is unchecked, reset description
+  useEffect(() => {
+      if (!watchSponsorAuctionPrize) {
+          form.setValue("auctionPrizeDescription", "");
+          form.clearErrors("auctionPrizeDescription");
+      }
+  }, [watchSponsorAuctionPrize, form]);
+
   const onSubmit = (values: BookingFormValues) => {
     startTransition(async () => {
       const result = await submitBooking(values);
@@ -123,6 +134,14 @@ export function BookingForm() {
       }
     });
   };
+
+  const sponsorshipOptions = [
+    { id: "sponsorHole1000", label: "Hole Sponsor (R1,000)" },
+    { id: "sponsorHole1800", label: "Hole Sponsor (R1,800 - includes premium placement)" },
+    { id: "sponsorAuctionPrize", label: "Auction/Prize Sponsorship (we'll contact you for details)" },
+    { id: "donateWithoutAttending", label: "Donate without attending (amount to be specified separately)" },
+    { id: "golfCartInterest", label: "Golf Cart Hire (Express interest - arrange with club separately)" },
+  ];
 
   return (
     <Card className="w-full bg-card shadow-xl">
@@ -193,24 +212,36 @@ export function BookingForm() {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-foreground">Sponsorship Options</h3>
             <div className="space-y-3">
-              {[
-                { id: "sponsorHole1000", label: "Hole Sponsor (R1,000)" },
-                { id: "sponsorHole1800", label: "Hole Sponsor (R1,800 - includes premium placement)" },
-                { id: "sponsorAuctionPrize", label: "Auction/Prize Sponsorship (we'll contact you for details)" },
-                { id: "donateWithoutAttending", label: "Donate without attending (amount to be specified separately)" },
-                { id: "golfCartInterest", label: "Golf Cart Hire (Express interest - arrange with club separately)" },
-              ].map(item => (
-                <div key={item.id} className="flex items-center space-x-2">
-                  <Controller
-                    name={item.id as keyof BookingFormValues} // Cast is safe as these keys exist in BookingFormValues
-                    control={form.control}
-                    render={({ field }) => (
-                       <Checkbox id={item.id} checked={field.value as boolean | undefined} onCheckedChange={field.onChange} />
+              {sponsorshipOptions.map(item => {
+                const isAuctionPrize = item.id === "sponsorAuctionPrize";
+                return (
+                  <div key={item.id}>
+                    <div className="flex items-center space-x-2">
+                        <Controller
+                            name={item.id as keyof BookingFormValues}
+                            control={form.control}
+                            render={({ field }) => (
+                            <Checkbox id={item.id} checked={field.value as boolean | undefined} onCheckedChange={field.onChange} />
+                            )}
+                        />
+                        <Label htmlFor={item.id} className="font-normal text-muted-foreground">{item.label}</Label>
+                    </div>
+                    {isAuctionPrize && watchSponsorAuctionPrize && (
+                        <div className="pl-6 pt-2">
+                            <Label htmlFor="auctionPrizeDescription">
+                                Please describe the prize you wish to sponsor <span className="text-primary">*</span>
+                            </Label>
+                            <Textarea 
+                                id="auctionPrizeDescription" 
+                                className="mt-1"
+                                {...form.register("auctionPrizeDescription")} 
+                            />
+                            {form.formState.errors.auctionPrizeDescription && <p className="text-sm text-destructive mt-1">{form.formState.errors.auctionPrizeDescription.message}</p>}
+                        </div>
                     )}
-                  />
-                  <Label htmlFor={item.id} className="font-normal text-muted-foreground">{item.label}</Label>
-                </div>
-              ))}
+                  </div>
+                )
+              })}
             </div>
              {showHoleSelector && (
               <div className="pt-4 space-y-4">
