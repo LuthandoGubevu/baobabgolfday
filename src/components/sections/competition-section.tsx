@@ -41,7 +41,7 @@ export function CompetitionSection() {
             </div>
           </div>
           <p className="text-sm text-muted-foreground italic">
-            Terms and conditions apply. The prize is subject to availability.
+            Terms and conditions apply.
           </p>
         </div>
       </div>
