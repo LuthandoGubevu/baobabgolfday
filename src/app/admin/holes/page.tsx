@@ -6,7 +6,7 @@ import { collection, onSnapshot, query, doc, runTransaction, updateDoc } from 'f
 import { db } from '@/lib/firebase';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
-import { Loader2, ShieldCheck, CircleCheck, CircleHelp, CircleX, RefreshCw, AlertTriangle } from "lucide-react";
+import { Loader2, ShieldCheck, CircleCheck, CircleHelp, CircleX, RefreshCw, AlertTriangle, Ban } from "lucide-react";
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -73,7 +73,7 @@ export default function AdminHolesPage() {
     return () => unsubscribe();
   }, []);
 
-  const handleAction = async (action: 'confirm' | 'release', holeId: string, bookingId?: string) => {
+  const handleAction = async (action: 'confirm' | 'release' | 'make_unavailable', holeId: string, bookingId?: string) => {
     setIsSubmitting(holeId);
     try {
         if (action === 'confirm' && bookingId) {
@@ -86,20 +86,33 @@ export default function AdminHolesPage() {
                 transaction.update(holeRef, { status: "confirmed" });
             });
             toast({ title: "Success", description: `Hole ${holeId} has been confirmed.` });
-        } else if (action === 'release' && bookingId) {
+        } else if (action === 'make_unavailable') {
             const holeRef = doc(db, "holes", holeId);
-            const bookingRef = doc(db, "bookings", bookingId);
+            await updateDoc(holeRef, {
+                status: "confirmed", // Use 'confirmed' status to make it unavailable
+                companyName: "Manually Blocked",
+                contactName: "Admin",
+                email: "N/A"
+            });
+            toast({ title: "Success", description: `Hole ${holeId} is now unavailable.` });
+        } else if (action === 'release') {
+            const holeRef = doc(db, "holes", holeId);
+            const holeDoc = await doc(db, "holes", holeId).get();
+            const originalBookingId = holeDoc.data()?.bookingId;
 
             await runTransaction(db, async (transaction) => {
-                const bookingDoc = await transaction.get(bookingRef);
-                if (bookingDoc.exists()) {
-                    // Remove the sponsored hole from the original booking
-                    transaction.update(bookingRef, { sponsoredHoleNumber: null });
-                } else {
-                    console.warn(`Booking document ${bookingId} not found, but releasing hole ${holeId}.`);
+                // If there was a booking associated, update it.
+                if (originalBookingId) {
+                    const bookingRef = doc(db, "bookings", originalBookingId);
+                    const bookingDoc = await transaction.get(bookingRef);
+                    if (bookingDoc.exists()) {
+                        transaction.update(bookingRef, { sponsoredHoleNumber: null });
+                    } else {
+                        console.warn(`Booking document ${originalBookingId} not found, but releasing hole ${holeId}.`);
+                    }
                 }
-
-                // Reset the hole document to be available
+                
+                // Always reset the hole to be available
                 transaction.update(holeRef, {
                     status: "available",
                     bookingId: null,
@@ -109,7 +122,7 @@ export default function AdminHolesPage() {
                 });
             });
 
-            toast({ title: "Success", description: `Hole ${holeId} released and booking updated.` });
+            toast({ title: "Success", description: `Hole ${holeId} released and is now available.` });
         } else {
             throw new Error("Invalid action or missing booking ID.");
         }
@@ -185,6 +198,30 @@ export default function AdminHolesPage() {
                                 {isActionPending ? <Loader2 className="h-4 w-4 animate-spin"/> : <CircleCheck className="h-4 w-4 mr-2"/>} Confirm
                             </Button>
                         )}
+                        
+                        {hole.status === 'available' && (
+                            <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                    <Button size="sm" variant="outline" className="flex-1 border-yellow-500 text-yellow-500 hover:bg-yellow-500/10 hover:text-yellow-400" disabled={isActionPending}>
+                                        {isActionPending ? <Loader2 className="h-4 w-4 animate-spin"/> : <Ban className="h-4 w-4 mr-2"/>} Make Unavailable
+                                    </Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                    <AlertDialogTitle>Make Hole {hole.id} Unavailable?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        This will manually mark the hole as unavailable, preventing new sponsorships. You can release it later if needed.
+                                    </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction onClick={() => handleAction('make_unavailable', hole.id)}>
+                                        Yes, make unavailable
+                                    </AlertDialogAction>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
+                            </AlertDialog>
+                        )}
 
                         {(hole.status === 'pending' || hole.status === 'confirmed') && (
                              <AlertDialog>
@@ -197,7 +234,7 @@ export default function AdminHolesPage() {
                                     <AlertDialogHeader>
                                     <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                                     <AlertDialogDescription>
-                                        This will make Hole {hole.id} available again. The booking from <span className='font-bold'>{hole.companyName}</span> will lose its pending/confirmed status for this hole. This action cannot be undone.
+                                        This will make Hole {hole.id} available again. {hole.bookingId ? `The booking from ${hole.companyName} will lose its sponsorship for this hole.` : `This will undo the manual block.`} This action cannot be undone.
                                     </AlertDialogDescription>
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
@@ -218,3 +255,4 @@ export default function AdminHolesPage() {
     </div>
   );
 }
+
