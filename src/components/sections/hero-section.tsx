@@ -33,6 +33,46 @@ export function HeroSection() {
         <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground">
           Join us for a day of golf and giving. All proceeds go to Greensleeves and Masizakhe Children’s Home.
         </p>
+
+        {/* Sponsor Logos */}
+        <div className="pt-4">
+          <p className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Our Sponsors</p>
+          <div className="flex justify-center items-center gap-8 md:gap-12 flex-wrap">
+            <div className="relative h-12 w-32" data-ai-hint="sponsor logo">
+                <Image
+                    src="https://picsum.photos/seed/sponsor1/200/100"
+                    alt="Sponsor 1 Logo"
+                    fill
+                    className="object-contain"
+                />
+            </div>
+             <div className="relative h-12 w-32" data-ai-hint="sponsor logo">
+                <Image
+                    src="https://picsum.photos/seed/sponsor2/200/100"
+                    alt="Sponsor 2 Logo"
+                    fill
+                    className="object-contain"
+                />
+            </div>
+             <div className="relative h-12 w-32" data-ai-hint="sponsor logo">
+                <Image
+                    src="https://picsum.photos/seed/sponsor3/200/100"
+                    alt="Sponsor 3 Logo"
+                    fill
+                    className="object-contain"
+                />
+            </div>
+             <div className="relative h-12 w-32" data-ai-hint="sponsor logo">
+                <Image
+                    src="https://picsum.photos/seed/sponsor4/200/100"
+                    alt="Sponsor 4 Logo"
+                    fill
+                    className="object-contain"
+                />
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-md md:text-lg text-foreground/90">
           <div className="flex items-center justify-center gap-2">
             <MapPin className="h-5 w-5 text-primary" />
