@@ -8,7 +8,7 @@ export const bookingFormSchema = z.object({
   contactName: z.string().min(1, "Contact name is required"),
   email: z.string().email("Invalid email address"),
   phoneNumber: z.string().min(1, "Phone number is required"),
-  postalAddress: z.string().min(1, "Postal address is required"),
+  businessVatNumber: z.string().optional(),
   callingCardName: z.string().min(1, "Calling card name is required"),
   player1: z.string().min(1, "Player 1 name is required"),
   player2: z.string().min(1, "Player 2 name is required"),

@@ -40,7 +40,7 @@ export function BookingForm() {
       contactName: "",
       email: "",
       phoneNumber: "",
-      postalAddress: "",
+      businessVatNumber: "",
       callingCardName: "",
       player1: "",
       player2: "",
@@ -160,9 +160,9 @@ export function BookingForm() {
               </div>
             </div>
             <div>
-              <Label htmlFor="postalAddress">Postal Address</Label>
-              <Input id="postalAddress" {...form.register("postalAddress")} />
-              {form.formState.errors.postalAddress && <p className="text-sm text-destructive mt-1">{form.formState.errors.postalAddress.message}</p>}
+              <Label htmlFor="businessVatNumber">Business VAT number (Optional)</Label>
+              <Input id="businessVatNumber" {...form.register("businessVatNumber")} />
+              {form.formState.errors.businessVatNumber && <p className="text-sm text-destructive mt-1">{form.formState.errors.businessVatNumber.message}</p>}
             </div>
           </div>
 
