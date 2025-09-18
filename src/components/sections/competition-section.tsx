@@ -22,7 +22,7 @@ export function CompetitionSection() {
             Hole-in-One <span className="text-primary">Competition</span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            This year, we're upping the stakes! Score a hole-in-one on the challenging 17th hole and you could be driving away in a brand-new car worth R300,000.
+            This year, we're upping the stakes! Score a hole-in-one on the challenging 17th hole and you could be driving away in a car to the value of R300 000.
           </p>
           <div className="space-y-4">
             <div className="flex items-center gap-4">
