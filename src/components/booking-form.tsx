@@ -55,7 +55,6 @@ export function BookingForm() {
       donationAmount: "",
       termsAccepted: false,
       sponsoredHoleNumber: undefined,
-      paymentReference: "",
     },
   });
 
@@ -345,19 +344,6 @@ export function BookingForm() {
 
           <Separator className="bg-border" />
 
-          {/* Payment Reference */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-foreground">Payment Information</h3>
-            <div>
-                <Label htmlFor="paymentReference">Payment Reference Number</Label>
-                <Input id="paymentReference" {...form.register("paymentReference")} placeholder="e.g., EFT-12345" />
-                <p className="text-xs text-muted-foreground mt-1">If you have already made a payment, please provide the reference number.</p>
-                {form.formState.errors.paymentReference && <p className="text-sm text-destructive mt-1">{form.formState.errors.paymentReference.message}</p>}
-            </div>
-          </div>
-          
-          <Separator className="bg-border" />
-
           {/* Terms and Conditions */}
           <div>
             <div className="flex items-center space-x-2">
@@ -397,5 +383,3 @@ export function BookingForm() {
     </Card>
   );
 }
-
-    

@@ -27,7 +27,6 @@ export const bookingFormSchema = z.object({
     .refine(num => num === undefined || (num >= 1 && num <= 18), {
         message: "Please select a valid hole number between 1 and 18."
     }),
-  paymentReference: z.string().optional(),
 }).refine(data => {
   // If a hole sponsorship is selected, a hole number must also be selected.
   if ((data.sponsorHole1000 || data.sponsorHole1800) && !data.sponsoredHoleNumber) {
@@ -73,5 +72,3 @@ export const reminderFormSchema = z.object({
 });
 
 export type ReminderFormValues = z.infer<typeof reminderFormSchema>;
-
-    

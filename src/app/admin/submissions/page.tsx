@@ -158,7 +158,6 @@ export default function AdminSubmissionsPage() {
                   <TableHead>Sponsorship</TableHead>
                   <TableHead>Prize Details</TableHead>
                   <TableHead>Hole Req.</TableHead>
-                  <TableHead>Payment Ref.</TableHead>
                   <TableHead>Contact Email</TableHead>
                   <TableHead>Phone</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
@@ -179,7 +178,6 @@ export default function AdminSubmissionsPage() {
                     <TableCell>{formatSponsorship(sub)}</TableCell>
                     <TableCell className="min-w-[200px] whitespace-pre-wrap">{sub.auctionPrizeDescription || 'N/A'}</TableCell>
                     <TableCell className="text-center font-bold">{sub.sponsoredHoleNumber || 'N/A'}</TableCell>
-                    <TableCell>{sub.paymentReference || 'N/A'}</TableCell>
                     <TableCell>{sub.email}</TableCell>
                     <TableCell>{sub.phoneNumber}</TableCell>
                     <TableCell className="text-right">
