@@ -36,7 +36,7 @@ export function CompetitionSection() {
                 <Car className="h-8 w-8 text-primary" />
                 <div>
                     <h3 className="font-semibold text-foreground">The Grand Prize</h3>
-                    <p className="text-muted-foreground">A spectacular new car valued at R300,000.</p>
+                    <p className="text-muted-foreground">A car to the value of R300,000.</p>
                 </div>
             </div>
           </div>
