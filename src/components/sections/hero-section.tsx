@@ -84,7 +84,7 @@ export function HeroSection() {
           </div>
           <div className="flex items-center justify-center gap-2">
             <Clock className="h-5 w-5 text-primary" />
-            <span>TBA</span>
+            <span>9:30 Shotgun Start</span>
           </div>
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
