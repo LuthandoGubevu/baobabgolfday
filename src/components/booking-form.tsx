@@ -53,7 +53,6 @@ export function BookingForm() {
       auctionPrizeDescription: "",
       donateWithoutAttending: false,
       donationAmount: "",
-      golfCartInterest: false,
       termsAccepted: false,
       sponsoredHoleNumber: undefined,
       paymentReference: "",
@@ -150,7 +149,6 @@ export function BookingForm() {
     { id: "sponsorHole1800", label: "Hole Sponsor (R1,800 - includes premium placement)" },
     { id: "sponsorAuctionPrize", label: "Auction/Prize Sponsorship (we'll contact you for details)" },
     { id: "donateWithoutAttending", label: "Donate without attending (amount to be specified separately)" },
-    { id: "golfCartInterest", label: "Golf Cart Hire (Express interest - arrange with club separately)" },
   ];
 
   return (
@@ -399,3 +397,5 @@ export function BookingForm() {
     </Card>
   );
 }
+
+    

@@ -20,7 +20,6 @@ export const bookingFormSchema = z.object({
   auctionPrizeDescription: z.string().optional(),
   donateWithoutAttending: z.boolean().optional(),
   donationAmount: z.string().optional(), // New field for donation amount
-  golfCartInterest: z.boolean().optional(),
   termsAccepted: z.boolean().refine(val => val === true, {
     message: "You must accept the terms and conditions to proceed.",
   }),
@@ -74,3 +73,5 @@ export const reminderFormSchema = z.object({
 });
 
 export type ReminderFormValues = z.infer<typeof reminderFormSchema>;
+
+    
