@@ -190,7 +190,7 @@ export function BookingForm() {
               </div>
             </div>
             <div className="text-left">
-              <Label htmlFor="businessVatNumber">Business VAT number <span className="text-primary">*</span></Label>
+              <Label htmlFor="businessVatNumber">Business VAT Registration Number <span className="text-primary">*</span></Label>
               <Input id="businessVatNumber" {...form.register("businessVatNumber")} />
               {form.formState.errors.businessVatNumber && <p className="text-sm text-destructive mt-1">{form.formState.errors.businessVatNumber.message}</p>}
             </div>
@@ -202,7 +202,7 @@ export function BookingForm() {
           <div className="space-y-4 text-left">
             <h3 className="text-xl font-semibold text-foreground">Team Registration</h3>
             <div>
-              <Label htmlFor="callingCardName">Calling Card Name (Team Name)</Label>
+              <Label htmlFor="callingCardName">Team/Business Name</Label>
               <Input id="callingCardName" {...form.register("callingCardName")} />
               {form.formState.errors.callingCardName && <p className="text-sm text-destructive mt-1">{form.formState.errors.callingCardName.message}</p>}
             </div>
@@ -398,4 +398,5 @@ export function BookingForm() {
   );
 }
 
+    
     

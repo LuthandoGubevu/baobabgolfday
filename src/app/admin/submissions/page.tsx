@@ -154,7 +154,7 @@ export default function AdminSubmissionsPage() {
                   <TableHead>Submitted At</TableHead>
                   <TableHead>Company</TableHead>
                   <TableHead>Contact Name</TableHead>
-                  <TableHead>VAT Number</TableHead>
+                  <TableHead>VAT Registration Number</TableHead>
                   <TableHead>Players</TableHead>
                   <TableHead>Sponsorship</TableHead>
                   <TableHead>Prize Details</TableHead>
@@ -216,3 +216,5 @@ export default function AdminSubmissionsPage() {
     </div>
   );
 }
+
+    
