@@ -152,18 +152,22 @@ export function BookingForm() {
 
   return (
     <Card className="w-full bg-card shadow-xl">
-      <CardHeader>
+      <CardHeader className="text-center">
         <CardTitle className="text-2xl font-headline text-primary">Team Registration & Sponsorship</CardTitle>
         <CardDescription className="text-muted-foreground">
           Book your 4-ball team and explore sponsorship opportunities.
         </CardDescription>
+        <div className="pt-2">
+            <p className="text-lg font-semibold text-foreground">Team Price: R3500 incl. VAT</p>
+            <p className="text-sm text-muted-foreground">4-ball including golf cart, excludes halfway house</p>
+        </div>
       </CardHeader>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <CardContent className="space-y-8">
+        <CardContent className="space-y-8 pt-6">
           {/* Contact Info */}
           <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-foreground">Contact Information</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h3 className="text-xl font-semibold text-foreground text-left">Contact Information</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div>
                 <Label htmlFor="companyName">Company Name <span className="text-primary">*</span></Label>
                 <Input id="companyName" {...form.register("companyName")} />
@@ -185,7 +189,7 @@ export function BookingForm() {
                 {form.formState.errors.phoneNumber && <p className="text-sm text-destructive mt-1">{form.formState.errors.phoneNumber.message}</p>}
               </div>
             </div>
-            <div>
+            <div className="text-left">
               <Label htmlFor="businessVatNumber">Business VAT number <span className="text-primary">*</span></Label>
               <Input id="businessVatNumber" {...form.register("businessVatNumber")} />
               {form.formState.errors.businessVatNumber && <p className="text-sm text-destructive mt-1">{form.formState.errors.businessVatNumber.message}</p>}
@@ -195,7 +199,7 @@ export function BookingForm() {
           <Separator className="bg-border" />
 
           {/* Team Registration */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-left">
             <h3 className="text-xl font-semibold text-foreground">Team Registration</h3>
             <div>
               <Label htmlFor="callingCardName">Calling Card Name (Team Name)</Label>
@@ -216,7 +220,7 @@ export function BookingForm() {
           <Separator className="bg-border" />
 
           {/* Sponsorship Options */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-left">
             <h3 className="text-xl font-semibold text-foreground">Sponsorship Options</h3>
             <div className="space-y-3">
               {sponsorshipOptions.map(item => {
@@ -345,7 +349,7 @@ export function BookingForm() {
           <Separator className="bg-border" />
           
           {/* Payment Info */}
-          <div className="space-y-2">
+          <div className="space-y-2 text-left">
             <h3 className="text-xl font-semibold text-foreground">Payment Information</h3>
             <p className="text-muted-foreground">
               Once form is submitted an invoice will be sent to you via email.
@@ -355,7 +359,7 @@ export function BookingForm() {
           <Separator className="bg-border" />
 
           {/* Terms and Conditions */}
-          <div>
+          <div className="text-left">
             <div className="flex items-center space-x-2">
                <Controller
                 name="termsAccepted"
@@ -393,5 +397,3 @@ export function BookingForm() {
     </Card>
   );
 }
-
-    
