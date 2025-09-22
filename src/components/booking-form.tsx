@@ -144,7 +144,7 @@ export function BookingForm() {
   };
 
   const sponsorshipOptions = [
-    { id: "sponsorHole1500", label: "Hole sponsor - catered R1 500 (Drinks & food on hole)" },
+    { id: "sponsorHole1500", label: "Hole sponsor - Catered R1 500 (Drinks & food on hole)" },
     { id: "sponsorHole1800", label: "Hole Sponsor (R1,800 - includes premium placement)" },
     { id: "sponsorAuctionPrize", label: "Auction/Prize Sponsorship (we'll contact you for details)" },
     { id: "donateWithoutAttending", label: "Donate without attending (amount to be specified separately)" },
@@ -397,3 +397,5 @@ export function BookingForm() {
     </Card>
   );
 }
+
+    
