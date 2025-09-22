@@ -36,7 +36,7 @@ function formatTimestamp(timestamp: FirestoreTimestamp | null): string {
 
 function formatSponsorship(submission: BookingFormValues): string {
   const sponsorships = [];
-  if (submission.sponsorHole1000) sponsorships.push("Hole (R1000)");
+  if (submission.sponsorHole1500) sponsorships.push("Hole (R1500)");
   if (submission.sponsorHole1800) sponsorships.push("Hole (R1800)");
   if (submission.sponsorAuctionPrize) sponsorships.push("Auction/Prize");
   if (submission.donateWithoutAttending) sponsorships.push(`Donation (${submission.donationAmount || 'unspecified'})`);
@@ -216,5 +216,3 @@ export default function AdminSubmissionsPage() {
     </div>
   );
 }
-
-    
