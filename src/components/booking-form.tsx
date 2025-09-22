@@ -270,7 +270,7 @@ export function BookingForm() {
             </div>
              {showHoleSelector && (
               <div className="pt-4 space-y-4">
-                <h4 className="font-semibold text-foreground">Select Your Sponsored Hole <span className="text-primary">*</span></h4>
+                <h4 className="font-semibold text-foreground">Select your Prefered Sponsor Hole</h4>
                  {holeError && (
                     <div className="p-3 my-2 text-sm rounded-md bg-destructive/10 text-destructive border border-destructive/20 flex items-center gap-2">
                         <AlertCircle className="h-4 w-4" />
@@ -397,8 +397,3 @@ export function BookingForm() {
     </Card>
   );
 }
-
-    
-    
-
-    
