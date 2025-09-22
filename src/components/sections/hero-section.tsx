@@ -38,10 +38,10 @@ export function HeroSection() {
         <div className="pt-4">
           <p className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Our Sponsors</p>
           <div className="flex justify-center items-center gap-8 md:gap-12 flex-wrap">
-            <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
+             <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
                 <Image
-                    src="/Golf Day Logo - Car City (White) 1.png"
-                    alt="Car City Logo"
+                    src="/Golf Day Logo - Masizakhe (White).png"
+                    alt="Masizakhe Logo"
                     fill
                     className="object-contain"
                 />
@@ -54,10 +54,10 @@ export function HeroSection() {
                     className="object-contain"
                 />
             </div>
-             <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
+            <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
                 <Image
-                    src="/Golf Day Logo - Masizakhe (White).png"
-                    alt="Masizakhe Logo"
+                    src="/Golf Day Logo - Car City (White) 1.png"
+                    alt="Car City Logo"
                     fill
                     className="object-contain"
                 />
