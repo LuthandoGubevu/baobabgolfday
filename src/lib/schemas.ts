@@ -15,7 +15,7 @@ export const bookingFormSchema = z.object({
   player3: z.string().optional(),
   player4: z.string().optional(),
   sponsorHole1500: z.boolean().optional(),
-  sponsorHole1800: z.boolean().optional(),
+  sponsorHole2000: z.boolean().optional(),
   sponsorAuctionPrize: z.boolean().optional(),
   auctionPrizeDescription: z.string().optional(),
   donateWithoutAttending: z.boolean().optional(),
@@ -29,7 +29,7 @@ export const bookingFormSchema = z.object({
     }),
 }).refine(data => {
   // If a hole sponsorship is selected, a hole number must also be selected.
-  if ((data.sponsorHole1500 || data.sponsorHole1800) && !data.sponsoredHoleNumber) {
+  if ((data.sponsorHole1500 || data.sponsorHole2000) && !data.sponsoredHoleNumber) {
     return false;
   }
   return true;
@@ -72,3 +72,5 @@ export const reminderFormSchema = z.object({
 });
 
 export type ReminderFormValues = z.infer<typeof reminderFormSchema>;
+
+    

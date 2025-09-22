@@ -48,7 +48,7 @@ export function BookingForm() {
       player3: "",
       player4: "",
       sponsorHole1500: false,
-      sponsorHole1800: false,
+      sponsorHole2000: false,
       sponsorAuctionPrize: false,
       auctionPrizeDescription: "",
       donateWithoutAttending: false,
@@ -59,10 +59,10 @@ export function BookingForm() {
   });
 
   const watchSponsorHole1500 = form.watch("sponsorHole1500");
-  const watchSponsorHole1800 = form.watch("sponsorHole1800");
+  const watchSponsorHole2000 = form.watch("sponsorHole2000");
   const watchSponsorAuctionPrize = form.watch("sponsorAuctionPrize");
   const watchDonateWithoutAttending = form.watch("donateWithoutAttending");
-  const showHoleSelector = watchSponsorHole1500 || watchSponsorHole1800;
+  const showHoleSelector = watchSponsorHole1500 || watchSponsorHole2000;
 
   useEffect(() => {
     setHolesLoading(true);
@@ -145,7 +145,7 @@ export function BookingForm() {
 
   const sponsorshipOptions = [
     { id: "sponsorHole1500", label: "Hole sponsor - Catered R1 500 (Drinks & food on hole)" },
-    { id: "sponsorHole1800", label: "Hole Sponsor (R1,800 - includes premium placement)" },
+    { id: "sponsorHole2000", label: "Hole sponsor - Uncatered R2 000" },
     { id: "sponsorAuctionPrize", label: "Auction/Prize Sponsorship (we'll contact you for details)" },
     { id: "donateWithoutAttending", label: "Donate without attending (amount to be specified separately)" },
   ];
@@ -399,4 +399,6 @@ export function BookingForm() {
 }
 
     
+    
+
     
