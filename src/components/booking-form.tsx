@@ -343,6 +343,16 @@ export function BookingForm() {
           </div>
 
           <Separator className="bg-border" />
+          
+          {/* Payment Info */}
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold text-foreground">Payment Information</h3>
+            <p className="text-muted-foreground">
+              Once form is submitted an invoice will be sent to you via email.
+            </p>
+          </div>
+
+          <Separator className="bg-border" />
 
           {/* Terms and Conditions */}
           <div>
@@ -383,3 +393,5 @@ export function BookingForm() {
     </Card>
   );
 }
+
+    
