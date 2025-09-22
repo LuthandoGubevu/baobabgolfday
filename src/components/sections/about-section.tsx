@@ -20,10 +20,10 @@ export function AboutSection() {
         </div>
         <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
            <Image
-            src="/add-hope-kids.jpg"
-            alt="Children smiling and receiving support from the Add Hope initiative"
+            src="/Prixe.png"
+            alt="Prize giving at the Add Hope golf day"
             fill
-            data-ai-hint="children charity support"
+            data-ai-hint="charity event prize"
             className="transform hover:scale-105 transition-transform duration-300 object-cover"
           />
         </div>
