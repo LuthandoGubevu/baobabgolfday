@@ -1,7 +1,7 @@
 
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Award, Car, Target } from "lucide-react";
+import { Award, Car, Target, HeartHandshake } from "lucide-react";
 import Image from "next/image";
 
 export function CompetitionSection() {
@@ -22,7 +22,7 @@ export function CompetitionSection() {
             Hole-in-One <span className="text-primary">Competition</span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            This year, we're upping the stakes! Score a hole-in-one on the challenging 17th hole and you could be driving away in a car to the value of R300 000.
+            The 'WIN A CAR' & 'R100k' Hole-in-One prize applies only to the 17th hole. If you get a Hole-in-One, you win a car to the value of R300k, and an additional R100k is donated to the Add Hope beneficiaries.
           </p>
           <div className="space-y-4">
             <div className="flex items-center gap-4">
@@ -37,6 +37,13 @@ export function CompetitionSection() {
                 <div>
                     <h3 className="font-semibold text-foreground">The Grand Prize</h3>
                     <p className="text-muted-foreground">A car to the value of R300,000.</p>
+                </div>
+            </div>
+            <div className="flex items-center gap-4">
+                <HeartHandshake className="h-8 w-8 text-primary" />
+                <div>
+                    <h3 className="font-semibold text-foreground">Charity Bonus</h3>
+                    <p className="text-muted-foreground">R100,000 will be donated to Add Hope in your name.</p>
                 </div>
             </div>
           </div>
