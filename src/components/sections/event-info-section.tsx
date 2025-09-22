@@ -1,7 +1,7 @@
 
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, CalendarDays, Clock, Users, Gift, Coffee, ShoppingBag } from "lucide-react";
+import { MapPin, CalendarDays, Clock, Users, Gift, Coffee, ShoppingBag, Award } from "lucide-react";
 
 const eventDetails = [
   { icon: MapPin, label: "Location", value: "Olivewood Golf Club" },
@@ -9,6 +9,7 @@ const eventDetails = [
   { icon: Clock, label: "Time", value: "9:30 Shotgun Start" },
   { icon: Users, label: "Format", value: "4 Ball Alliance. Including Golf Cart" },
   { icon: Gift, label: "Prizes", value: "Longest Drive, Closest to Pin, Best Team" },
+  { icon: Award, label: "Prize Giving & Auction", value: "Starts at 15:30" },
   { icon: ShoppingBag, label: "Includes", value: "Gift Bags" },
   { icon: Coffee, label: "Refreshments", value: "Light Refreshments Included" },
 ];
@@ -24,7 +25,7 @@ export function EventInfoSection() {
           Everything you need to know about the big day.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {eventDetails.map((item, index) => (
           <Card key={index} className="bg-card shadow-lg hover:shadow-primary/20 transition-shadow duration-300 flex flex-col">
             <CardHeader className="flex flex-row items-center gap-4 pb-2">
