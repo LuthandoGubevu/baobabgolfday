@@ -159,7 +159,7 @@ export function BookingForm() {
         </CardDescription>
         <div className="pt-2">
             <p className="text-lg font-semibold text-foreground">Team Price: R3500 incl. VAT</p>
-            <p className="text-sm text-muted-foreground">4-ball including golf cart, excludes halfway house</p>
+            <p className="text-sm text-muted-foreground">4-ball including golf carts, excludes halfway house</p>
         </div>
       </CardHeader>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -397,3 +397,5 @@ export function BookingForm() {
     </Card>
   );
 }
+
+    
