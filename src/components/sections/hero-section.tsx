@@ -36,7 +36,7 @@ export function HeroSection() {
 
         {/* Sponsor Logos */}
         <div className="pt-4">
-          <p className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Our Sponsors</p>
+          
           <div className="flex justify-center items-center gap-8 md:gap-12 flex-wrap">
              <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
                 <Image
@@ -84,7 +84,7 @@ export function HeroSection() {
           </div>
           <div className="flex items-center justify-center gap-2">
             <Clock className="h-5 w-5 text-primary" />
-            <span>9:30 Shotgun Start</span>
+            <span>09:30 Shotgun Start</span>
           </div>
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
