@@ -38,34 +38,34 @@ export function HeroSection() {
         <div className="pt-4">
           <p className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Our Sponsors</p>
           <div className="flex justify-center items-center gap-8 md:gap-12 flex-wrap">
-            <div className="relative h-12 w-32" data-ai-hint="sponsor logo">
+            <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
                 <Image
-                    src="https://placehold.co/200x100/121212/e0e0e0?text=Sponsor+1"
-                    alt="Sponsor 1 Logo"
+                    src="/Golf Day Logo - Car City (White) 1.png"
+                    alt="Car City Logo"
                     fill
                     className="object-contain"
                 />
             </div>
-             <div className="relative h-12 w-32" data-ai-hint="sponsor logo">
+             <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
                 <Image
-                    src="https://placehold.co/200x100/121212/e0e0e0?text=Sponsor+2"
-                    alt="Sponsor 2 Logo"
+                    src="/Golf Day Logo - Green Sleeves (White).png"
+                    alt="Green Sleeves Logo"
                     fill
                     className="object-contain"
                 />
             </div>
-             <div className="relative h-12 w-32" data-ai-hint="sponsor logo">
+             <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
                 <Image
-                    src="https://placehold.co/200x100/121212/e0e0e0?text=Sponsor+3"
-                    alt="Sponsor 3 Logo"
+                    src="/Golf Day Logo - Masizakhe (White).png"
+                    alt="Masizakhe Logo"
                     fill
                     className="object-contain"
                 />
             </div>
-             <div className="relative h-12 w-32" data-ai-hint="sponsor logo">
+             <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
                 <Image
-                    src="https://placehold.co/200x100/121212/e0e0e0?text=Sponsor+4"
-                    alt="Sponsor 4 Logo"
+                    src="/Golf Day Logo - Olivewood (White).png"
+                    alt="Olivewood Logo"
                     fill
                     className="object-contain"
                 />
