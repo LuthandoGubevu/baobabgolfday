@@ -20,7 +20,7 @@ export function AboutSection() {
         </div>
         <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
            <Image
-            src="/Prixe.png"
+            src="/Prize.png"
             alt="Prize giving at the Add Hope golf day"
             fill
             data-ai-hint="charity event prize"
