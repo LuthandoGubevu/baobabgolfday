@@ -4,16 +4,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
 const galleryImages = [
-  { src: "/DSC_5180.jpg", alt: "Highlights from the 2025 KFC Add Hope Golf Day event.", dataAiHint: "golf event charity" },
-  { src: "/DSC_51801.jpg", alt: "Participants enjoying the atmosphere at the golf day.", dataAiHint: "charity golf players" },
-  { src: "/DSC_51803.jpg", alt: "Scenic view of the East London Golf Club during the event.", dataAiHint: "golf course landscape" },
-  { src: "/DSC_51804.jpg", alt: "An action shot of a golfer during the tournament.", dataAiHint: "golf swing action" },
+  { src: "/image-1.jpg", alt: "Highlights from the 2025 KFC Add Hope Golf Day event.", dataAiHint: "golf event charity" },
+  { src: "/image-2.jpg", alt: "Participants enjoying the atmosphere at the golf day.", dataAiHint: "charity golf players" },
+  { src: "/image-3.jpg", alt: "Scenic view of the East London Golf Club during the event.", dataAiHint: "golf course landscape" },
+  { src: "/image-4.jpg", alt: "An action shot of a golfer during the tournament.", dataAiHint: "golf swing action" },
   { src: "/image-5.jpg", alt: "Group photo of attendees and supporters at the charity golf day.", dataAiHint: "event attendees group" },
   { src: "/image-6.jpg", alt: "Moments from the award ceremony or closing of the golf event.", dataAiHint: "charity event awards" },
-  { src: "https://picsum.photos/seed/7/600/400", alt: "Placeholder image for the gallery.", dataAiHint: "golf event" },
-  { src: "https://picsum.photos/seed/8/600/400", alt: "Placeholder image for the gallery.", dataAiHint: "charity event" },
-  { src: "https://picsum.photos/seed/9/600/400", alt: "Placeholder image for the gallery.", dataAiHint: "golf players" },
-  { src: "https://picsum.photos/seed/10/600/400", alt: "Placeholder image for the gallery.", dataAiHint: "golf course" },
+  { src: "/DSC_5180.jpg", alt: "A team of golfers at the event.", dataAiHint: "golf team photo" },
+  { src: "/DSC_51801.jpg", alt: "Golfers on the course.", dataAiHint: "golf course action" },
+  { src: "/DSC_51803.jpg", alt: "Smiling participants at the golf day.", dataAiHint: "happy golfers" },
+  { src: "/DSC_51804.jpg", alt: "Another view of the golf course during the event.", dataAiHint: "golf landscape" },
 ];
 
 export default function GalleryPage() {
