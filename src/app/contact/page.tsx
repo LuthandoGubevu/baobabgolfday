@@ -103,11 +103,11 @@ export default function ContactPage() {
           <CardContent className="space-y-6 text-muted-foreground">
              <div className="flex items-center gap-3">
               <Mail className="h-6 w-6 text-primary" />
-              <p>Email: <a href="mailto:info@baobabbrands.com" className="hover:text-primary transition-colors">info@baobabbrands.com</a></p>
+              <p>Email: <a href="mailto:roslyn@baobabbrands.com" className="hover:text-primary transition-colors">roslyn@baobabbrands.com</a></p>
             </div>
             <div className="flex items-center gap-3">
               <Phone className="h-6 w-6 text-primary" />
-              <p>Phone: <a href="tel:0430040071" className="hover:text-primary transition-colors">043 004 0071</a></p>
+              <p>Phone: <a href="tel:0836799305" className="hover:text-primary transition-colors">083 679 9305</a></p>
             </div>
             <div className="flex items-start gap-3">
               <MapPinIcon className="h-6 w-6 text-primary mt-1" />
