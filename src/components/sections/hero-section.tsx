@@ -70,6 +70,14 @@ export function HeroSection() {
                     className="object-contain"
                 />
             </div>
+             <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
+                <Image
+                    src="/daily-logo.png"
+                    alt="Daily Dispatch Logo"
+                    fill
+                    className="object-contain"
+                />
+            </div>
           </div>
         </div>
 
