@@ -20,8 +20,6 @@ export async function deleteSubmission(submissionId: string) {
         return { success: false, message: "Submission ID is required." };
     }
 
-    // Admin access is controlled by client-side route guard.
-
     try {
         const submissionRef = doc(db, "bookings", submissionId);
         const submissionDoc = await getDoc(submissionRef);
@@ -33,7 +31,7 @@ export async function deleteSubmission(submissionId: string) {
         const submissionData = submissionDoc.data();
         const sponsoredHoleNumber = submissionData.sponsoredHoleNumber;
 
-        // If a hole was sponsored, we need to release it.
+        // If a hole was sponsored, run a transaction to release it and delete the booking.
         if (sponsoredHoleNumber) {
             const holeRef = doc(db, "holes", sponsoredHoleNumber.toString());
 
@@ -41,7 +39,6 @@ export async function deleteSubmission(submissionId: string) {
                 const holeDoc = await transaction.get(holeRef);
                 
                 // Only release the hole if it was linked to THIS specific booking.
-                // This prevents accidentally releasing a hole that another booking now holds.
                 if (holeDoc.exists() && holeDoc.data().bookingId === submissionId) {
                     transaction.update(holeRef, {
                         status: "available",
@@ -57,7 +54,7 @@ export async function deleteSubmission(submissionId: string) {
             });
 
         } else {
-            // No sponsored hole, just delete the submission.
+            // No sponsored hole, just delete the submission document.
             await deleteDoc(submissionRef);
         }
         
