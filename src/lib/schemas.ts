@@ -9,6 +9,7 @@ export const bookingFormSchema = z.object({
   email: z.string().email("Invalid email address"),
   phoneNumber: z.string().min(1, "Phone number is required"),
   businessVatNumber: z.string().min(1, "Business VAT number is required"),
+  registerTeam: z.boolean().optional(),
   callingCardName: z.string().optional(),
   player1: z.string().optional(),
   player2: z.string().optional(),
@@ -72,5 +73,3 @@ export const reminderFormSchema = z.object({
 });
 
 export type ReminderFormValues = z.infer<typeof reminderFormSchema>;
-
-    

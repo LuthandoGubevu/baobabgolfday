@@ -42,6 +42,7 @@ export function BookingForm() {
       email: "",
       phoneNumber: "",
       businessVatNumber: "",
+      registerTeam: false,
       callingCardName: "",
       player1: "",
       player2: "",
@@ -58,6 +59,7 @@ export function BookingForm() {
     },
   });
 
+  const watchRegisterTeam = form.watch("registerTeam");
   const watchSponsorHole1500 = form.watch("sponsorHole1500");
   const watchSponsorHole2000 = form.watch("sponsorHole2000");
   const watchSponsorAuctionPrize = form.watch("sponsorAuctionPrize");
@@ -92,6 +94,18 @@ export function BookingForm() {
     return () => unsubscribe();
   }, []);
   
+  // When team registration is unchecked, reset team fields
+  useEffect(() => {
+    if (!watchRegisterTeam) {
+        form.setValue("callingCardName", "");
+        form.setValue("player1", "");
+        form.setValue("player2", "");
+        form.setValue("player3", "");
+        form.setValue("player4", "");
+        form.clearErrors(["callingCardName", "player1", "player2", "player3", "player4"]);
+    }
+  }, [watchRegisterTeam, form]);
+
   // When sponsorship is unchecked, reset hole selection
   useEffect(() => {
       if (!showHoleSelector) {
@@ -201,20 +215,35 @@ export function BookingForm() {
           {/* Team Registration */}
           <div className="space-y-4 text-left">
             <h3 className="text-xl font-semibold text-foreground">Team Registration</h3>
-            <div>
-              <Label htmlFor="callingCardName">Team/Business Name</Label>
-              <Input id="callingCardName" {...form.register("callingCardName")} />
-              {form.formState.errors.callingCardName && <p className="text-sm text-destructive mt-1">{form.formState.errors.callingCardName.message}</p>}
+             <div className="flex items-center space-x-2">
+                <Controller
+                    name="registerTeam"
+                    control={form.control}
+                    render={({ field }) => (
+                    <Checkbox id="registerTeam" checked={field.value} onCheckedChange={field.onChange} />
+                    )}
+                />
+                <Label htmlFor="registerTeam" className="font-normal text-muted-foreground">Register a team</Label>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[1, 2, 3, 4].map((num) => (
-                <div key={num}>
-                  <Label htmlFor={`player${num}`}>Player {num} Full Name</Label>
-                  <Input id={`player${num}`} {...form.register(`player${num}` as `player${1 | 2 | 3 | 4}`)} />
-                  {form.formState.errors[`player${num}` as `player${1 | 2 | 3 | 4}`] && <p className="text-sm text-destructive mt-1">{form.formState.errors[`player${num}` as `player${1 | 2 | 3 | 4}`]?.message}</p>}
+
+            {watchRegisterTeam && (
+                <div className="space-y-4 pt-4 border-l-2 border-primary/20 pl-6 ml-1">
+                    <div>
+                        <Label htmlFor="callingCardName">Team/Business Name</Label>
+                        <Input id="callingCardName" {...form.register("callingCardName")} />
+                        {form.formState.errors.callingCardName && <p className="text-sm text-destructive mt-1">{form.formState.errors.callingCardName.message}</p>}
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {[1, 2, 3, 4].map((num) => (
+                            <div key={num}>
+                            <Label htmlFor={`player${num}`}>Player {num} Full Name</Label>
+                            <Input id={`player${num}`} {...form.register(`player${num}` as `player${1 | 2 | 3 | 4}`)} />
+                            {form.formState.errors[`player${num}` as `player${1 | 2 | 3 | 4}`] && <p className="text-sm text-destructive mt-1">{form.formState.errors[`player${num}` as `player${1 | 2 | 3 | 4}`]?.message}</p>}
+                            </div>
+                        ))}
+                    </div>
                 </div>
-              ))}
-            </div>
+            )}
           </div>
           
           <Separator className="bg-border" />
@@ -397,5 +426,3 @@ export function BookingForm() {
     </Card>
   );
 }
-
-    
