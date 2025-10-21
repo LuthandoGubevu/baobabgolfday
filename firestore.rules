@@ -3,52 +3,42 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Helper function to check for admin role
+    // Helper function to check if a user is an authenticated admin
     function isAdmin() {
-      // Check if the user is authenticated and has an admin role document
-      // The admin role doc should exist at /roles/{user.email} with {role: "admin"}
-      return request.auth != null && exists(/databases/$(database)/documents/roles/$(request.auth.token.email)) &&
-             get(/databases/$(database)/documents/roles/$(request.auth.token.email)).data.role == 'admin';
+      return request.auth != null && request.auth.token.email in ["roslyn@baobabbrands.com", "royden@baobabbrands.com"];
     }
 
-    // Bookings:
-    // - Allow anyone to create a booking (submit the form).
-    // - Allow only admins to read, update, or delete bookings.
+    // Bookings collection
     match /bookings/{bookingId} {
+      // Anyone can create a booking (submit the form)
       allow create: if true;
+      // Only admins can read, update, or delete bookings
       allow read, update, delete: if isAdmin();
     }
 
-    // Holes:
-    // - Allow anyone to read the status of holes (for the booking form).
-    // - Allow only admins to update hole statuses.
+    // Holes collection
     match /holes/{holeId} {
+      // Anyone can read the hole statuses to see what's available
       allow read: if true;
-      allow update: if isAdmin();
+      // Only admins or a transaction initiated by a user creating a booking can write
+      // The transaction logic is handled server-side, but rules must allow admin writes.
+      allow write: if isAdmin();
     }
 
-    // Messages:
-    // - Allow anyone to create a message (submit contact form).
-    // - Allow only admins to read or delete messages.
+    // Messages collection
     match /messages/{messageId} {
+      // Anyone can create a message (submit contact form)
       allow create: if true;
-      allow read, delete: if isAdmin();
-    }
-    
-    // Reminders:
-    // - Allow anyone to create a reminder (submit email).
-    // - Allow only admins to read or delete reminders.
-    match /reminders/{reminderId} {
-      allow create: if true;
+      // Only admins can read or delete messages
       allow read, delete: if isAdmin();
     }
 
-    // Roles:
-    // - Only admins can manage roles. This prevents non-admins from giving themselves
-    //   admin privileges. This collection should be managed carefully, likely
-    //   directly from the Firebase Console for initial setup.
-    match /roles/{userEmail} {
-      allow read, write: if isAdmin();
+    // Reminders collection
+    match /reminders/{reminderId} {
+        // Anyone can create a reminder signup
+        allow create: if true;
+        // Only admins can read or delete reminders
+        allow read, delete: if isAdmin();
     }
   }
 }
