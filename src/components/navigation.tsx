@@ -26,6 +26,8 @@ const supportingNavLinks = [
   { href: '/contact', label: 'Contact Us' },
 ];
 
+const ADMIN_EMAILS = ["roslyn@baobabbrands.com", "royden@baobabbrands.com"];
+
 export function Navigation() {
   const pathname = usePathname();
   const router = useRouter(); // useRouter hook
@@ -41,7 +43,7 @@ export function Navigation() {
     window.addEventListener('scroll', handleScroll);
     
     const unsubscribeAuth = onAuthStateChanged(auth, async (user: User | null) => {
-        if (user && user.email === "roslyn@baobabbrands.com") {
+        if (user && user.email && ADMIN_EMAILS.includes(user.email)) {
             setIsAdminLoggedIn(true);
         } else {
             setIsAdminLoggedIn(false);

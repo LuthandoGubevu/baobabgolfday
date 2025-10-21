@@ -11,7 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { SectionWrapper } from '@/components/section-wrapper';
 import { Button } from '@/components/ui/button';
 
-const ADMIN_EMAIL = "roslyn@baobabbrands.com";
+const ADMIN_EMAILS = ["roslyn@baobabbrands.com", "royden@baobabbrands.com"];
 
 function AdminNav() {
     const pathname = usePathname();
@@ -61,11 +61,11 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
-      if (user && user.email === ADMIN_EMAIL) {
-        // User is logged in and is the admin.
+      if (user && user.email && ADMIN_EMAILS.includes(user.email)) {
+        // User is logged in and is an admin.
         setIsAuthenticated(true);
       } else {
-        // User is not logged in or is not the admin.
+        // User is not logged in or is not an admin.
         toast({
           title: "Authentication Required",
           description: "You do not have permission to access the admin area.",
@@ -104,4 +104,3 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     </SectionWrapper>
   );
 }
-
