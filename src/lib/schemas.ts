@@ -29,14 +29,14 @@ export const bookingFormSchema = z.object({
         message: "Please select a valid hole number between 1 and 18."
     }),
 }).refine(data => {
-  // If a hole sponsorship is selected, a hole number must also be selected.
-  if ((data.sponsorHole1500 || data.sponsorHole2000) && !data.sponsoredHoleNumber) {
-    return false;
-  }
-  return true;
+    // If a hole sponsorship is selected, a hole number must also be selected.
+    if ((data.sponsorHole1500 || data.sponsorHole2000) && !data.sponsoredHoleNumber) {
+        return false;
+    }
+    return true;
 }, {
-  message: "Please select an available hole for your sponsorship.",
-  path: ["sponsoredHoleNumber"], 
+    message: "Please select an available hole for your sponsorship.",
+    path: ["sponsoredHoleNumber"],
 }).refine(data => {
     // If auction prize is sponsored, a description must be provided.
     if (data.sponsorAuctionPrize && (!data.auctionPrizeDescription || data.auctionPrizeDescription.trim().length === 0)) {
@@ -55,6 +55,23 @@ export const bookingFormSchema = z.object({
 }, {
     message: "Please specify the amount you wish to donate.",
     path: ["donationAmount"],
+}).refine(data => {
+    // If registering a team, at least one player name is required.
+    if (data.registerTeam && (!data.callingCardName || data.callingCardName.trim().length === 0)) {
+        return false;
+    }
+    return true;
+}, {
+    message: "Please provide a team/business name for the calling card.",
+    path: ["callingCardName"],
+}).refine(data => {
+    if (data.registerTeam && (!data.player1 || data.player1.trim().length === 0)) {
+        return false;
+    }
+    return true;
+}, {
+    message: "At least one player name is required to register a team.",
+    path: ["player1"],
 });
 
 
