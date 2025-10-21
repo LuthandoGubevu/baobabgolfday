@@ -4,6 +4,7 @@ import './globals.css';
 import { Navigation } from '@/components/navigation';
 import { Toaster } from "@/components/ui/toaster";
 import { Footer } from '@/components/footer'; // Import the new Footer component
+import { FirebaseErrorListener } from '@/components/FirebaseErrorListener';
 
 export const metadata: Metadata = {
   title: 'Hope Fore Hunger - KFC Add Hope Golf Day 2025',
@@ -30,6 +31,7 @@ export default function RootLayout({
         <main className="flex-grow">{children}</main>
         <Footer /> {/* Add the Footer component here */}
         <Toaster />
+        <FirebaseErrorListener />
       </body>
     </html>
   );

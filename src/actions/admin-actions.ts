@@ -3,8 +3,10 @@
 
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/firebase";
-import { doc, runTransaction, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
-import { headers } from "next/headers";
+import { doc, runTransaction, getDoc, deleteDoc } from "firebase/firestore";
+import { errorEmitter } from "@/firebase/error-emitter";
+import { FirestorePermissionError, type SecurityRuleContext } from "@/firebase/errors";
+
 
 // Helper function to verify admin user
 async function verifyAdmin() {
@@ -20,8 +22,9 @@ export async function deleteSubmission(submissionId: string) {
         return { success: false, message: "Submission ID is required." };
     }
 
+    const submissionRef = doc(db, "bookings", submissionId);
+    
     try {
-        const submissionRef = doc(db, "bookings", submissionId);
         const submissionDoc = await getDoc(submissionRef);
 
         if (!submissionDoc.exists()) {
@@ -31,14 +34,12 @@ export async function deleteSubmission(submissionId: string) {
         const submissionData = submissionDoc.data();
         const sponsoredHoleNumber = submissionData.sponsoredHoleNumber;
 
-        // If a hole was sponsored, run a transaction to release it and delete the booking.
         if (sponsoredHoleNumber) {
             const holeRef = doc(db, "holes", sponsoredHoleNumber.toString());
-
-            await runTransaction(db, async (transaction) => {
+            
+            runTransaction(db, async (transaction) => {
                 const holeDoc = await transaction.get(holeRef);
                 
-                // Only release the hole if it was linked to THIS specific booking.
                 if (holeDoc.exists() && holeDoc.data().bookingId === submissionId) {
                     transaction.update(holeRef, {
                         status: "available",
@@ -49,20 +50,33 @@ export async function deleteSubmission(submissionId: string) {
                     });
                 }
                 
-                // Now, delete the booking document itself within the same transaction.
                 transaction.delete(submissionRef);
+            }).catch(async (serverError) => {
+                 const permissionError = new FirestorePermissionError({
+                    path: submissionRef.path,
+                    operation: 'delete',
+                } satisfies SecurityRuleContext);
+                errorEmitter.emit('permission-error', permissionError);
+                console.error("Transaction failed, permission error emitted.", permissionError);
             });
 
         } else {
             // No sponsored hole, just delete the submission document.
-            await deleteDoc(submissionRef);
+            deleteDoc(submissionRef).catch(async (serverError) => {
+                const permissionError = new FirestorePermissionError({
+                    path: submissionRef.path,
+                    operation: 'delete',
+                } satisfies SecurityRuleContext);
+                errorEmitter.emit('permission-error', permissionError);
+                console.error("Delete failed, permission error emitted.", permissionError);
+            });
         }
         
         revalidatePath("/admin/submissions");
-        return { success: true, message: "Submission deleted successfully." };
+        return { success: true, message: "Submission deletion initiated." };
 
     } catch (error: any) {
-        console.error("Error deleting submission:", error);
-        return { success: false, message: "Failed to delete submission. Please try again." };
+        console.error("Error processing submission deletion:", error);
+        return { success: false, message: "Failed to process submission deletion. Please try again." };
     }
 }
