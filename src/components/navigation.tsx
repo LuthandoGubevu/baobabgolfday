@@ -26,7 +26,7 @@ const supportingNavLinks = [
   { href: '/contact', label: 'Contact Us' },
 ];
 
-const ADMIN_EMAILS = ["roslyn@baobabbrands.com", "royden@baobabbrands.com"];
+const ADMIN_EMAILS = ["roslyn@baobabbrands.com", "royden@baobabbrands.com", "ross@baobabbrands.com"];
 
 export function Navigation() {
   const pathname = usePathname();

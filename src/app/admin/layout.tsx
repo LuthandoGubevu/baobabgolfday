@@ -11,7 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { SectionWrapper } from '@/components/section-wrapper';
 import { Button } from '@/components/ui/button';
 
-const ADMIN_EMAILS = ["roslyn@baobabbrands.com", "royden@baobabbrands.com"];
+const ADMIN_EMAILS = ["roslyn@baobabbrands.com", "royden@baobabbrands.com", "ross@baobabbrands.com"];
 
 function AdminNav() {
     const pathname = usePathname();
