@@ -42,7 +42,7 @@ export default function TermsAndConditionsPage() {
                 Once the Prize is delivered and registered in the winner’s name, the winner takes full responsibility for the Prize, which includes the Prize’s insurance.
               </li>
               <li>
-                In addition, should the Prize be achieved, a total amount of R100 000 (one hundred thousand rand) will be donated by the Promoter to the Event’s nominated beneficiaries — Greensleaves and Masizakhe Children's Home — in recognition of the achievement. The winner of the Prize will have no claim to the allocated donation.
+                In addition, should the Prize be achieved, a total amount of R100 000 (one hundred thousand rand) will be donated by the Promoter to the Event’s nominated beneficiaries - Greensleaves and Masizakhe Children's Home - in recognition of the achievement. The winner of the Prize will have no claim to the allocated donation.
               </li>
               <li>
                 To enter: Only amateur players officially registered to participate in the Add Hope Golf day 2025 shall be eligible to enter the Event. No Professional Players included. The Prize shall apply exclusively to Hole 17 on the Olivewood Golf Club golf course. The shot must be made from the official tee markers set for the day. First attempt only. Mulligan’s or second attempts do not qualify. To remove all doubt, the ball must be holed in one stroke from the tee. Only one round of golf per player permitted, played in accordance with the compliance with the Rules of Golf. The winner will be announced at the Events Prizegiving ceremony, subject to verification that all competition terms and conditions have been met.
