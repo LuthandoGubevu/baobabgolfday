@@ -1,60 +1,43 @@
+
 rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    // Helper functions
+    
+    // Helper function to check for admin credentials.
     function isAdmin() {
       return request.auth != null && request.auth.token.email in ["roslyn@baobabbrands.com", "royden@baobabbrands.com", "ross@baobabbrands.com"];
     }
-
-    // Function to check if the incoming request data for a booking is valid.
-    function isValidBookingData(data) {
-      return data.companyName is string &&
-             data.contactName is string &&
-             data.email is string &&
-             data.phoneNumber is string &&
-             data.businessVatNumber is string &&
-             data.termsAccepted == true;
-    }
     
-    // Allow anyone to submit a message or reminder
-    match /messages/{messageId} {
-      allow read, write: if isAdmin();
-      allow create: if true;
-    }
-    match /reminders/{reminderId} {
-      allow read, write: if isAdmin();
-      allow create: if true;
+    // General read access for auxiliary collections if needed, but default to locked down.
+    match /{document=**} {
+      allow read, write: if false;
     }
 
-    // Bookings collection
+    // Bookings: Allow anyone to create, but only admins can read/delete.
     match /bookings/{bookingId} {
-      allow read, delete: if isAdmin();
-      
-      // Allow users to create bookings.
-      allow create: if request.auth != null && isValidBookingData(request.resource.data);
-
-      // Allow users to update their own booking ONLY to remove a sponsored hole.
-      // This is used by the 'release' admin action.
-      allow update: if isAdmin() || (request.auth != null && request.resource.data.sponsoredHoleNumber == null);
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
     }
 
-    // Holes collection
+    // Holes: Allow anyone to read status. Writes are complex.
     match /holes/{holeId} {
       allow read: if true;
-      allow write: if isAdmin();
-
-      // Allow a user to update a hole IF it's part of a transaction where they are creating a booking.
-      allow update: if request.auth != null &&
-                      // The write must be part of a transaction.
-                      getAfter(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId)) != null &&
-                      // The hole must be available before the update.
-                      resource.data.status == 'available' &&
-                      // The incoming data must set the status to 'pending'.
-                      request.resource.data.status == 'pending' &&
-                      // The bookingId must be set on the hole.
-                      request.resource.data.bookingId is string;
+      // Allow updates only by admins OR as part of a legitimate booking transaction by anyone.
+      // The transaction check ensures a user can't just claim a hole without creating a booking.
+      allow write: if isAdmin() || (getAfter(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId)).data.sponsoredHoleNumber == holeId);
+    }
+    
+    // Messages: Allow anyone to create, only admins can manage.
+    match /messages/{messageId} {
+        allow create: if true;
+        allow read, update, delete: if isAdmin();
+    }
+    
+    // Reminders: Allow anyone to sign up, only admins can manage.
+    match /reminders/{reminderId} {
+        allow create: if true;
+        allow read, update, delete: if isAdmin();
     }
   }
 }
