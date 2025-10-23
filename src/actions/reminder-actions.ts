@@ -25,7 +25,6 @@ export async function submitEmailForReminder(values: ReminderFormValues) {
   };
 
   try {
-    // Check for duplicates before adding? For now, we'll keep it simple.
     await addDoc(collection(db, "reminders"), data)
       .catch(serverError => {
         const permissionError = new FirestorePermissionError({

@@ -23,7 +23,6 @@ export async function submitBooking(values: BookingFormValues) {
   try {
     if (sponsoredHoleNumber) {
         const holeRef = doc(db, "holes", sponsoredHoleNumber.toString());
-        // Define newBookingRef outside the transaction so it's available in the catch block.
         const newBookingRef = doc(collection(db, "bookings")); 
 
         await runTransaction(db, async (transaction) => {
@@ -53,17 +52,15 @@ export async function submitBooking(values: BookingFormValues) {
                 email: formData.email,
             });
         }).catch(serverError => {
-            // This is the critical change: emitting a contextual error from within the transaction's catch block.
             const permissionError = new FirestorePermissionError({
                 path: `Transaction on bookings/${newBookingRef.id} and holes/${sponsoredHoleNumber}`,
                 operation: 'write', 
                 requestResourceData: {
                     booking: { ...formData, sponsoredHoleNumber, bookingId: newBookingRef.id },
-                    holeUpdate: { status: 'pending', bookingId: newBooking_id }
+                    holeUpdate: { status: 'pending', bookingId: newBookingRef.id }
                 }
             } satisfies SecurityRuleContext);
             errorEmitter.emit('permission-error', permissionError);
-            // Re-throw to be caught by the outer try-catch and show a message to the user.
             throw serverError; 
         });
 
@@ -73,7 +70,7 @@ export async function submitBooking(values: BookingFormValues) {
         };
 
     } else {
-      const docRef = await addDoc(collection(db, "bookings"), {
+      await addDoc(collection(db, "bookings"), {
         ...formData,
         submittedAt: serverTimestamp()
       }).catch(serverError => {
@@ -94,7 +91,6 @@ export async function submitBooking(values: BookingFormValues) {
 
   } catch (error: any) {
     console.error("Error submitting booking:", error);
-    // Return a more specific message if it's the one we expect from the transaction.
     const specificMessage = error.message.includes("This hole is no longer available") 
         ? error.message 
         : "An unexpected error occurred while submitting your booking. Please try again.";
