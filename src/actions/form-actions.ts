@@ -23,6 +23,7 @@ export async function submitBooking(values: BookingFormValues) {
   try {
     if (sponsoredHoleNumber) {
         const holeRef = doc(db, "holes", sponsoredHoleNumber.toString());
+        // Define newBookingRef outside the transaction so it's available in the catch block.
         const newBookingRef = doc(collection(db, "bookings")); 
 
         await runTransaction(db, async (transaction) => {
@@ -39,6 +40,7 @@ export async function submitBooking(values: BookingFormValues) {
             const bookingData = {
                 ...formData,
                 sponsoredHoleNumber,
+                bookingId: newBookingRef.id,
                 submittedAt: serverTimestamp()
             };
 
@@ -56,8 +58,8 @@ export async function submitBooking(values: BookingFormValues) {
                 path: `Transaction on bookings/${newBookingRef.id} and holes/${sponsoredHoleNumber}`,
                 operation: 'write', 
                 requestResourceData: {
-                    booking: { ...formData, sponsoredHoleNumber },
-                    holeUpdate: { status: 'pending', bookingId: newBookingRef.id }
+                    booking: { ...formData, sponsoredHoleNumber, bookingId: newBookingRef.id },
+                    holeUpdate: { status: 'pending', bookingId: newBooking_id }
                 }
             } satisfies SecurityRuleContext);
             errorEmitter.emit('permission-error', permissionError);
@@ -65,7 +67,6 @@ export async function submitBooking(values: BookingFormValues) {
             throw serverError; 
         });
 
-        console.log("Booking submitted with ID: ", newBookingRef.id, formData);
         return { 
             success: true, 
             message: "Booking submitted successfully! Your hole selection is pending confirmation." 
@@ -85,7 +86,6 @@ export async function submitBooking(values: BookingFormValues) {
         throw serverError;
       });
 
-      console.log("Booking submitted with ID: ", docRef.id, formData);
       return { 
         success: true, 
         message: "Booking submitted successfully! We will be in touch shortly." 

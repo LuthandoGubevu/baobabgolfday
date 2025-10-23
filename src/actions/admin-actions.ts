@@ -24,6 +24,8 @@ export async function deleteSubmission(submissionId: string) {
 
     const submissionRef = doc(db, "bookings", submissionId);
     
+    // We wrap the logic but don't expect a user-facing message, 
+    // as the error emitter will handle dev feedback.
     try {
         const submissionDoc = await getDoc(submissionRef);
 
@@ -37,7 +39,7 @@ export async function deleteSubmission(submissionId: string) {
         if (sponsoredHoleNumber) {
             const holeRef = doc(db, "holes", sponsoredHoleNumber.toString());
             
-            runTransaction(db, async (transaction) => {
+            await runTransaction(db, async (transaction) => {
                 const holeDoc = await transaction.get(holeRef);
                 
                 if (holeDoc.exists() && holeDoc.data().bookingId === submissionId) {
@@ -57,26 +59,28 @@ export async function deleteSubmission(submissionId: string) {
                     operation: 'delete',
                 } satisfies SecurityRuleContext);
                 errorEmitter.emit('permission-error', permissionError);
-                console.error("Transaction failed, permission error emitted.", permissionError);
+                throw serverError; // Re-throw to be caught by outer try-catch
             });
 
         } else {
             // No sponsored hole, just delete the submission document.
-            deleteDoc(submissionRef).catch(async (serverError) => {
+            await deleteDoc(submissionRef).catch(async (serverError) => {
                 const permissionError = new FirestorePermissionError({
                     path: submissionRef.path,
                     operation: 'delete',
                 } satisfies SecurityRuleContext);
                 errorEmitter.emit('permission-error', permissionError);
-                console.error("Delete failed, permission error emitted.", permissionError);
+                throw serverError; // Re-throw to be caught by outer try-catch
             });
         }
         
         revalidatePath("/admin/submissions");
-        return { success: true, message: "Submission deletion initiated." };
+        return { success: true, message: "Submission deleted successfully." };
 
     } catch (error: any) {
+        // The error is now caught here after being emitted, preventing app crash
+        // but still providing dev feedback via the emitter.
         console.error("Error processing submission deletion:", error);
-        return { success: false, message: "Failed to process submission deletion. Please try again." };
+        return { success: false, message: "Failed to delete submission due to a permissions error. Check the console for details." };
     }
 }
