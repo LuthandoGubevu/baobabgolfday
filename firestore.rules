@@ -1,38 +1,55 @@
+
 rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
     
-    // Helper function to check for admin privileges
+    // Helper function to check for admin privileges based on email.
     function isAdmin() {
-      return request.auth.token.email in ["roslyn@baobabbrands.com", "royden@baobabbrands.com", "ross@baobabbrands.com"];
+      return request.auth != null && request.auth.token.email in ["roslyn@baobabbrands.com", "royden@baobabbrands.com", "ross@baobabbrands.com"];
     }
 
-    // Bookings collection: Allow anyone to create, but only admins to read/update/delete.
+    // Bookings collection rules
     match /bookings/{bookingId} {
+      // Admins can read, update, or delete any booking.
       allow read, update, delete: if isAdmin();
-      allow create: if request.auth != null; // Allow any authenticated user to create
+      
+      // Anyone can create a booking. This is a public-facing form.
+      allow create: if true;
+
+      // Admins can list all bookings
+      allow list: if isAdmin();
     }
 
-    // Holes collection: Allow anyone to read, but only admins or a specific transaction to write.
+    // Holes collection rules
     match /holes/{holeId} {
+      // Anyone can read the status of the holes to see what's available.
       allow read: if true;
-      // Allow admins to update directly
-      allow update: if isAdmin();
-      // Allow a user to update a hole if they are creating a new booking in a transaction
-      allow write: if request.auth != null && getAfter(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId)).data.email == request.auth.token.email;
+      
+      // Admins can write to any hole document directly (e.g., to manually block one).
+      // Additionally, a non-admin can update a hole document ONLY IF:
+      // 1. They are only changing the 'status' to 'pending' and updating booking-related fields.
+      // 2. This update is part of a transaction where they are also creating a new booking document.
+      allow write: if isAdmin() || 
+                      (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'bookingId', 'companyName', 'contactName', 'email']) &&
+                       request.resource.data.status == 'pending' &&
+                       getAfter(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId)).data.sponsoredHoleNumber == holeId);
     }
-    
-    // Messages collection: Allow anyone to create, but only admins to manage.
+
+    // Messages collection rules
     match /messages/{messageId} {
-      allow read, update, delete: if isAdmin();
-      allow create: if true; // Anyone can send a message
+      // Admins can read and delete messages.
+      allow read, delete: if isAdmin();
+      // Anyone can create a message through the contact form.
+      allow create: if true;
     }
-    
-    // Reminders collection: Allow anyone to create, but only admins to manage.
+
+    // Reminders collection rules
     match /reminders/{reminderId} {
-      allow read, update, delete: if isAdmin();
-      allow create: if true; // Anyone can sign up for a reminder
+       // Admins can read and delete reminders.
+      allow read, delete: if isAdmin();
+       // Anyone can create a reminder.
+      allow create: if true;
     }
   }
 }
