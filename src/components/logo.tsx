@@ -10,7 +10,7 @@ export function Logo() {
         width={112} 
         height={30} 
         priority
-        style={{ height: 'auto' }}
+        style={{ width: 'auto', height: 'auto' }}
       />
     </Link>
   );

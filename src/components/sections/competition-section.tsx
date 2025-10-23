@@ -13,6 +13,7 @@ export function CompetitionSection() {
             src="/golfer.png"
             alt="A golfer celebrating a successful shot after winning the hole-in-one competition"
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             data-ai-hint="golfer celebrating"
             className="transform hover:scale-105 transition-transform duration-300 object-cover"
           />

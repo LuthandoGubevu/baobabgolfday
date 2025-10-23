@@ -23,6 +23,7 @@ export function AboutSection() {
             src="/Prize.png"
             alt="Prize giving at the Add Hope golf day"
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             data-ai-hint="charity event prize"
             className="transform hover:scale-105 transition-transform duration-300 object-cover"
           />

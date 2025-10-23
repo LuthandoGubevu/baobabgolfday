@@ -22,6 +22,7 @@ export function HeroSection() {
           quality={80}
           className="opacity-50 object-cover"
           data-ai-hint="golf course hero"
+          sizes="100vw"
           priority // Keep priority as it's LCP
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background"></div>
@@ -43,6 +44,7 @@ export function HeroSection() {
                     src="/Golf Day Logo - Masizakhe (White).png"
                     alt="Masizakhe Logo"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-contain"
                 />
             </div>
@@ -51,6 +53,7 @@ export function HeroSection() {
                     src="/Golf Day Logo - Green Sleeves (White).png"
                     alt="Green Sleeves Logo"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-contain"
                 />
             </div>
@@ -59,6 +62,7 @@ export function HeroSection() {
                     src="/Golf Day Logo - Car City (White) 1.png"
                     alt="Car City Logo"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-contain"
                 />
             </div>
@@ -67,6 +71,7 @@ export function HeroSection() {
                     src="/Golf Day Logo - Olivewood (White).png"
                     alt="Olivewood Logo"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-contain"
                 />
             </div>
@@ -75,6 +80,7 @@ export function HeroSection() {
                     src="/daily-logo.png"
                     alt="Daily Dispatch Logo"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-contain"
                 />
             </div>
