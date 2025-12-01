@@ -32,7 +32,7 @@ export function HeroSection() {
           KFC Add Hope Annual Golf Day 2025
         </h1>
         <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground">
-          Join us for a day of golf and giving. All proceeds go to Greensleeves and Masizakhe Children’s Home.
+          Join us for a day of golf and giving. Net proceeds go to Greensleeves and Masizakhe Children’s Home.
         </p>
 
         {/* Sponsor Logos */}
