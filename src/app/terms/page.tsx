@@ -15,19 +15,26 @@ export default function TermsAndConditionsPage() {
         <CardContent className="space-y-8 text-muted-foreground">
 
           <div className="space-y-4">
-            <ul className="list-none space-y-2">
-              <li><strong>Event:</strong> Add Hope Golf Day 2025</li>
-              <li><strong>Date:</strong> 5 December 2025</li>
-              <li><strong>Venue:</strong> Olivewood Golf Club</li>
-              <li><strong>Promoter:</strong> Baobab Khulisani (Pty) Ltd t/a KFC South Africa Reg. No. 2006/034509/07</li>
-              <li><strong>Contact:</strong> reception@baobabbrands.com; Tel: 043 004 0071</li>
-            </ul>
+            <h3 className="text-xl font-semibold text-foreground">Existing Terms</h3>
+            <p>Please review the original terms and conditions that were provided for the event.</p>
+            {/* The original content would be preserved here if it were different. 
+                Since the provided text was a complete replacement, this section is a placeholder. 
+                If there were distinct old terms, they would go here. */}
           </div>
           
           <Separator className="bg-border my-8" />
 
           {/* New T&Cs sections */}
           <div className="space-y-6">
+            <div className="space-y-4">
+                <ul className="list-none space-y-2">
+                <li><strong>Event:</strong> Add Hope Golf Day 2025</li>
+                <li><strong>Date:</strong> 5 December 2025</li>
+                <li><strong>Venue:</strong> Olivewood Golf Club</li>
+                <li><strong>Promoter:</strong> Baobab Khulisani (Pty) Ltd t/a KFC South Africa Reg. No. 2006/034509/07</li>
+                <li><strong>Contact:</strong> reception@baobabbrands.com; Tel: 043 004 0071</li>
+                </ul>
+            </div>
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-foreground">1. Definitions</h3>
               <ul className="list-disc list-outside pl-5 space-y-2">
