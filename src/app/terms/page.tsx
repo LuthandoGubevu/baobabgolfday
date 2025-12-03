@@ -9,23 +9,98 @@ export default function TermsAndConditionsPage() {
       <Card className="max-w-4xl mx-auto bg-card shadow-xl">
         <CardHeader>
           <CardTitle className="text-2xl md:text-3xl font-headline text-primary">
-            Add Hope Golf Day – Terms &amp; Conditions (South Africa)
+            Terms and Conditions
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-8 text-muted-foreground">
 
           <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-foreground">Existing Terms</h3>
-            <p>Please review the original terms and conditions that were provided for the event.</p>
-            {/* The original content would be preserved here if it were different. 
-                Since the provided text was a complete replacement, this section is a placeholder. 
-                If there were distinct old terms, they would go here. */}
+            <h2 className="text-xl font-bold text-foreground">Add Hope Golf Day 2025 Hole-In-One “Win a Car” Competition</h2>
+            <p>The Promoter is Baobab Khulisani (Pty) Ltd (&quot;The Promoter&quot;), trading as KFC.</p>
+            <p>The competition is open to all South African citizens, permanent or temporary residents above the age of 18 who are in possession of a valid identity document, passport, or legal permit. Excluded from participation are:</p>
+            <ul className="list-disc list-outside pl-5 space-y-2">
+                <li>Directors, members, partners, employees, agents, or consultants of the Promoter or its marketing service providers.</li>
+                <li>Individuals who directly or indirectly control or are controlled by the Promoter.</li>
+                <li>Spouses, life partners, business partners, immediate family members, or anyone residing at the same address as such persons.</li>
+                <li>Anyone who has won a competition organized, promoted, or conducted by the Promoter within the preceding 183 days.</li>
+            </ul>
+            <p>This competition (the “Event”) takes place on the 5 December 2025 at Olivewood Golf Club. The Prize for achieving a Hole-in-One on the designated hole during the Event is a car. The make, model, and year of the car will be revealed at the Event and is valued at approximately R300 000 (three hundred thousand rand). Please note that the actual colour and vehicle rims may differ from those shown in promotional and advertising material. Car City EL will coordinate the Prize registration and provide the winner with details regarding the handover process. However, the winner shall be solely responsible for collecting the Prize. The Promoter will not be liable for any costs, delays, or issues arising from the winner’s failure to collect the Prize. The winner will be required to sign an indemnity form in addition to the Terms, during the handover and delivery process.</p>
+            <p>The Prize does not include servicing and maintenance plans for the vehicle, fuel, insurance or additions to the Prize after it is awarded.</p>
+            <p>Once the Prize is delivered and registered in the winner’s name, the winner takes full responsibility for the Prize, which includes the Prize’s insurance.</p>
+            <p>In addition, should the Prize be achieved, a total amount of R100 000 (one hundred thousand rand) will be donated by the Promoter to the Event’s nominated beneficiaries - Greensleaves and Masizakhe Children&apos;s Home - in recognition of the achievement. The winner of the Prize will have no claim to the allocated donation.</p>
+            <p>To enter: Only amateur players officially registered to participate in the Add Hope Golf day 2025 shall be eligible to enter the Event. No Professional Players included. The Prize shall apply exclusively to Hole 17 on the Olivewood Golf Club golf course. The shot must be made from the official tee markers set for the day. First attempt only. Mulligan’s or second attempts do not qualify. To remove all doubt, the ball must be holed in one stroke from the tee. Only one round of golf per player permitted, played in accordance with the compliance with the Rules of Golf. The winner will be announced at the Events Prizegiving ceremony, subject to verification that all competition terms and conditions have been met.</p>
+            <p>There will only be one winner, determined by the first Hole-In-One shot on the day of the Event. The Prize is subject to insurance approval, competition terms and conditions and verification by the event organizers.</p>
+            <p>The Prize is not exchangeable for cash and is not transferable. The winner must claim their Prize within 30 days of the Event in South Africa by presenting a valid identity document, driver’s licence, passport, or permit and signing a receipt. Failure to claim the Prize or provide the necessary documentation will result in disqualification.</p>
+            <p>All risks associated with the Prize pass to the winner upon notification of winning. The winner is responsible for insuring the Prize against risks, including third-party liabilities. Neither the Promoter nor associated parties are liable for costs or issues arising from the absence of such insurance.</p>
+            <p>The Promoter reserves the right to terminate the competition immediately and without notice for reasons beyond its control. In such an event, participants agree to waive any claims and acknowledge they will have no recourse against the Promoter or its affiliates.</p>
+            <p>All guarantees for tangible Prizes are carried by the manufacturer or supplier. The Promoter provides no warranties, explicit or implied, regarding the Prizes.</p>
+            <p>Participation in the competition constitutes acceptance of the rules, and entrants agree to abide by them.</p>
+            <p>The judges’ decision is final, and no correspondence will be entered into, except as provided by the relevant legislation.</p>
+            <p>By entering this competition, participants consent to the collection, processing, and storage of their personal information by the Promoter for purposes related to this competition, in accordance with the Protection of Personal Information Act, 4 of 2013 (“POPIA”). Participants have the right to request access to, correction, or deletion of their personal information by contacting POPIcompliance@kfcbaobab.com. The Promoter will retain personal information only as long as necessary for the fulfilment of these purposes and compliance with applicable laws and will implement reasonable security measures to protect such information. Personal information will not be shared with third parties without the participant’s consent, except as required by law. Any images of the winner used for marketing purposes will require written permission.</p>
+            <p>Entrants indemnify the Promoter and its affiliates against claims, damages, or losses resulting from participation in the competition, except in cases of gross negligence by the Promoter.</p>
+            <p>The Promoter assumes no responsibility for errors, technical malfunctions, or interruptions affecting participation or entries. Participants agree to release the Promoter from liability for any issues arising from such occurrences.</p>
           </div>
-          
-          <Separator className="bg-border my-8" />
 
+          <Separator className="bg-border my-8" />
+          
+          <div className="space-y-4">
+            <h2 className="text-xl font-bold text-foreground">Sponsorship/Advertising Terms and Conditions</h2>
+            <p>The Promoter is Baobab Khulisani (Pty) Ltd (“The Promoter”) trading as KFC.</p>
+            <p>The Promoter is hosting an Add Hope Golf Day 2025 (the “Event”) on the 5 December 2025 at Olivewood Golf Club (the “Facility”). The Promoter will be donating all net proceeds from the Event to Greensleaves and Masizakhe Children&apos;s Home. Should circumstances require a change in the nominated beneficiary, the Promoter will notify the Sponsor in writing and ensure the new beneficiary aligns with the original charitable intent.</p>
+            <p>The &quot;Sponsor&quot; refers to any individual, who participates, through financial contribution, provision of goods or services, or any other form of sponsorship as outlined in the Sponsorship Package and Booking Form.</p>
+            <p>The Sponsor agrees to (i) obey all rules, laws, by-laws, ordinances and regulations governing use of the facility at which the Event is to be held, (ii) abide by the rules and regulations of the local authority or any other government or regulatory body having authority to regulate the facility and the Event; (iii) obey all laws, including those pertaining to health and safety, consumer protection and protection of visitors and fellow attendees to the Event; and (iv) obey laws and regulations as set out in the Consumer Protection Act and Advertising Regulators Board.</p>
+            <p>The Sponsor agrees to occupy the exhibit space during the Event hours and to advertise only the products and services related to their company or associated companies. Should circumstances require a change in the allocated exhibit space the Promoter will notify the Sponsor in advance as far as possible.</p>
+            <p>The Sponsor is responsible for setting up and removing of any advertising material, banners etc immediately after the Event. The Promoter will not be responsible for any loss or damage caused by the Sponsor’s failure to remove the advertising material timeously or travel disruptions.</p>
+            <p>The Sponsor is responsible for arranging their own accommodation and transport costs.</p>
+            <p>The Sponsor shall pay the Promoter the price in accordance with the Sponsorship Package selected on the Booking Form.</p>
+            <p>The invoice will be generated upon receipt of an authorized Booking form.</p>
+            <p>Any additional charges incurred at the Event, which are not covered by the package, shall be borne by the Sponsor.</p>
+            <p>Payment must be received within 7 days from date of invoice and not later than 72 hours before the Event.</p>
+            <p>Should payment not be received as per clause 11, then the Sponsor will be denied exhibit rights to the Event and any privileges associated with the Event revoked.</p>
+            <p>The Promoter reserves the right, in its sole and unfettered discretion to:</p>
+            <ul className="list-disc list-outside pl-5 space-y-2">
+                <li>determine the eligibility of sponsors and sponsorships for the Event;</li>
+                <li>reject or prohibit sponsors or advertising material which the Promoter considers objectionable, inappropriate, disruptive or offensive to the Promoter, other sponsors or the Event attendees;</li>
+                <li>change or modify the layout of the Event and/or relocate Sponsors;</li>
+                <li>cancel, in whole or in part, the Event due to a Force Majeure such as natural disasters, strikes, pandemics, or governmental restrictions; or</li>
+                <li>change the date, location and duration of the Event; without any liability whatsoever to the Sponsor.</li>
+            </ul>
+            <p>In respect of the points above, the Promoter will endeavour to develop an event of the same or similar value that is suitable to both parties to replace the cancelled event.</p>
+            <p>If it transpires that the Event cannot be rescheduled and it is impossible to hold the Event, due to a Force Majeure event or otherwise, the Sponsor will receive 100% refund of any monies paid to the Promoter for this Event, less any reasonable costs already incurred by the Promoter prior to the cancellation notice. The Promoter will use its best endeavours to refund any amounts due to the Sponsor within twenty (20) working days following notification of the cancellation.</p>
+            <p>Each Party shall retain ownership of its respective intellectual property, including but not limited to trademarks, logos, slogans, copyrighted materials, and proprietary content. Nothing in this Agreement shall be construed as a transfer of ownership of intellectual property rights from one Party to the other.</p>
+            <p>The Sponsor hereby grants the Promoter a non-exclusive, royalty-free licence to use the Sponsor’s name, logo, trademarks, and other branding materials for the purposes of promoting the Event, acknowledging sponsorship, and fulfilling the Promoter’s obligations under this Agreement. This licence shall be limited to the duration of the Agreement and the scope of the Event.</p>
+            <p>The Sponsor acknowledges and agrees that the Promoter may capture photographs, video recordings, and other media during the Event, which may include images, branding, or testimonials of the Sponsor and its representatives. The Sponsor grants the Promoter the right to use, reproduce, and publish such media for the purposes of promoting future events, marketing, and related communications, in any format or medium, without further compensation or approval. The Promoter will use reasonable efforts to ensure that any use of such media is dignified and appropriate. If the Sponsor wishes to withhold consent for specific uses, such request must be made in writing prior to the Event.</p>
+            <p>Neither Party shall use the other Party’s intellectual property in a manner that may damage its reputation, misrepresent the relationship between the Parties, or imply endorsement beyond the scope of this Agreement. Any use beyond the agreed scope shall require prior written consent.</p>
+            <p>Each Party warrants that it has the legal right to use and grant rights to any intellectual property it provides under this Agreement and that such use will not infringe the rights of any third party. Each Party agrees to indemnify and hold the other harmless against any claims arising from unauthorised use of third-party intellectual property.</p>
+            <p>Upon termination or expiry of this Agreement, each Party shall immediately cease using the other Party’s intellectual property and shall remove all references from promotional materials, websites, and other media, unless otherwise agreed in writing.</p>
+            <p>The Sponsor agrees to indemnify and hold harmless the Promoter, other Event sponsors and the facility and their respective officers, agents, insurers and employees, against all claims, damages, costs and charges of every kind resulting from their sponsorship or its occupancy of exhibit space, for personal injuries, death, property damages or any other damage sustained by the Sponsor.</p>
+            <p>The Promoter accepts no responsibility for any loss or damage to property, personal injuries or death to any of the Sponsor’s employees, staff or agents that occurs during or in preparation for the Event unless such harm is occasioned by the gross negligence of the Promoter.</p>
+            <p>The Sponsor is responsible to arrange suitable insurance with a reputable insurance provider with regard to an exhibit, personnel, display and materials from any damage or loss through theft, fire, accident or other cause and accepts all risks associated with the use of its exhibit space.</p>
+            <p>Nothing in the clauses above shall be interpreted to exclude liability for gross negligence or wilful misconduct, in accordance with the Consumer Protection Act.</p>
+            <p>By participating as a Sponsor of the Event, Sponsors consent to the collection, processing, and storage of their personal information by the Promoter for purposes related to this competition, in accordance with the Protection of Personal Information Act, 4 of 2013 (“POPIA”). Sponsors have the right to request access to, correction, or deletion of their personal information by contacting POPIcompliance@kfcbaobab.com. The Promoter will retain personal information only as long as necessary for the fulfilment of these purposes and compliance with applicable laws and will implement reasonable security measures to protect such information. Personal information will not be shared with third parties without the Sponsor’s consent, except as required by law.</p>
+            <p>If the Sponsor wishes to cancel its participation in the Event, written notice must be provided to the Promoter no less than seven (7) full working days prior to the scheduled date of the Event. Cancellations received after this period will result in the Sponsor being liable for the full sponsorship fee, and no refund shall be issued.</p>
+            <p>Should the Sponsor fail to attend or participate in the Event without prior written cancellation in accordance with the clause above, the Sponsor shall remain liable for the full sponsorship fee, and no refund shall be issued.</p>
+            <p>Either Party may terminate this Agreement with immediate effect by giving written notice to the other Party if the other Party commits a material breach of any term of this Agreement and fails to remedy such breach within seven (7) days of receiving written notice requiring it to do so.</p>
+            <p>Upon termination of this Agreement for any reason:</p>
+            <ul className="list-disc list-outside pl-5 space-y-2">
+                <li>All outstanding fees due to the Promoter shall become immediately payable.</li>
+                <li>The Sponsor shall cease all use of the Promoter’s intellectual property and branding.</li>
+                <li>Each Party shall return or destroy any confidential information belonging to the other Party, unless retention is required by law.</li>
+            </ul>
+            <p>The Promoter makes no representations or gives any warranties as to the success of the Event, attendance or numbers.</p>
+            <p>Neither Party may assign, transfer or otherwise deal their rights interest and obligations hereunder without the written consent of the other.</p>
+            <p>The Parties shall first attempt to resolve any dispute, controversy, or claim arising out of or relating to this Agreement amicably through good faith negotiations. Either Party may initiate such discussions by providing written notice to the other Party outlining the nature of the dispute.</p>
+            <p>If the dispute cannot be resolved within ten (10) working days of the initial notice, the Parties agree to submit the matter to mediation, to be conducted by an independent and accredited mediator appointed by mutual agreement. The mediation shall take place in East London, South Africa, unless otherwise agreed, and the costs shall be shared equally between the Parties.</p>
+            <p>Should mediation fail to resolve the dispute, the matter shall be referred to arbitration in accordance with the rules of the Arbitration Foundation of Southern Africa (AFSA). The arbitration shall be conducted in English, in East London, South Africa, and the decision of the arbitrator shall be final and binding on both Parties.</p>
+            <p>Nothing in the clause above shall prevent either Party from seeking urgent interim relief from a court of competent jurisdiction, including the High Court of South Africa, where such relief is necessary to prevent irreparable harm.</p>
+            <p>This Agreement shall be governed by and construed in accordance with the laws of the Republic of South Africa. Subject to the provisions of this clause, the Parties consent to the jurisdiction of the courts of South Africa for the enforcement of any arbitral award or interim relief.</p>
+          </div>
+
+          <Separator className="bg-border my-8" />
+          
           {/* New T&Cs sections */}
           <div className="space-y-6">
+            <h2 className="text-xl font-bold text-foreground">Add Hope Golf Day – Terms &amp; Conditions (South Africa)</h2>
             <div className="space-y-4">
                 <ul className="list-none space-y-2">
                 <li><strong>Event:</strong> Add Hope Golf Day 2025</li>
@@ -36,7 +111,7 @@ export default function TermsAndConditionsPage() {
                 </ul>
             </div>
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">1. Definitions</h3>
+              <h3 className="text-lg font-semibold text-foreground">1. Definitions</h3>
               <ul className="list-disc list-outside pl-5 space-y-2">
                 <li>“Event” means the golf day and all associated activities (e.g., registration, prize-giving, auction).</li>
                 <li>“Participant” includes players, team captains, caddies, volunteers, and guests.</li>
@@ -47,7 +122,7 @@ export default function TermsAndConditionsPage() {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">2. Eligibility &amp; Registration</h3>
+              <h3 className="text-lg font-semibold text-foreground">2. Eligibility &amp; Registration</h3>
               <ul className="list-disc list-outside pl-5 space-y-2">
                 <li>Participation is open to persons aged 18+ unless otherwise stated.</li>
                 <li>Only amateur players allowed.</li>
@@ -57,7 +132,7 @@ export default function TermsAndConditionsPage() {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">3. Rules of Play</h3>
+              <h3 className="text-lg font-semibold text-foreground">3. Rules of Play</h3>
               <ul className="list-disc list-outside pl-5 space-y-2">
                 <li>The Event is played under the Rules of Golf (R&amp;A), GolfRSA Handicapping, and Club Local Rules.</li>
                 <li>Format: Fourball Alliance, Scramble Drive, minimum 4 (four) drives, 2 (two) to count.</li>
@@ -67,7 +142,7 @@ export default function TermsAndConditionsPage() {
             </div>
             
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">4. Fees, Payment &amp; Invoices</h3>
+              <h3 className="text-lg font-semibold text-foreground">4. Fees, Payment &amp; Invoices</h3>
               <ul className="list-disc list-outside pl-5 space-y-2">
                 <li>Fees: R3 500 (incl. VAT) per 4-ball</li>
                 <li>Fees: R1 500 (incl. VAT) Hole sponsor – catered (drinks and food on hole)</li>
@@ -80,7 +155,7 @@ export default function TermsAndConditionsPage() {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">5. Cancellations, Substitutions &amp; Refunds</h3>
+              <h3 className="text-lg font-semibold text-foreground">5. Cancellations, Substitutions &amp; Refunds</h3>
               <ul className="list-disc list-outside pl-5 space-y-2">
                 <li>Participant cancellations: 100% refund less administration fee, where applicable.</li>
                 <li>Substitutions are permitted. Notification to be sent to the Promoter 48 hours before the Event with written notice.</li>
@@ -91,7 +166,7 @@ export default function TermsAndConditionsPage() {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">6. Safety, Health &amp; Conduct</h3>
+              <h3 className="text-lg font-semibold text-foreground">6. Safety, Health &amp; Conduct</h3>
               <ul className="list-disc list-outside pl-5 space-y-2">
                 <li>Participants must comply with Occupational Health and Safety Act requirements, Club safety rules, and instructions from officials.</li>
                 <li>The Promoter may remove any person for intoxication, disorderly conduct, dangerous behaviour, or breach of rules—no refund in such cases.</li>
@@ -100,7 +175,7 @@ export default function TermsAndConditionsPage() {
             </div>
             
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">7. Equipment, Carts &amp; Course Access</h3>
+              <h3 className="text-lg font-semibold text-foreground">7. Equipment, Carts &amp; Course Access</h3>
               <ul className="list-disc list-outside pl-5 space-y-2">
                 <li>Carts: 2 (two) carts per 4-ball will be provided and are used at participants own risk.</li>
                 <li>Participants are responsible for their own equipment and personal belongings. The Promoter and Club are not liable for loss, theft, or damage except where caused by gross negligence or wilful misconduct.</li>
@@ -108,7 +183,7 @@ export default function TermsAndConditionsPage() {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">8. Prizes &amp; Competitions</h3>
+              <h3 className="text-lg font-semibold text-foreground">8. Prizes &amp; Competitions</h3>
               <ul className="list-disc list-outside pl-5 space-y-2">
                 <li>Eligibility: Only registered players who complete the minimum required holes in accordance with the format are eligible.</li>
                 <li>Tie-breaking: calculation to be performed using Club rules. This decision is final.</li>
@@ -119,7 +194,7 @@ export default function TermsAndConditionsPage() {
             </div>
             
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">9. Sponsorships &amp; Branding</h3>
+              <h3 className="text-lg font-semibold text-foreground">9. Sponsorships &amp; Branding</h3>
               <ul className="list-disc list-outside pl-5 space-y-2">
                 <li>Sponsorship packages: refer to the Sponsorship/Advertising Terms and Conditions on the Events microsite.</li>
                 <li>Sponsors must comply with advertising standards, Club rules, and safety requirements.</li>
@@ -129,13 +204,13 @@ export default function TermsAndConditionsPage() {
             </div>
             
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">10. Photography, Media &amp; Privacy (POPIA)</h3>
+              <h3 className="text-lg font-semibold text-foreground">10. Photography, Media &amp; Privacy (POPIA)</h3>
               <p>By participating in this Event, participants consent to the collection, processing, and storage of their personal information by the Promoter for purposes related to this Event i.e. Event reporting, marketing and social media, in accordance with the Protection of Personal Information Act, 4 of 2013 (“POPIA”). Participants have the right to request access to, correction, or deletion of their personal information by contacting POPIcompliance@kfcbaobab.com. The Promoter will retain personal information only as long as necessary for the fulfilment of these purposes and compliance with applicable laws and will implement reasonable security measures to protect such information. Personal information will not be shared with third parties without the participant’s consent, except as required by law.</p>
               <p>If you do not wish to be photographed, please inform registration staff; reasonable steps will be taken to accommodate.</p>
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-foreground">11. Liability, Indemnity &amp; Insurance</h3>
+              <h3 className="text-lg font-semibold text-foreground">11. Liability, Indemnity &amp; Insurance</h3>
               <ul className="list-disc list-outside pl-5 space-y-2">
                 <li>Golf involves inherent risks (e.g., stray balls, weather, course conditions). Participants attend and play at their own risk.</li>
                 <li>To the maximum extent permitted by South African law, the Promoter, Club, and their staff are not liable for injury, loss, or damage arising from participation, except where caused by gross negligence or wilful misconduct.</li>
@@ -146,7 +221,7 @@ export default function TermsAndConditionsPage() {
             </div>
 
             <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">12. Compliance &amp; Illegal Items</h3>
+                <h3 className="text-lg font-semibold text-foreground">12. Compliance &amp; Illegal Items</h3>
                 <ul className="list-disc list-outside pl-5 space-y-2">
                     <li>No weapons, drugs, or prohibited items.</li>
                     <li>Adherence to environmental and wildlife guidelines on the course.</li>
@@ -154,7 +229,7 @@ export default function TermsAndConditionsPage() {
             </div>
 
             <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">13. Weather Policy</h3>
+                <h3 className="text-lg font-semibold text-foreground">13. Weather Policy</h3>
                 <ul className="list-disc list-outside pl-5 space-y-2">
                     <li>Play suspensions (lightning, unsafe conditions) follow the Club’s lightning and safety protocols.</li>
                     <li>If play is interrupted, the Promoter may modify format (e.g., reduced holes) to determine results fairly.</li>
@@ -162,29 +237,29 @@ export default function TermsAndConditionsPage() {
             </div>
 
             <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">14. Communication</h3>
+                <h3 className="text-lg font-semibold text-foreground">14. Communication</h3>
                 <p>Official updates will be sent via email to the contact on file.</p>
             </div>
 
             <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">15. Dispute Resolution &amp; Governing Law</h3>
-                <ul className="list-disc list-outside pl-5 space-y-2">
-                    <li>The Parties shall first attempt to resolve any dispute, controversy, or claim arising out of or relating to these Terms and Conditions amicably through good faith negotiations. Either Party may initiate such discussions by providing written notice to the other Party outlining the nature of the dispute.</li>
-                    <li>If the dispute cannot be resolved within ten (10) working days of the initial notice, the Parties agree to submit the matter to mediation, to be conducted by an independent and accredited mediator appointed by mutual agreement. The mediation shall take place in East London, South Africa, unless otherwise agreed, and the costs shall be shared equally between the Parties.</li>
-                    <li>Should mediation fail to resolve the dispute, the matter shall be referred to arbitration in accordance with the rules of the Arbitration Foundation of Southern Africa (AFSA). The arbitration shall be conducted in English, in East London, South Africa, and the decision of the arbitrator shall be final and binding on both Parties.</li>
-                    <li>Nothing in this clause shall prevent either Party from seeking urgent interim relief from a court of competent jurisdiction, including the High Court of South Africa, where such relief is necessary to prevent irreparable harm.</li>
-                    <li>This Terms and Conditions shall be governed by and construed in accordance with the laws of the Republic of South Africa. Subject to the provisions of this clause, the Parties consent to the jurisdiction of the courts of South Africa for the enforcement of any arbitral award or interim relief.</li>
-                </ul>
+              <h3 className="text-lg font-semibold text-foreground">15. Dispute Resolution &amp; Governing Law</h3>
+              <ul className="list-disc list-outside pl-5 space-y-2">
+                <li>The Parties shall first attempt to resolve any dispute, controversy, or claim arising out of or relating to these Terms and Conditions amicably through good faith negotiations. Either Party may initiate such discussions by providing written notice to the other Party outlining the nature of the dispute.</li>
+                <li>If the dispute cannot be resolved within ten (10) working days of the initial notice, the Parties agree to submit the matter to mediation, to be conducted by an independent and accredited mediator appointed by mutual agreement. The mediation shall take place in East London, South Africa, unless otherwise agreed, and the costs shall be shared equally between the Parties.</li>
+                <li>Should mediation fail to resolve the dispute, the matter shall be referred to arbitration in accordance with the rules of the Arbitration Foundation of Southern Africa (AFSA). The arbitration shall be conducted in English, in East London, South Africa, and the decision of the arbitrator shall be final and binding on both Parties.</li>
+                <li>Nothing in this clause shall prevent either Party from seeking urgent interim relief from a court of competent jurisdiction, including the High Court of South Africa, where such relief is necessary to prevent irreparable harm.</li>
+                <li>This Terms and Conditions shall be governed by and construed in accordance with the laws of the Republic of South Africa. Subject to the provisions of this clause, the Parties consent to the jurisdiction of the courts of South Africa for the enforcement of any arbitral award or interim relief.</li>
+              </ul>
             </div>
 
             <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">16. Amendments</h3>
+                <h3 className="text-lg font-semibold text-foreground">16. Amendments</h3>
                 <p>The Promoter may update these terms with notice on the Event microsite or via email. Material changes will be highlighted.</p>
             </div>
 
             <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-foreground">17. Acceptance</h3>
-                <p>By registering, paying, or attending, Participants confirm they have read, understood, and accepted these Terms & Conditions.</p>
+                <h3 className="text-lg font-semibold text-foreground">17. Acceptance</h3>
+                <p>By registering, paying, or attending, Participants confirm they have read, understood, and accepted these Terms &amp; Conditions.</p>
             </div>
           </div>
         </CardContent>
