@@ -15,31 +15,155 @@ export default function TermsAndConditionsPage() {
         <CardContent className="space-y-8 text-muted-foreground">
 
           <div className="space-y-4">
-            <h2 className="text-xl font-bold text-foreground">Add Hope Golf Day 2025 Hole-In-One “Win a Car” Competition</h2>
-            <p>The Promoter is Baobab Khulisani (Pty) Ltd (&quot;The Promoter&quot;), trading as KFC.</p>
-            <p>The competition is open to all South African citizens, permanent or temporary residents above the age of 18 who are in possession of a valid identity document, passport, or legal permit. Excluded from participation are:</p>
-            <ul className="list-disc list-outside pl-5 space-y-2">
-                <li>Directors, members, partners, employees, agents, or consultants of the Promoter or its marketing service providers.</li>
-                <li>Individuals who directly or indirectly control or are controlled by the Promoter.</li>
-                <li>Spouses, life partners, business partners, immediate family members, or anyone residing at the same address as such persons.</li>
-                <li>Anyone who has won a competition organized, promoted, or conducted by the Promoter within the preceding 183 days.</li>
-            </ul>
-            <p>This competition (the “Event”) takes place on the 5 December 2025 at Olivewood Golf Club. The Prize for achieving a Hole-in-One on the designated hole during the Event is a car. The make, model, and year of the car will be revealed at the Event and is valued at approximately R300 000 (three hundred thousand rand). Please note that the actual colour and vehicle rims may differ from those shown in promotional and advertising material. Car City EL will coordinate the Prize registration and provide the winner with details regarding the handover process. However, the winner shall be solely responsible for collecting the Prize. The Promoter will not be liable for any costs, delays, or issues arising from the winner’s failure to collect the Prize. The winner will be required to sign an indemnity form in addition to the Terms, during the handover and delivery process.</p>
-            <p>The Prize does not include servicing and maintenance plans for the vehicle, fuel, insurance or additions to the Prize after it is awarded.</p>
-            <p>Once the Prize is delivered and registered in the winner’s name, the winner takes full responsibility for the Prize, which includes the Prize’s insurance.</p>
-            <p>In addition, should the Prize be achieved, a total amount of R100 000 (one hundred thousand rand) will be donated by the Promoter to the Event’s nominated beneficiaries - Greensleaves and Masizakhe Children&apos;s Home - in recognition of the achievement. The winner of the Prize will have no claim to the allocated donation.</p>
-            <p>To enter: Only amateur players officially registered to participate in the Add Hope Golf day 2025 shall be eligible to enter the Event. No Professional Players included. The Prize shall apply exclusively to Hole 17 on the Olivewood Golf Club golf course. The shot must be made from the official tee markers set for the day. First attempt only. Mulligan’s or second attempts do not qualify. To remove all doubt, the ball must be holed in one stroke from the tee. Only one round of golf per player permitted, played in accordance with the compliance with the Rules of Golf. The winner will be announced at the Events Prizegiving ceremony, subject to verification that all competition terms and conditions have been met.</p>
-            <p>There will only be one winner, determined by the first Hole-In-One shot on the day of the Event. The Prize is subject to insurance approval, competition terms and conditions and verification by the event organizers.</p>
-            <p>The Prize is not exchangeable for cash and is not transferable. The winner must claim their Prize within 30 days of the Event in South Africa by presenting a valid identity document, driver’s licence, passport, or permit and signing a receipt. Failure to claim the Prize or provide the necessary documentation will result in disqualification.</p>
-            <p>All risks associated with the Prize pass to the winner upon notification of winning. The winner is responsible for insuring the Prize against risks, including third-party liabilities. Neither the Promoter nor associated parties are liable for costs or issues arising from the absence of such insurance.</p>
-            <p>The Promoter reserves the right to terminate the competition immediately and without notice for reasons beyond its control. In such an event, participants agree to waive any claims and acknowledge they will have no recourse against the Promoter or its affiliates.</p>
-            <p>All guarantees for tangible Prizes are carried by the manufacturer or supplier. The Promoter provides no warranties, explicit or implied, regarding the Prizes.</p>
-            <p>Participation in the competition constitutes acceptance of the rules, and entrants agree to abide by them.</p>
-            <p>The judges’ decision is final, and no correspondence will be entered into, except as provided by the relevant legislation.</p>
-            <p>By entering this competition, participants consent to the collection, processing, and storage of their personal information by the Promoter for purposes related to this competition, in accordance with the Protection of Personal Information Act, 4 of 2013 (“POPIA”). Participants have the right to request access to, correction, or deletion of their personal information by contacting POPIcompliance@kfcbaobab.com. The Promoter will retain personal information only as long as necessary for the fulfilment of these purposes and compliance with applicable laws and will implement reasonable security measures to protect such information. Personal information will not be shared with third parties without the participant’s consent, except as required by law. Any images of the winner used for marketing purposes will require written permission.</p>
-            <p>Entrants indemnify the Promoter and its affiliates against claims, damages, or losses resulting from participation in the competition, except in cases of gross negligence by the Promoter.</p>
-            <p>The Promoter assumes no responsibility for errors, technical malfunctions, or interruptions affecting participation or entries. Participants agree to release the Promoter from liability for any issues arising from such occurrences.</p>
-          </div>
+  <h2 className="text-xl font-bold text-foreground">
+    Terms and Conditions: Add Hope Golf Day 2025 Hole-In-One “Win a Car” Competition
+  </h2>
+
+  <ol className="list-decimal list-outside pl-5 space-y-4">
+    <li>
+      The Promoter is Baobab Khulisani (Pty) Ltd ("The Promoter"), trading as KFC.
+    </li>
+
+    <li>
+      The competition is open to all South African citizens, permanent or temporary residents
+      above the age of 18 who are in possession of a valid identity document, passport, or legal
+      permit. Excluded from participation are:
+      <ul className="list-disc list-outside pl-5 space-y-2 mt-2">
+        <li>
+          Directors, members, partners, employees, agents, or consultants of the Promoter or its
+          marketing service providers.
+        </li>
+        <li>
+          Individuals who directly or indirectly control or are controlled by the Promoter.
+        </li>
+        <li>
+          Spouses, life partners, business partners, immediate family members, or anyone residing
+          at the same address as such persons.
+        </li>
+        <li>
+          Anyone who has won a competition organized, promoted, or conducted by the Promoter
+          within the preceding 183 days.
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      This competition (“Event”) takes place on 5 December 2025 at Olivewood Golf Club. The Prize
+      for achieving a Hole-in-One on the designated hole during the Event is a car. The make,
+      model, and year of the car will be revealed at the Event and is valued at approximately
+      R300 000 (three hundred thousand rand). Please note that the actual colour and vehicle rims
+      may differ from promotional material.
+      <br/><br/>
+      Car City EL will coordinate Prize registration and provide the winner with handover details.
+      However, the winner is solely responsible for collecting the Prize. The Promoter will not be
+      liable for costs, delays, or issues arising from failure to collect the Prize.
+      <br/><br/>
+      The winner will be required to sign an indemnity form in addition to these Terms during the
+      handover and delivery process.
+    </li>
+
+    <li>
+      The Prize does not include servicing and maintenance plans for the vehicle, fuel, insurance,
+      or additions to the Prize after it is awarded.
+    </li>
+
+    <li>
+      Once the Prize is delivered and registered in the winner’s name, the winner takes full
+      responsibility for the Prize, including insurance.
+    </li>
+
+    <li>
+      Should the Prize be achieved, a total amount of R100 000 (one hundred thousand rand) will
+      be donated by the Promoter to the Event’s nominated beneficiaries — Greensleaves and
+      Masizakhe Children's Home — in recognition of the achievement. The winner will have no
+      claim to the allocated donation.
+    </li>
+
+    <li>
+      To enter: Only amateur players officially registered to participate in the Add Hope Golf Day
+      2025 are eligible to enter the Event. No Professional Players may enter or win a prize.
+      <br/><br/>
+      The Prize applies exclusively to Hole 17 on the Olivewood Golf Club golf course. The shot
+      must be made from the official tee markers set for the day. First attempt only. Mulligans or
+      second attempts do not qualify.
+      <br/><br/>
+      The ball must be holed in one stroke from the tee. Only one round of golf per player is
+      permitted, in accordance with the Rules of Golf.
+      <br/><br/>
+      The winner will be announced at the Event’s Prizegiving ceremony, subject to verification of
+      all competition terms and conditions, and confirmation they are not registered with the PGA
+      (Professional Golfers Association).
+    </li>
+
+    <li>
+      There will only be one winner, determined by the first Hole-In-One shot on the day of the
+      Event. The Prize is subject to terms and conditions and verification by event organizers.
+    </li>
+
+    <li>
+      The Prize is not exchangeable for cash and is not transferable. The winner must claim their
+      Prize within 30 days of the Event in South Africa by presenting a valid identity document,
+      driver’s licence, passport, or permit and signing a receipt. Failure to claim the Prize or
+      provide required documentation will result in disqualification.
+    </li>
+
+    <li>
+      All risks associated with the Prize pass to the winner upon notification of winning. The
+      winner is responsible for insuring the Prize against risks, including third-party liabilities.
+      Neither the Promoter nor associated parties are liable for costs or issues arising from the
+      absence of such insurance.
+    </li>
+
+    <li>
+      The Promoter reserves the right to terminate the competition immediately and without notice
+      for reasons beyond its control. Participants agree to waive any claims and acknowledge they
+      will have no recourse against the Promoter or its affiliates.
+    </li>
+
+    <li>
+      All guarantees for tangible Prizes are carried by the manufacturer or supplier. The Promoter
+      provides no warranties, explicit or implied, regarding the Prizes.
+    </li>
+
+    <li>
+      Participation in the competition constitutes acceptance of the rules, and entrants agree to
+      abide by them.
+    </li>
+
+    <li>
+      The judges’ decision is final, and no correspondence will be entered into except as required
+      by legislation.
+    </li>
+
+    <li>
+      By entering this competition, participants consent to the collection, processing, and
+      storage of their personal information by the Promoter in accordance with the Protection of
+      Personal Information Act, 4 of 2013 (“POPIA”).
+      <br/><br/>
+      Participants may request access to, correction, or deletion of their personal information by
+      emailing <a href="mailto:POPIcompliance@kfcbaobab.com" className="text-blue-600 underline">
+        POPIcompliance@kfcbaobab.com
+      </a>.
+      <br/><br/>
+      Personal information will be retained only as long as necessary and will not be shared with
+      third parties without consent except as required by law. Any images of the winner used for
+      marketing will require written permission.
+    </li>
+
+    <li>
+      Entrants indemnify the Promoter and its affiliates against claims, damages, or losses
+      resulting from participation in the competition, except in cases of gross negligence by the
+      Promoter.
+    </li>
+
+    <li>
+      The Promoter assumes no responsibility for errors, technical malfunctions, or interruptions
+      affecting participation or entries. Participants agree to release the Promoter from liability
+      for any issues arising from such occurrences.
+    </li>
+  </ol>
+</div>
+
 
           <Separator className="bg-border my-8" />
           
