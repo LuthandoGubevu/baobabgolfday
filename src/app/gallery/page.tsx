@@ -2,19 +2,9 @@
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import { PackageOpen } from "lucide-react";
 
-const galleryImages = [
-  { src: "/image-1.jpg", alt: "Highlights from the 2025 KFC Add Hope Golf Day event.", dataAiHint: "golf event charity" },
-  { src: "/image-2.jpg", alt: "Participants enjoying the atmosphere at the golf day.", dataAiHint: "charity golf players" },
-  { src: "/image-3.jpg", alt: "Scenic view of the East London Golf Club during the event.", dataAiHint: "golf course landscape" },
-  { src: "/image-4.jpg", alt: "An action shot of a golfer during the tournament.", dataAiHint: "golf swing action" },
-  { src: "/image-5.jpg", alt: "Group photo of attendees and supporters at the charity golf day.", dataAiHint: "event attendees group" },
-  { src: "/image-6.jpg", alt: "Moments from the award ceremony or closing of the golf event.", dataAiHint: "charity event awards" },
-  { src: "/DSC_5180.jpg", alt: "A team of golfers at the event.", dataAiHint: "golf team photo" },
-  { src: "/DSC_51801.jpg", alt: "Golfers on the course.", dataAiHint: "golf course action" },
-  { src: "/DSC_51803.jpg", alt: "Smiling participants at the golf day.", dataAiHint: "happy golfers" },
-  { src: "/DSC_51804.jpg", alt: "Another view of the golf course during the event.", dataAiHint: "golf landscape" },
-];
+const galleryImages: { src: string, alt: string, dataAiHint: string }[] = [];
 
 export default function GalleryPage() {
   return (
@@ -27,25 +17,37 @@ export default function GalleryPage() {
           Highlights from past KFC Add Hope Golf Days. 2025 gallery coming soon!
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {galleryImages.map((image, index) => (
-          <Card key={image.src} className="overflow-hidden shadow-lg hover:shadow-primary/20 transition-shadow">
-            <CardContent className="p-0">
-              <div className="aspect-video relative">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="hover:scale-105 transition-transform duration-300 object-cover"
-                  data-ai-hint={image.dataAiHint}
-                  priority={index < 3} 
-                />
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      {galleryImages.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {galleryImages.map((image, index) => (
+            <Card key={image.src} className="overflow-hidden shadow-lg hover:shadow-primary/20 transition-shadow">
+              <CardContent className="p-0">
+                <div className="aspect-video relative">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="hover:scale-105 transition-transform duration-300 object-cover"
+                    data-ai-hint={image.dataAiHint}
+                    priority={index < 3} 
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <Card className="max-w-xl mx-auto bg-card shadow-lg">
+            <CardHeader className="items-center text-center">
+                <PackageOpen className="h-16 w-16 text-muted-foreground mb-4" />
+                <CardTitle className="text-2xl text-foreground">Gallery Coming Soon</CardTitle>
+                <CardDescription className="text-muted-foreground">
+                    Photos from the event will be uploaded here shortly. Check back soon!
+                </CardDescription>
+            </CardHeader>
+        </Card>
+      )}
     </SectionWrapper>
   );
 }
