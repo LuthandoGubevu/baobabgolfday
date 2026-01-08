@@ -8,16 +8,6 @@ export function HeroSection() {
 
   return (
     <SectionWrapper id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden !py-0 bg-black">
-      <video 
-        autoPlay 
-        loop 
-        muted 
-        playsInline
-        className="absolute z-0 w-auto min-w-full min-h-full max-w-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        src="/Comp Video.mp4"
-      >
-        Your browser does not support the video tag.
-      </video>
       <div className="absolute inset-0 bg-black/50 z-10" />
       <div className="relative z-20 text-center space-y-8 animate-in fade-in duration-1000 px-4">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tight text-white drop-shadow-md">
