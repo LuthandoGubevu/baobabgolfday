@@ -5,6 +5,7 @@ import { EventInfoSection } from '@/components/sections/event-info-section';
 import { CompetitionSection } from '@/components/sections/competition-section';
 import { BookingSection } from '@/components/sections/booking-section';
 import { Separator } from '@/components/ui/separator';
+import { DonationSection } from '@/components/sections/donation-section';
 
 export default function Home() {
   return (
@@ -17,7 +18,8 @@ export default function Home() {
       <Separator className="bg-secondary h-px md:h-0.5" />
       <CompetitionSection />
       <Separator className="bg-secondary h-px md:h-0.5" />
-      <BookingSection />
+      {/* <BookingSection /> */}
+      <DonationSection />
     </div>
   );
 }
