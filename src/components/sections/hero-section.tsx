@@ -14,12 +14,12 @@ export function HeroSection() {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover opacity-50"
+          className="w-full h-full object-cover opacity-70"
           src="/Complilation Video.mp4"
         >
           Your browser does not support the video tag.
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background"></div>
       </div>
       <div className="relative z-10 text-center space-y-8 animate-in fade-in duration-1000">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tight text-foreground">
