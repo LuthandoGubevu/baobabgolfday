@@ -14,18 +14,18 @@ export function HeroSection() {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover opacity-70"
+          className="w-full h-full object-cover"
           src="/Complilation Video.mp4"
         >
           Your browser does not support the video tag.
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background"></div>
+        <div className="absolute inset-0 bg-black/50"></div>
       </div>
       <div className="relative z-10 text-center space-y-8 animate-in fade-in duration-1000">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tight text-foreground">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tight text-white drop-shadow-md">
           Together, We Raised R150,000 for Children in Need
         </h1>
-        <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground">
+        <p className="max-w-3xl mx-auto text-lg md:text-xl text-slate-200 drop-shadow-md">
           Thank you for joining the KFC Add Hope Annual Golf Day. Because of your support, we raised over R150,000 for Greensleeves and Masizakhe Children’s Home — helping nourish more young lives.
         </p>
 
@@ -33,7 +33,7 @@ export function HeroSection() {
         <div className="pt-4">
           
           <div className="flex justify-center items-center gap-8 md:gap-12 flex-wrap">
-             <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
+             <div className="relative h-16 w-40 drop-shadow-lg" data-ai-hint="sponsor logo">
                 <Image
                     src="/Golf Day Logo - Masizakhe (White).png"
                     alt="Masizakhe Logo"
@@ -42,7 +42,7 @@ export function HeroSection() {
                     className="object-contain"
                 />
             </div>
-             <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
+             <div className="relative h-16 w-40 drop-shadow-lg" data-ai-hint="sponsor logo">
                 <Image
                     src="/Golf Day Logo - Green Sleeves (White).png"
                     alt="Green Sleeves Logo"
@@ -51,7 +51,7 @@ export function HeroSection() {
                     className="object-contain"
                 />
             </div>
-            <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
+            <div className="relative h-16 w-40 drop-shadow-lg" data-ai-hint="sponsor logo">
                 <Image
                     src="/Golf Day Logo - Car City (White) 1.png"
                     alt="Car City Logo"
@@ -60,7 +60,7 @@ export function HeroSection() {
                     className="object-contain"
                 />
             </div>
-             <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
+             <div className="relative h-16 w-40 drop-shadow-lg" data-ai-hint="sponsor logo">
                 <Image
                     src="/Golf Day Logo - Olivewood (White).png"
                     alt="Olivewood Logo"
@@ -69,7 +69,7 @@ export function HeroSection() {
                     className="object-contain"
                 />
             </div>
-             <div className="relative h-16 w-40" data-ai-hint="sponsor logo">
+             <div className="relative h-16 w-40 drop-shadow-lg" data-ai-hint="sponsor logo">
                 <Image
                     src="/daily-logo.png"
                     alt="Daily Dispatch Logo"
