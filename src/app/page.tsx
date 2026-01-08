@@ -1,8 +1,6 @@
 
 import { HeroSection } from '@/components/sections/hero-section';
 import { AboutSection } from '@/components/sections/about-section';
-import { CompetitionSection } from '@/components/sections/competition-section';
-import { BookingSection } from '@/components/sections/booking-section';
 import { Separator } from '@/components/ui/separator';
 import { DonationSection } from '@/components/sections/donation-section';
 
@@ -13,9 +11,6 @@ export default function Home() {
       <Separator className="bg-secondary h-px md:h-0.5" />
       <AboutSection />
       <Separator className="bg-secondary h-px md:h-0.5" />
-      <CompetitionSection />
-      <Separator className="bg-secondary h-px md:h-0.5" />
-      {/* <BookingSection /> */}
       <DonationSection />
     </div>
   );

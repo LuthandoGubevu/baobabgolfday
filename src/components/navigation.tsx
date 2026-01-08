@@ -16,9 +16,6 @@ import { useToast } from '@/hooks/use-toast'; // useToast imported
 const mainNavLinks = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About Add Hope' },
-  { href: '#event-info', label: 'Event Info' },
-  { href: '#competition', label: 'Competition' },
-  { href: '#booking', label: 'Bookings' },
 ];
 
 const supportingNavLinks = [
