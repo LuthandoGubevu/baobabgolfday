@@ -9,16 +9,16 @@ export function HeroSection() {
   return (
     <SectionWrapper id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden !py-0">
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/golf-hero.jpg"
-          alt="Golf event hero background"
-          fill
-          quality={80}
-          className="opacity-50 object-cover"
-          data-ai-hint="golf course hero"
-          sizes="100vw"
-          priority // Keep priority as it's LCP
-        />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-50"
+          src="/Complilation Video.mp4"
+        >
+          Your browser does not support the video tag.
+        </video>
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background"></div>
       </div>
       <div className="relative z-10 text-center space-y-8 animate-in fade-in duration-1000">
@@ -38,7 +38,7 @@ export function HeroSection() {
                     src="/Golf Day Logo - Masizakhe (White).png"
                     alt="Masizakhe Logo"
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-contain"
                 />
             </div>
@@ -47,7 +47,7 @@ export function HeroSection() {
                     src="/Golf Day Logo - Green Sleeves (White).png"
                     alt="Green Sleeves Logo"
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-contain"
                 />
             </div>
@@ -56,7 +56,7 @@ export function HeroSection() {
                     src="/Golf Day Logo - Car City (White) 1.png"
                     alt="Car City Logo"
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-contain"
                 />
             </div>
@@ -65,7 +65,7 @@ export function HeroSection() {
                     src="/Golf Day Logo - Olivewood (White).png"
                     alt="Olivewood Logo"
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-contain"
                 />
             </div>
@@ -74,7 +74,7 @@ export function HeroSection() {
                     src="/daily-logo.png"
                     alt="Daily Dispatch Logo"
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-contain"
                 />
             </div>
