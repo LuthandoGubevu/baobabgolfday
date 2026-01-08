@@ -10,7 +10,7 @@ export function DonationSection() {
           Don't Miss Out!
         </h2>
         <p className="mt-4 text-lg text-muted-foreground">
-          Registrations open soon. Leave your email below, and we'll send you a one-time reminder when it's time to book your spot.
+          Leave your email below, and we'll send you a one-time reminder when registrations open for the 2025 event.
         </p>
       </div>
 
