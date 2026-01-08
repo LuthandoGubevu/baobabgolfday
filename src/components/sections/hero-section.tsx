@@ -7,7 +7,7 @@ import Link from 'next/link';
 export function HeroSection() {
 
   return (
-    <SectionWrapper id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden !py-0 bg-black">
+    <SectionWrapper id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black py-16 md:py-24">
       <video
         autoPlay
         loop
