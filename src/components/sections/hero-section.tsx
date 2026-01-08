@@ -8,19 +8,7 @@ export function HeroSection() {
 
   return (
     <SectionWrapper id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden !py-0">
-      <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-          src="/Complilation Video.mp4"
-        >
-          Your browser does not support the video tag.
-        </video>
-        <div className="absolute inset-0 bg-black/50"></div>
-      </div>
+      <div className="absolute inset-0 z-0 bg-black"></div>
       <div className="relative z-10 text-center space-y-8 animate-in fade-in duration-1000">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tight text-white drop-shadow-md">
           Together, We Raised R150,000 for Children in Need
