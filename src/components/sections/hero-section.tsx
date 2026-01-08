@@ -13,7 +13,7 @@ export function HeroSection() {
         loop 
         muted 
         playsInline
-        className="absolute z-0 w-full h-full object-cover"
+        className="absolute z-0 w-auto min-w-full min-h-full max-w-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         src="/Comp Video.mp4"
       >
         Your browser does not support the video tag.
