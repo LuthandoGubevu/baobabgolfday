@@ -1,6 +1,6 @@
 
 import { SectionWrapper } from "@/components/section-wrapper";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import Image from "next/image";
 import { PackageOpen } from "lucide-react";
 
