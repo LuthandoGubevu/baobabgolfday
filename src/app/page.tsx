@@ -11,9 +11,9 @@ export default function Home() {
     <div className="flex flex-col">
       <HeroSection />
       <Separator className="bg-secondary h-px md:h-0.5" />
-      <ParticipantsSection />
-      <Separator className="bg-secondary h-px md:h-0.5" />
       <EventHighlightsSection />
+      <Separator className="bg-secondary h-px md:h-0.5" />
+      <ParticipantsSection />
       <Separator className="bg-secondary h-px md:h-0.5" />
       <AboutSection />
       <Separator className="bg-secondary h-px md:h-0.5" />
