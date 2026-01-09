@@ -85,7 +85,7 @@ export function EventHighlightsSection() {
                       />
                       <Tooltip>
                         <TooltipTrigger asChild>
-                            <a href={item.src} download className="absolute bottom-2 right-2 z-10 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-primary">
+                            <a href={item.src} download className="absolute bottom-2 right-2 z-10 p-2 rounded-full bg-black/50 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 hover:bg-primary">
                                 <Download className="h-5 w-5" />
                                 <span className="sr-only">Download image</span>
                             </a>
