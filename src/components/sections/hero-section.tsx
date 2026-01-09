@@ -14,7 +14,7 @@ export function HeroSection() {
           loop 
           muted 
           playsInline 
-          className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
+          className="absolute z-0 top-1/2 left-1/2 w-auto min-w-full min-h-full max-w-none -translate-x-1/2 -translate-y-1/2"
           data-ai-hint="background video"
       >
         <source src="/HeroSectionVideo.mp4" type="video/mp4" />

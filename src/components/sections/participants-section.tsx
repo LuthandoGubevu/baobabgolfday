@@ -74,7 +74,7 @@ export function ParticipantsSection() {
                             <Button asChild variant="outline" size="sm" className="mt-4">
                                <a href={company.url} target="_blank" rel="noopener noreferrer">
                                  <LinkIcon className="mr-2 h-4 w-4" />
-                                 Visit Website
+                                 Learn More
                                </a>
                             </Button>
                         )}
