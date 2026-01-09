@@ -3,7 +3,6 @@ import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link as LinkIcon } from "lucide-react";
-import Link from 'next/link';
 
 const participants: { name: string, url: string | null }[] = [
   { name: "Tile Africa", url: "https://www.tileafrica.co.za/" },
@@ -88,7 +87,7 @@ export function ParticipantsSection() {
       
       <div className="text-center mt-16">
         <p className="text-muted-foreground">
-            If your business participated and you&apos;d like to be listed here, <Link href="/contact" className="text-primary hover:underline">contact us to be included</Link>.
+            If your business participated and you&apos;d like to be listed here, <a href="mailto:roslyn@baobabbrands.com" className="text-primary hover:underline">contact us to be included</a>.
         </p>
       </div>
     </SectionWrapper>
