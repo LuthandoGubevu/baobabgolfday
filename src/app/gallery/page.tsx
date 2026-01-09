@@ -12,7 +12,7 @@ const galleryItems: { type: 'image' | 'video', src: string, alt: string, dataAiH
     { type: 'image', src: "/DSC_7261.jpg", alt: "Golf event attendees", dataAiHint: "golf event" },
     { type: 'image', src: "/DSC_7289.jpg", alt: "Golfers on the course", dataAiHint: "golf course" },
     { type: 'image', src: "/DSC_7296.jpg", alt: "Group photo at golf day", dataAiHint: "group photo" },
-    { type_image', src: "/DSC_7300.jpg", alt: "Golfer taking a shot", dataAiHint: "golf swing" },
+    { type: 'image', src: "/DSC_7300.jpg", alt: "Golfer taking a shot", dataAiHint: "golf swing" },
     { type: 'image', src: "/DSC_7302.jpg", alt: "Smiling attendees", dataAiHint: "people smiling" },
     { type: 'image', src: "/DSC_7306.jpg", alt: "Golfers chatting", dataAiHint: "people talking" },
     { type: 'image', src: "/DSC_7308.jpg", alt: "Prize giving ceremony", dataAiHint: "award ceremony" },
