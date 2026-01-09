@@ -26,7 +26,7 @@ export function HeroSection() {
           Together, We Raised R150,000 for Children in Need
         </h1>
         <p className="max-w-3xl mx-auto text-lg md:text-xl text-slate-200 drop-shadow-md">
-          Thank you for joining the KFC Add Hope Annual Golf Day. Because of your support, we raised over R150,000 for Greensleeves and Masizakhe Children’s Home — helping nourish more young lives.
+          Thank you for joining the KFC Add Hope Annual Golf Day. Because of your support, we raised over R150,000 for Greensleeves and Masizakhe Children’s Home, helping nourish more young lives.
         </p>
 
         {/* Sponsor Logos */}
