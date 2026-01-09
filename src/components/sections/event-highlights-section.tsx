@@ -66,7 +66,10 @@ export function EventHighlightsSection() {
                   {item.type === 'video' ? (
                     <video
                       src={item.src}
-                      controls
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
                       className="object-cover w-full h-full"
                       data-ai-hint={item.dataAiHint}
                     >
