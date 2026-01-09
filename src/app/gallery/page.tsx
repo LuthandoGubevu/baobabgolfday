@@ -63,10 +63,7 @@ export default function GalleryPage() {
                   {item.type === 'video' ? (
                     <video
                       src={item.src}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
+                      controls
                       className="hover:scale-105 transition-transform duration-300 object-cover w-full h-full"
                       data-ai-hint={item.dataAiHint}
                     >
