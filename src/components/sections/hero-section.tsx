@@ -81,13 +81,6 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
-          <Link href="/gallery" passHref>
-            <Button size="lg" className="min-w-[200px] shadow-lg hover:shadow-primary/50 transition-shadow">
-              View Event Highlights
-            </Button>
-          </Link>
-        </div>
       </div>
     </SectionWrapper>
   );
