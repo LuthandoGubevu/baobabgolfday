@@ -1,24 +1,20 @@
 
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { incrementVisitCount } from '@/actions/site-stats-actions';
 
-const SESSION_STORAGE_KEY = 'visit-counted';
-
 export function VisitCounter() {
-  useEffect(() => {
-    // Check if the visit has already been counted in this session
-    const visitCounted = sessionStorage.getItem(SESSION_STORAGE_KEY);
+  const [hasCounted, setHasCounted] = useState(false);
 
-    if (!visitCounted) {
-      // If not counted, call the server action to increment
+  useEffect(() => {
+    // This effect runs only once on initial component mount on the client.
+    // The `hasCounted` state prevents it from running again on re-renders.
+    if (!hasCounted) {
       incrementVisitCount();
-      
-      // Mark this session as counted
-      sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
+      setHasCounted(true);
     }
-  }, []);
+  }, [hasCounted]); // Dependency array ensures this logic is controlled.
 
   return null; // This component doesn't render anything visible
 }
