@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
@@ -16,6 +16,7 @@ export function ImageDialog({ src, alt, children }: ImageDialogProps) {
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-4xl h-auto p-2 bg-black border-border">
+        <DialogTitle className="sr-only">{alt}</DialogTitle>
         <div className="relative aspect-video">
           <Image 
             src={src} 
