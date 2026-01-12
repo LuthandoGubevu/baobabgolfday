@@ -101,9 +101,9 @@ export default function AdminSubmissionsPage() {
 
   return (
     <div id="admin-submissions-page">
-       <div className="mb-8">
+       {/* <div className="mb-8">
             <StatsCard />
-        </div>
+        </div> */}
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary flex items-center justify-center gap-3">
           <BookUser className="h-12 w-12"/> Booking Submissions
