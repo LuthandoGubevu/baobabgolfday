@@ -84,7 +84,7 @@ export default function GalleryPage() {
           Event Gallery
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Highlights from past KFC Add Hope Golf Days. 2025 gallery coming soon!
+          Images from the 2025 KFC Golf Day Event
         </p>
       </div>
       {galleryItems.length > 0 ? (
@@ -150,3 +150,5 @@ export default function GalleryPage() {
     </SectionWrapper>
   );
 }
+
+    
