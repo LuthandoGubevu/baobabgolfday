@@ -57,5 +57,14 @@ service cloud.firestore {
         // Only admins can read or delete reminders.
         allow read, delete: if isAdmin();
     }
+
+    // Site Stats collection
+    match /site_stats/{statId} {
+      // Only admins can read site stats.
+      allow get, list: if isAdmin();
+
+      // No one can create, update or delete directly. This must be handled by a server action.
+      allow create, update, delete: if false;
+    }
   }
 }

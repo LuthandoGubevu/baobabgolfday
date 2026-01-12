@@ -23,7 +23,7 @@ function AdminNav() {
     };
 
     const navItems = [
-        { href: '/admin/submissions', label: 'Submissions', icon: BookUser },
+        { href: '/admin/submissions', label: 'Dashboard', icon: LayoutDashboard },
         { href: '/admin/holes', label: 'Hole Status', icon: ShieldCheck },
         { href: '/admin/messages', label: 'Messages', icon: MessageSquare },
         { href: '/admin/reminders', label: 'Reminders', icon: BellRing },
@@ -33,12 +33,15 @@ function AdminNav() {
         <div className="bg-card p-4 rounded-lg shadow-md mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className='flex items-center gap-2 text-lg font-semibold text-primary'>
                 <LayoutDashboard />
-                <span>Admin Dashboard</span>
+                <span>Admin Area</span>
             </div>
             <nav className="flex items-center gap-2 flex-wrap justify-center">
                 {navItems.map(item => (
                     <Link key={item.href} href={item.href} passHref>
-                        <Button variant={pathname === item.href ? "default" : "outline"} size="sm">
+                        <Button 
+                          variant={pathname.startsWith(item.href) ? "default" : "outline"} 
+                          size="sm"
+                        >
                             <item.icon className='mr-2 h-4 w-4' />
                             {item.label}
                         </Button>

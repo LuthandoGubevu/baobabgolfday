@@ -5,10 +5,12 @@ import { Separator } from '@/components/ui/separator';
 import { DonationSection } from '@/components/sections/donation-section';
 import { EventHighlightsSection } from '@/components/sections/event-highlights-section';
 import { ParticipantsSection } from '@/components/sections/participants-section';
+import { VisitCounter } from '@/components/visit-counter';
 
 export default function Home() {
   return (
     <div className="flex flex-col">
+      <VisitCounter />
       <HeroSection />
       <Separator className="bg-secondary h-px md:h-0.5" />
       <EventHighlightsSection />
