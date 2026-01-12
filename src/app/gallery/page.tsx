@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import Image from "next/image";
 import { PackageOpen, Download } from "lucide-react";
+import { ImageDialog } from "@/components/image-dialog";
 
 const galleryItems: { type: 'image' | 'video', src: string, alt: string, dataAiHint: string }[] = [
     { type: 'video', src: "/Comp Video Final.mp4", alt: "Event highlight video", dataAiHint: "golf event video" },
@@ -91,48 +92,56 @@ export default function GalleryPage() {
         <TooltipProvider>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {galleryItems.map((item, index) => (
-                <Card key={item.src} className="group overflow-hidden shadow-lg hover:shadow-primary/20 transition-shadow">
-                <CardContent className="p-0">
-                    <div className="aspect-video relative">
-                    {item.type === 'video' ? (
-                        <video
-                        src={item.src}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="object-cover w-full h-full"
-                        data-ai-hint={item.dataAiHint}
-                        >
-                        Your browser does not support the video tag.
-                        </video>
-                    ) : (
-                        <>
-                        <Image
-                            src={item.src}
-                            alt={item.alt}
-                            fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="group-hover:scale-105 transition-transform duration-300 object-cover"
-                            data-ai-hint={item.dataAiHint}
-                            priority={index < 3} 
-                        />
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <a href={item.src} download className="absolute bottom-2 right-2 z-10 p-2 rounded-full bg-black/50 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 hover:bg-primary">
-                                    <Download className="h-5 w-5" />
-                                    <span className="sr-only">Download image</span>
+                <div key={item.src}>
+                  {item.type === 'image' ? (
+                    <ImageDialog src={item.src} alt={item.alt}>
+                      <Card className="group overflow-hidden shadow-lg hover:shadow-primary/20 transition-shadow cursor-pointer">
+                        <CardContent className="p-0">
+                          <div className="aspect-video relative">
+                            <Image
+                              src={item.src}
+                              alt={item.alt}
+                              fill
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              className="group-hover:scale-105 transition-transform duration-300 object-cover"
+                              data-ai-hint={item.dataAiHint}
+                              priority={index < 3}
+                            />
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <a href={item.src} download onClick={(e) => e.stopPropagation()} className="absolute bottom-2 right-2 z-10 p-2 rounded-full bg-black/50 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 hover:bg-primary">
+                                  <Download className="h-5 w-5" />
+                                  <span className="sr-only">Download image</span>
                                 </a>
-                            </TooltipTrigger>
-                            <TooltipContent>
+                              </TooltipTrigger>
+                              <TooltipContent>
                                 <p>Download</p>
-                            </TooltipContent>
-                        </Tooltip>
-                        </>
-                    )}
-                    </div>
-                </CardContent>
-                </Card>
+                              </TooltipContent>
+                            </Tooltip>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </ImageDialog>
+                  ) : (
+                    <Card className="group overflow-hidden shadow-lg">
+                      <CardContent className="p-0">
+                        <div className="aspect-video relative">
+                          <video
+                            src={item.src}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="object-cover w-full h-full"
+                            data-ai-hint={item.dataAiHint}
+                          >
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+                </div>
             ))}
             </div>
         </TooltipProvider>
@@ -150,5 +159,3 @@ export default function GalleryPage() {
     </SectionWrapper>
   );
 }
-
-    
