@@ -63,8 +63,14 @@ service cloud.firestore {
       // Only admins can read site stats.
       allow get, list: if isAdmin();
 
-      // No one can create, update or delete directly. This must be handled by a server action.
-      allow create, update, delete: if false;
+      // Allow anyone to create the document for the first time with a count of 1.
+      allow create: if request.resource.data.count == 1;
+
+      // Allow anyone to increment the count by exactly 1.
+      allow update: if request.resource.data.count == resource.data.count + 1;
+      
+      // Nobody can delete the stats document.
+      allow delete: if false;
     }
   }
 }
