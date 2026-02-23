@@ -26,7 +26,7 @@
   { "name": "Feature Ceilings", "url": "https://www.facebook.com/featureceilings/", "industry": "Construction", "description": "Professional ceiling and partition installations known for architectural precision and aesthetic excellence in modern builds." },
   { "name": "First In Business", "url": "https://storage.co.za/", "industry": "IT Services", "description": "Providing comprehensive hardware and OS support, security management, and web hosting services, alongside managed IT installations and technical support." },
   { "name": "FNB Brokers", "url": "https://www.fnb.co.za/index.html", "industry": "Financial Services", "description": "Professional financial advisory services and investment management backed by the strength of South Africa's leading bank." },
-  { "name": "Foodserve", "url": null, "industry": "Retail", "description": "Wholesale food distributors supplying the hospitality industry with high-quality ingredients and dependable delivery services." },
+  { "name": "Foodserve", "url": "https://www.foodserv.co.za/", "industry": "Retail", "description": "Wholesale food distributors supplying the hospitality industry with high-quality ingredients and dependable delivery services." },
   { "name": "Fridge Foods", "url": null, "industry": "Retail", "description": "Specialists in the supply and distribution of chilled and frozen food products to retail chains and independent stores." },
   { "name": "GTS t/a Grease Traps", "url": "https://greasetraps.co.za/", "industry": "Industrial", "description": "Innovative waste management solutions focusing on grease trap maintenance and environmental compliance for industrial kitchens." },
   { "name": "HRPM", "url": "https://supercard.co.za/", "industry": "IT Services", "description": "Advanced human resource and payroll management software solutions designed to optimize organizational administrative tasks." },
@@ -60,5 +60,3 @@
   { "name": "Windmill", "url": null, "industry": "Retail", "description": "A iconic local establishment offering a unique blend of retail experiences and quality goods to the East London community." },
   { "name": "YUM", "url": null, "industry": "Retail", "description": "The global restaurant group behind world-famous brands, committed to serving quality food and fostering social responsibility." }
 ]
-
-    
