@@ -2,7 +2,7 @@
 [
   { "name": "Abantu Staffing Solutions", "url": "https://www.abantustaffingsolutions.co.za/", "industry": "Staffing", "description": "A premier recruitment and HR services provider connecting top talent with leading organizations to drive professional growth." },
   { "name": "Abbotsford Spar", "url": null, "industry": "Retail", "description": "A community-focused grocery retailer dedicated to providing fresh quality products and exceptional service to local families." },
-  { "name": "Adinga", "url": null, "industry": "IT Services", "description": "Providing innovative software solutions and technical consulting to streamline business operations and enhance digital efficiency." },
+  { "name": "Adinga", "url": "https://adinga.co.za/", "industry": "IT Services", "description": "Providing innovative software solutions and technical consulting to streamline business operations and enhance digital efficiency." },
   { "name": "Airfire Solutions", "url": null, "industry": "Construction", "description": "Experts in specialized fire protection systems and safety installations for commercial and industrial infrastructure projects." },
   { "name": "Aloe Travel", "url": null, "industry": "Travel", "description": "A dedicated travel agency offering personalized holiday planning and corporate travel management for seamless global journeys." },
   { "name": "Andion Plumbing", "url": "https://iopsa.org.za/plumbers_list/andion-plumbing-cc/", "industry": "Construction", "description": "Professional plumbing and maintenance services known for reliability and high-quality workmanship in residential developments." },
@@ -59,5 +59,3 @@
   { "name": "Windmill", "url": null, "industry": "Retail", "description": "A iconic local establishment offering a unique blend of retail experiences and quality goods to the East London community." },
   { "name": "YUM", "url": null, "industry": "Retail", "description": "The global restaurant group behind world-famous brands, committed to serving quality food and fostering social responsibility." }
 ]
-
-    
