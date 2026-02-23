@@ -57,5 +57,5 @@
   { "name": "WA Media", "url": "https://www.facebook.com/wamediasa/", "industry": "Media", "description": "A creative media and marketing agency specializing in digital strategy, branding, and high-impact advertising campaigns." },
   { "name": "Weyercon", "url": "https://www.linkedin.com/company/weyercon/", "industry": "Construction", "description": "Leading civil engineering and construction firm known for delivering large-scale infrastructure projects with excellence." },
   { "name": "Windmill", "url": "https://windmillroadhouse.co.za/", "industry": "Retail", "description": "A iconic local establishment offering a unique blend of retail experiences and quality goods to the East London community." },
-  { "name": "YUM", "url": null, "industry": "Retail", "description": "The global restaurant group behind world-famous brands, committed to serving quality food and fostering social responsibility." }
+  { "name": "YUM", "url": "https://www.yum.com/wps/portal/yumbrands/Yumbrands/", "industry": "Retail", "description": "The global restaurant group behind world-famous brands, committed to serving quality food and fostering social responsibility." }
 ]
