@@ -2,7 +2,7 @@
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Mail } from "lucide-react";
+import { ExternalLink, Mail, Phone } from "lucide-react";
 import participants from '@/app/lib/placeholder-images.json';
 
 export function ParticipantsSection() {
@@ -21,17 +21,22 @@ export function ParticipantsSection() {
         {participants.map((company, index) => {
           const url = company.url || "";
           const isEmail = url.startsWith('mailto:');
+          const isPhone = url.startsWith('tel:');
           const isSocial = url.includes('facebook.com') || url.includes('linkedin.com') || url.includes('instagram.com');
           const isStandardWeb = (url.includes('.com') || url.includes('.co.za')) && !isSocial;
 
           let buttonLabel = "Visit Page";
           if (isEmail) {
             buttonLabel = "Email Us";
+          } else if (isPhone) {
+            buttonLabel = "Call Us";
           } else if (isStandardWeb) {
             buttonLabel = "Visit Website";
           }
 
-          const Icon = isEmail ? Mail : ExternalLink;
+          let Icon = ExternalLink;
+          if (isEmail) Icon = Mail;
+          if (isPhone) Icon = Phone;
 
           return (
             <Card 
@@ -67,8 +72,8 @@ export function ParticipantsSection() {
                   >
                     <a 
                       href={company.url} 
-                      target={isEmail ? "_self" : "_blank"} 
-                      rel={isEmail ? "" : "noopener noreferrer"}
+                      target={(isEmail || isPhone) ? "_self" : "_blank"} 
+                      rel={(isEmail || isPhone) ? "" : "noopener noreferrer"}
                       className="flex items-center justify-center gap-2"
                     >
                       {buttonLabel}
