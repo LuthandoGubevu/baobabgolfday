@@ -2,7 +2,7 @@
 import { SectionWrapper } from "@/components/section-wrapper";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Mail } from "lucide-react";
 import participants from '@/app/lib/placeholder-images.json';
 
 export function ParticipantsSection() {
@@ -18,52 +18,58 @@ export function ParticipantsSection() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {participants.map((company, index) => (
-          <Card 
-            key={index} 
-            className="group flex flex-col h-full bg-card border-border hover:border-primary/50 transition-all duration-300 ease-in-out shadow-sm hover:shadow-xl"
-          >
-            <CardContent className="flex flex-col flex-grow p-6 text-left">
-              <div className="space-y-2 mb-4">
-                <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
-                  {company.name}
-                </h3>
-                {company.industry && (
-                  <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
-                    {company.industry}
+        {participants.map((company, index) => {
+          const isEmail = company.url?.startsWith('mailto:');
+          const buttonLabel = isEmail ? "Email Us" : "Visit Website";
+          const Icon = isEmail ? Mail : ExternalLink;
+
+          return (
+            <Card 
+              key={index} 
+              className="group flex flex-col h-full bg-card border-border hover:border-primary/50 transition-all duration-300 ease-in-out shadow-sm hover:shadow-xl"
+            >
+              <CardContent className="flex flex-col flex-grow p-6 text-left">
+                <div className="space-y-2 mb-4">
+                  <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
+                    {company.name}
+                  </h3>
+                  {company.industry && (
+                    <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
+                      {company.industry}
+                    </p>
+                  )}
+                </div>
+                
+                {company.description && (
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {company.description}
                   </p>
                 )}
-              </div>
-              
-              {company.description && (
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {company.description}
-                </p>
-              )}
-            </CardContent>
+              </CardContent>
 
-            {company.url && (
-              <CardFooter className="px-6 pb-6 pt-0 mt-auto">
-                <Button 
-                  asChild 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full border-primary/20 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
-                >
-                  <a 
-                    href={company.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2"
+              {company.url && (
+                <CardFooter className="px-6 pb-6 pt-0 mt-auto">
+                  <Button 
+                    asChild 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full border-primary/20 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
                   >
-                    Visit Website
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
-                </Button>
-              </CardFooter>
-            )}
-          </Card>
-        ))}
+                    <a 
+                      href={company.url} 
+                      target={isEmail ? "_self" : "_blank"} 
+                      rel={isEmail ? "" : "noopener noreferrer"}
+                      className="flex items-center justify-center gap-2"
+                    >
+                      {buttonLabel}
+                      <Icon className="h-3.5 w-3.5" />
+                    </a>
+                  </Button>
+                </CardFooter>
+              )}
+            </Card>
+          )
+        })}
       </div>
       
       <div className="text-center mt-20 p-8 border border-border/40 rounded-2xl bg-black/20">
