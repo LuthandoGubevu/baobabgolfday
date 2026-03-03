@@ -19,8 +19,18 @@ export function ParticipantsSection() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {participants.map((company, index) => {
-          const isEmail = company.url?.startsWith('mailto:');
-          const buttonLabel = isEmail ? "Email Us" : "Visit Website";
+          const url = company.url || "";
+          const isEmail = url.startsWith('mailto:');
+          const isSocial = url.includes('facebook.com') || url.includes('linkedin.com') || url.includes('instagram.com');
+          const isStandardWeb = (url.includes('.com') || url.includes('.co.za')) && !isSocial;
+
+          let buttonLabel = "Visit Page";
+          if (isEmail) {
+            buttonLabel = "Email Us";
+          } else if (isStandardWeb) {
+            buttonLabel = "Visit Website";
+          }
+
           const Icon = isEmail ? Mail : ExternalLink;
 
           return (
