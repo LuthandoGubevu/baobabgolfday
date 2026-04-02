@@ -2,16 +2,16 @@
 "use client";
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation'; // useRouter added
-import { Menu, LogIn, LogOut, LayoutDashboard, Trophy } from 'lucide-react'; // Trophy added, LogOut added
+import { usePathname, useRouter } from 'next/navigation';
+import { Menu, LogIn, LogOut, LayoutDashboard } from 'lucide-react';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
-import { onAuthStateChanged, signOut, User } from 'firebase/auth'; // signOut, User added
-import { auth } from '@/lib/firebase'; // auth imported
-import { useToast } from '@/hooks/use-toast'; // useToast imported
+import { onAuthStateChanged, signOut, User } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import { useToast } from '@/hooks/use-toast';
 
 const mainNavLinks = [
   { href: '#home', label: 'Home' },
@@ -28,13 +28,15 @@ const ADMIN_EMAILS = ["roslyn@baobabbrands.com", "royden@baobabbrands.com", "ros
 
 export function Navigation() {
   const pathname = usePathname();
-  const router = useRouter(); // useRouter hook
-  const { toast } = useToast(); // toast hook
+  const router = useRouter();
+  const { toast } = useToast();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false); // State for admin login
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -50,7 +52,7 @@ export function Navigation() {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      unsubscribeAuth(); // Unsubscribe from auth listener
+      unsubscribeAuth();
     };
   }, []);
 
@@ -73,7 +75,7 @@ export function Navigation() {
         title: "Logged Out",
         description: "You have been successfully logged out.",
       });
-      router.push('/'); // Redirect to home page after logout
+      router.push('/');
     } catch (error) {
       console.error("Logout Error:", error);
       toast({
@@ -82,7 +84,7 @@ export function Navigation() {
         variant: "destructive",
       });
     }
-    setIsSheetOpen(false); // Close sheet if open
+    setIsSheetOpen(false);
   };
   
   const renderLinks = (links: { href: string; label: string }[], isMainPageLink: boolean) => (
@@ -102,6 +104,9 @@ export function Navigation() {
   );
 
   const AdminButton = ({ isMobile = false }: { isMobile?: boolean }) => {
+    // Prevent rendering auth-dependent state until hydration is complete
+    if (!mounted) return <div className={cn(isMobile ? "h-10 mt-4" : "w-20 ml-2")} />;
+
     if (isAdminLoggedIn) {
       return (
         <div className={cn("flex gap-2", isMobile && "flex-col w-full mt-4")}>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -28,8 +29,10 @@ const calculateTimeLeft = (targetDate: Date): TimeLeft | null => {
 
 export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Set initial value on client-side to avoid hydration mismatch
     setTimeLeft(calculateTimeLeft(targetDate));
 
@@ -39,6 +42,11 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
 
     return () => clearInterval(timer);
   }, [targetDate]);
+
+  // Prevent server-side render mismatch by returning a skeleton or nothing until mounted
+  if (!mounted) {
+    return <div className="h-32" />; 
+  }
 
   if (!timeLeft) {
     return (
