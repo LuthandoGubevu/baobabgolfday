@@ -44,7 +44,7 @@ export function ParticipantsSection() {
               className="group flex flex-col h-full bg-card border-border hover:border-primary/50 transition-all duration-300 ease-in-out shadow-sm hover:shadow-xl"
             >
               <CardContent className="flex flex-col flex-grow p-6 text-left">
-                <div className="space-y-2 mb-4">
+                <div className="space-y-2">
                   <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
                     {company.name}
                   </h3>
@@ -54,12 +54,6 @@ export function ParticipantsSection() {
                     </p>
                   )}
                 </div>
-                
-                {company.description && (
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {company.description}
-                  </p>
-                )}
               </CardContent>
 
               {company.url && (
